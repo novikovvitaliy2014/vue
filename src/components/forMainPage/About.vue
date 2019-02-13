@@ -15,9 +15,9 @@
         </div>
         <article class="about__row-desc">
           <h5>Preliminary reporting</h5>
-          <p>Project presentation and <strong>priced outlay</strong> of materials and works needed is published before to be realized</p>
+          <p>Project presentation and <strong>priced outlay</strong> of materials and works needed is published before project to be realized</p>
           <p>The list of participants under the nicknames is published before the project is realized</p>
-          <p>Every donation can be seen on the site immediatly after his donation has been initilized. In a such way, each participant can check if he is in the list of donations and participants and get persuaded that his <strong>donation is acounted</strong></p>
+          <p>Every donation can be seen on the site immediatly after his donation has been initilized. In a such way, each participant can check if he is in the list of donations and participants and get persuaded that his <strong>donation is accounted</strong></p>
         </article>
         <div class="about__row-img about__row-img--3">
         </div>
@@ -25,12 +25,9 @@
         </div>
         <article class="about__row-desc">
           <h5>Final reporting</h5>
-          <p>At the end of work the final report is published. The report includes final priced outlay of materials and works used, final photoreport, the <strong>contacts of all the specialists and suppliers</strong>. In a such way, participant is given a chanse to check the project accuracy</p>
+          <p>At the end of work final report is published. The report includes final priced outlay of materials and works used, final photoreport, the <strong>contacts of all the specialists and suppliers</strong>. In a such way, participant is given a chance to check the project accuracy</p>
         </article>
       </section>
     </div>
   </section>
 </template>
-
-<style lang="sass">
-</style>

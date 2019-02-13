@@ -1,5 +1,5 @@
 <template>
-  <div class="signin">
+  <section class="signin">
     <h1>Sign in</h1>
     <v-form @submit.prevent = "onSubmit"
       v-model="valid"
@@ -79,7 +79,7 @@
       >
       Recovery link is sent to your email adress
     </v-alert>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -124,9 +124,6 @@
       }
     },
     computed: {
-      user() {
-        return this.$store.getters.isAuthenticated
-      },
       error() {
         return this.$store.getters.error
       },
@@ -142,6 +139,3 @@
     }
   };
 </script>
-
-<style lang="sass" scoped>
-</style>

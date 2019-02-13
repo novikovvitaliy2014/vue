@@ -1,5 +1,5 @@
 <template>
-  <div class="project__container">
+  <section class="project__container">
     <h2 class="project__title">Project №2</h2>
     <h3 class="project__title">Renovation of basketball court near the school №53</h3>
     <h4 class="project__title">Period of the participants engaging: 01.09.19.- 30.09.19.</h4>
@@ -15,7 +15,7 @@
         </div>
       </div>
     </div>
-    <div class="project__smeta" >
+    <section class="project__smeta" >
       <table>
         <caption>Priced outlay</caption>
         <tr>
@@ -36,27 +36,25 @@
           <td>10%</td>
           <td></td>
           <td>{{ salary }}</td>
-        </tr><tr>
+        </tr>
+        <tr>
           <td>Final Sum:</td>
           <td></td>
           <td></td>
           <td>{{ finalSum }}</td>
         </tr>
       </table>
-    </div>
-  </div>
+    </section>
+  </section>
 </template>
 <script>
   export default {
     computed: {
-      auth() {
-        return this.$store.getters.isAuthenticated
-      },
       total() {
-        const smetaSchool = this.$store.getters.smetaSchool
+        let smetaSchool = this.$store.getters.smetaSchool
         let sumTotal = 0;
-        for (let i = 0; i < smetaSchool.length; i++ ) {
-          sumTotal = sumTotal + smetaSchool[i].num * smetaSchool[i].price
+        for (let item of smetaSchool ) {
+          sumTotal = sumTotal + item.num * item.price
         }
         return sumTotal;
       },
@@ -68,16 +66,13 @@
       }
     },
     methods: {
-      multiplication(a,b) {
-        return a * b
+      multiplication(num, price) {
+        return num * price
       }
     },
     created() {
       this.smetaSchool = this.$store.getters.smetaSchool
       this.$store.dispatch('initSmeta')
-    },
+    }
   };
 </script>
-
-<style lang="sass">
-</style>

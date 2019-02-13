@@ -1,10 +1,7 @@
 <template>
-  <div>
+  <section>
     <features></features>
     <about></about>
     <pro></pro>
-  </div>
+  </section>
 </template>
-
-<style lang="sass">
-</style>

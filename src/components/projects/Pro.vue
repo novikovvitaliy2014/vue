@@ -13,7 +13,7 @@
     </transition>
     <div class="project__button">
       <router-link to="/signup">
-        <button class="city__btn">Donate</button>
+        <button class="city__btn">Book Donation</button>
       </router-link>
     </div>
   </section>
@@ -26,14 +26,6 @@
         selected: 'Baker Street',
         adresses: ['Baker Street','School №53']
       }
-    },
-    computed: {
-      auth() {
-        return this.$store.getters.isAuthenticated
-      }
     }
   };
 </script>
-
-<style lang="sass">
-</style>

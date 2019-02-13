@@ -1,5 +1,5 @@
 <template>
-  <div class="signup">
+  <section class="signup">
     <h1>Sign up</h1>
     <v-form @submit.prevent = "onSubmit"
       ref="form"
@@ -116,7 +116,7 @@
         Check your fill in, you might not have agreed Conditions of Use and Privacy Notice
       </v-alert>
     </v-form>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -146,7 +146,6 @@
         switchRules: [
           v => !!v || ''
         ],
-        // invalid: false,
         selected: '',
         options: ['Baker Street', 'School №53'],
         telRules: [
@@ -167,16 +166,16 @@
     methods: {
       gotDonations(donations) {
         let sumDonations = null
-        for (let i = 0; i < donations.length; i++ ) {
-          sumDonations = sumDonations + Number(donations[i].donation)
+        for (let item of donations ) {
+          sumDonations = sumDonations + Number(item.donation)
         }
         return sumDonations
       },
       needDonations(smeta) {
         let needSum = null
         let sum = null
-        for (let i = 0; i < smeta.length; i++ ) {
-          sum = sum + smeta[i].num * smeta[i].price
+        for (let item of smeta ) {
+          sum = sum + item.num * item.price
         }
         needSum = sum + sum * 0.1
         return needSum
@@ -212,9 +211,6 @@
       }
     },
     computed: {
-      user () {
-        return this.$store.getters.user
-      },
       error () {
         return this.$store.getters.error
       },
@@ -235,6 +231,3 @@
     }
   };
 </script>
-
-<style lang="sass" scoped>
-</style>

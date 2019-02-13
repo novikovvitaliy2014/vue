@@ -51,8 +51,8 @@
 <script>
   export default {
     methods: {
-      multiplication(a,b) {
-        return a * b
+      multiplication(num, price) {
+        return num * price
       }
     },
     computed: {
@@ -60,10 +60,10 @@
         return this.$store.getters.isAuthenticated
       },
       total() {
-        const smetaBaker = this.$store.getters.smetaBaker
+        let smetaBaker = this.$store.getters.smetaBaker
         let sumTotal = 0;
-        for (let i = 0; i < smetaBaker.length; i++ ) {
-          sumTotal = sumTotal + smetaBaker[i].num * smetaBaker[i].price
+        for (let item of smetaBaker ) {
+          sumTotal = sumTotal + item.num * item.price
         }
         return sumTotal;
       },
@@ -80,6 +80,3 @@
     }
   };
 </script>
-
-<style lang="sass">
-</style>

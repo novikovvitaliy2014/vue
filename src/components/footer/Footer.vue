@@ -8,6 +8,3 @@
     </div>
   </footer>
 </template>
-
-<style lang="sass">
-</style>

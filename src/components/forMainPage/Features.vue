@@ -5,6 +5,3 @@
       </div>
     </section>
 </template>
-
-<style lang="sass">
-</style>

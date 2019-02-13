@@ -1,5 +1,5 @@
 <template>
-  <div class="donors">
+  <section class="donors">
     <h1>List of donations and participants</h1>
     <v-select
       class="project__select"
@@ -9,7 +9,7 @@
       @input="getDonors"
       required>
     </v-select>
-    <div class="donors__pro" v-if="selected === 'Baker Street'">
+    <section class="donors__pro" v-if="selected === 'Baker Street'">
       <div v-for="user in usersBaker"
           :key="user.idToken">
       <div class="donors__row">
@@ -29,8 +29,8 @@
         <div class="donors__cell">{{ restDonation(smetaBaker, usersBaker)}} &#8364;</div>
         <div class="donors__cell">Still needed</div>
       </div>
-    </div>
-    <div class="donors__pro" v-if="selected === 'School №53'">
+    </section>
+    <section class="donors__pro" v-if="selected === 'School №53'">
       <div v-for="user in usersSchool"
           :key="user.idToken">
       <div class="donors__row">
@@ -50,8 +50,8 @@
         <div class="donors__cell">{{ restDonation(smetaSchool, usersSchool) }} &#8364;</div>
         <div class="donors__cell">Still needed</div>
       </div>
-    </div>
-  </div>
+    </section>
+  </section>
 </template>
 
 <script>
@@ -67,16 +67,16 @@
     methods: {
       gotDonations(donations) {
         let sumDonations = null
-        for (let i = 0; i < donations.length; i++ ) {
-          sumDonations = sumDonations + Number(donations[i].donation)
+        for (let item of donations) {
+          sumDonations = sumDonations + Number(item.donation)
         }
         return sumDonations
       },
       needDonations(smeta) {
         let needSum = 0;
         let sum = 0;
-        for (let i = 0; i < smeta.length; i++ ) {
-          sum = sum + smeta[i].num * smeta[i].price
+        for (let item of smeta ) {
+          sum = sum + item.num * item.price
         }
         needSum = sum + sum * 0.1
         return needSum
@@ -106,6 +106,3 @@
     }
   };
 </script>
-
-<style lang="sass" scoped>
-</style>

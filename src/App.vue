@@ -24,8 +24,7 @@ import WebFontLoader from 'webfontloader'
       WebFontLoader.load({
         google: {
           families: ['Roboto:100,300,400,500,700,900']
-        },
-        active: this.setFontLoaded
+        }
       })
     }
   };
