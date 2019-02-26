@@ -7,27 +7,42 @@
 </template>
 
 <script>
+import Header from './components/header/Header.vue'
+import Footer from './components/footer/Footer.vue'
+import PageMain from './views/mainPage/PageMain.vue'
+import Donors from './views/donorsPage/Donors.vue'
+import Signin from './views/auth/signin.vue'
+import Signup from './views/auth/signup.vue'
+
 import WebFontLoader from 'webfontloader'
-  export default {
-    computed: {
-      auth() {
-        return this.$store.getters.isAuthenticated !== null && this.$store.getters.isAuthenticated !== undefined
-      }
-    },
-    created() {
-      this.$store.dispatch('tryAutoLogin')
-      this.$vuetify.theme.green = "#4CAF50"
-      this.$vuetify.theme.primary = "#4CAF50"
-      this.$vuetify.theme.greendarken4 = "#1B5E20"
-    },
-    mounted () {
-      WebFontLoader.load({
-        google: {
-          families: ['Roboto:100,300,400,500,700,900']
-        }
-      })
+export default {
+  components: {
+    'app-header': Header,
+    'app-footer': Footer,
+    PageMain,
+    Donors,
+    Signin,
+    Signup
+  },
+  computed: {
+    auth() {
+      return this.$store.getters.isAuthenticated !== null && this.$store.getters.isAuthenticated !== undefined
     }
-  };
+  },
+  created() {
+    this.$store.dispatch('tryAutoLogin')
+    this.$vuetify.theme.green = "#4CAF50"
+    this.$vuetify.theme.primary = "#4CAF50"
+    this.$vuetify.theme.greendarken4 = "#1B5E20"
+  },
+  mounted () {
+    WebFontLoader.load({
+      google: {
+        families: ['Roboto:100,300,400,500,700,900']
+      }
+    })
+  }
+};
 </script>
 
 <style lang="sass">

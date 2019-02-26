@@ -55,54 +55,54 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        adresses: ["Baker Street","School №53"],
-        selected: '',
-        smetaBaker: [],
-        smetaSchool: []
-      }
-    },
-    methods: {
-      gotDonations(donations) {
-        let sumDonations = null
-        for (let item of donations) {
-          sumDonations = sumDonations + Number(item.donation)
-        }
-        return sumDonations
-      },
-      needDonations(smeta) {
-        let needSum = 0;
-        let sum = 0;
-        for (let item of smeta ) {
-          sum = sum + item.num * item.price
-        }
-        needSum = sum + sum * 0.1
-        return needSum
-      },
-      restDonation(smeta, donations) {
-        let need = this.needDonations(smeta)
-        let sum = this.gotDonations(donations)
-        let rest = need - sum
-        return rest
-      },
-      getDonors() {
-        this.$store.dispatch('fetchUsers')
-      }
-    },
-    computed: {
-      usersBaker() {
-        return this.$store.getters.usersBaker
-      },
-      usersSchool() {
-        return this.$store.getters.usersSchool
-      },
-    },
-    created () {
-      this.$store.dispatch('initSmeta')
-      this.smetaBaker = this.$store.getters.smetaBaker
-      this.smetaSchool = this.$store.getters.smetaSchool
+export default {
+  data() {
+    return {
+      adresses: ["Baker Street","School №53"],
+      selected: '',
+      smetaBaker: [],
+      smetaSchool: []
     }
-  };
+  },
+  methods: {
+    gotDonations(donations) {
+      let sumDonations = null
+      for (let item of donations) {
+        sumDonations = sumDonations + Number(item.donation)
+      }
+      return sumDonations
+    },
+    needDonations(smeta) {
+      let needSum = 0;
+      let sum = 0;
+      for (let item of smeta ) {
+        sum = sum + item.num * item.price
+      }
+      needSum = sum + sum * 0.1
+      return needSum
+    },
+    restDonation(smeta, donations) {
+      let need = this.needDonations(smeta)
+      let sum = this.gotDonations(donations)
+      let rest = need - sum
+      return rest
+    },
+    getDonors() {
+      this.$store.dispatch('fetchUsers')
+    }
+  },
+  computed: {
+    usersBaker() {
+      return this.$store.getters.usersBaker
+    },
+    usersSchool() {
+      return this.$store.getters.usersSchool
+    },
+  },
+  created () {
+    this.$store.dispatch('initSmeta')
+    this.smetaBaker = this.$store.getters.smetaBaker
+    this.smetaSchool = this.$store.getters.smetaSchool
+  }
+};
 </script>

@@ -83,59 +83,59 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        forgot: false,
-        password: '',
-        hidePassword: true,
-        valid: true,
-        donation: null,
-        passwordRules: [
-          v => !!v || 'Enter your password',
-          v => (v && v.length >= 6) || 'Password must be at least 6 characters'
-        ],
-        emailRules: [
-          v => !!v || 'Enter your email',
-          v => /.+@.+/.test(v) || 'Enter a valid email address',
-          v => (v && v.length >= 8) || 'Enter a valid email address'
-        ],
-        errors: [],
-        email: ''
-      }
-    },
-    methods: {
-      forgotPass() {
-        this.forgot = !this.forgot
-      },
-      resetPass() {
-        const email = this.email
-        this.$store.dispatch('resetPassword', email)
-      },
-      onDismissed() {
-        this.$store.dispatch('clearError')
-      },
-      onSubmit() {
-        const formData = {
-          email: this.email,
-          password: this.password
-        }
-        this.$store.dispatch('login', {email: formData.email, password: formData.password})
-      }
-    },
-    computed: {
-      error() {
-        return this.$store.getters.error
-      },
-      passwordType() {
-        return this.hidePassword ? 'password' : 'text'
-      },
-      resetError() {
-        return this.$store.getters.resetError
-      },
-      sent() {
-        return this.$store.getters.success
-      }
+export default {
+  data() {
+    return {
+      forgot: false,
+      password: '',
+      hidePassword: true,
+      valid: true,
+      donation: null,
+      passwordRules: [
+        v => !!v || 'Enter your password',
+        v => (v && v.length >= 6) || 'Password must be at least 6 characters'
+      ],
+      emailRules: [
+        v => !!v || 'Enter your email',
+        v => /.+@.+/.test(v) || 'Enter a valid email address',
+        v => (v && v.length >= 8) || 'Enter a valid email address'
+      ],
+      errors: [],
+      email: ''
     }
-  };
+  },
+  methods: {
+    forgotPass() {
+      this.forgot = !this.forgot
+    },
+    resetPass() {
+      const email = this.email
+      this.$store.dispatch('resetPassword', email)
+    },
+    onDismissed() {
+      this.$store.dispatch('clearError')
+    },
+    onSubmit() {
+      const formData = {
+        email: this.email,
+        password: this.password
+      }
+      this.$store.dispatch('login', {email: formData.email, password: formData.password})
+    }
+  },
+  computed: {
+    error() {
+      return this.$store.getters.error
+    },
+    passwordType() {
+      return this.hidePassword ? 'password' : 'text'
+    },
+    resetError() {
+      return this.$store.getters.resetError
+    },
+    sent() {
+      return this.$store.getters.success
+    }
+  }
+};
 </script>

@@ -48,31 +48,31 @@
   </section>
 </template>
 <script>
-  export default {
-    computed: {
-      total() {
-        let smetaSchool = this.$store.getters.smetaSchool
-        let sumTotal = 0;
-        for (let item of smetaSchool ) {
-          sumTotal = sumTotal + item.num * item.price
-        }
-        return sumTotal;
-      },
-      salary() {
-        return this.total * 0.1
-      },
-      finalSum() {
-        return this.total + this.salary
+export default {
+  computed: {
+    total() {
+      let smetaSchool = this.$store.getters.smetaSchool
+      let sumTotal = 0;
+      for (let item of smetaSchool ) {
+        sumTotal = sumTotal + item.num * item.price
       }
+      return sumTotal;
     },
-    methods: {
-      multiplication(num, price) {
-        return num * price
-      }
+    salary() {
+      return this.total * 0.1
     },
-    created() {
-      this.smetaSchool = this.$store.getters.smetaSchool
-      this.$store.dispatch('initSmeta')
+    finalSum() {
+      return this.total + this.salary
     }
-  };
+  },
+  methods: {
+    multiplication(num, price) {
+      return num * price
+    }
+  },
+  created() {
+    this.smetaSchool = this.$store.getters.smetaSchool
+    this.$store.dispatch('initSmeta')
+  }
+};
 </script>

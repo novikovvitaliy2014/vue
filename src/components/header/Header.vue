@@ -2,7 +2,7 @@
   <header class="header"  >
     <div class="header__top">
       <router-link to="/">
-        <app-logo></app-logo>
+        <logo></logo>
       </router-link>
       <nav>
         <ul>
@@ -41,25 +41,33 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        isActive: false
-      }
-    },
-    computed: {
-      auth() {
-        return this.$store.getters.isAuthenticated !== null && this.$store.getters.isAuthenticated !== undefined
-      }
-    },
-    methods: {
-      showContacts() {
-        this.isActive = !this.isActive;
-      },
-      onLogout() {
-        this.$store.dispatch('logout')
-      }
+import Logo from './Logo.vue'
+import Contacts from './Contacts.vue'
+
+
+export default {
+  components: {
+    Logo,
+    Contacts
+  },
+  data () {
+    return {
+      isActive: false
     }
-  };
+  },
+  computed: {
+    auth() {
+      return this.$store.getters.isAuthenticated !== null && this.$store.getters.isAuthenticated !== undefined
+    }
+  },
+  methods: {
+    showContacts() {
+      this.isActive = !this.isActive;
+    },
+    onLogout() {
+      this.$store.dispatch('logout')
+    }
+  }
+};
 </script>
 

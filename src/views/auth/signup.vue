@@ -120,114 +120,114 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        password: '',
-        hidePassword: true,
-        valid: false,
-        donation: null,
-        pseudoRules: [
-          v => !!v || 'Enter your nickname'
-        ],
-        donRules: [
-          v => !!v || 'Enter donation amount',
-          v => (v && v.length >= 2) || 'Minimal donation - 10 &#8364;'
-        ],
-        passwordRules: [
-          v => !!v || 'Enter your password',
-          v => (v && v.length >= 6) || 'Password must be at least 6 characters'
-        ],
-        emailRules: [
-          v => !!v || 'Enter your email',
-          v => /.+@.+/.test(v) || 'Enter a valid email address',
-          v => (v && v.length >= 8) || 'Enter a valid email address'
-        ],
-        switchRules: [
-          v => !!v || ''
-        ],
-        selected: '',
-        options: ['Baker Street', 'School №53'],
-        telRules: [
-          v => !!v || 'Enter mobile phone number',
-          v => (v && v.length >= 10) || 'Number must be at least 10 characters',
-          v => (v && v.length <= 12) || 'Number must be at least 12 characters'
-        ],
-        terms: false,
-        errors: [],
-        projects: '',
-        pseudo: '',
-        tel: null,
-        email: '',
-        smetaBaker: [],
-        smetaSchool: []
-      }
-    },
-    methods: {
-      gotDonations(donations) {
-        let sumDonations = null
-        for (let item of donations ) {
-          sumDonations = sumDonations + Number(item.donation)
-        }
-        return sumDonations
-      },
-      needDonations(smeta) {
-        let needSum = null
-        let sum = null
-        for (let item of smeta ) {
-          sum = sum + item.num * item.price
-        }
-        needSum = sum + sum * 0.1
-        return needSum
-      },
-      restDonation(smeta, donations) {
-        let need = this.needDonations(smeta)
-        let sum = this.gotDonations(donations)
-        let rest = need - sum
-        return rest
-      },
-      fetchDonations() {
-        this.$store.dispatch('fetchDonations')
-      },
-      onDismissed() {
-        this.$store.dispatch('clearError')
-      },
-      onSubmit() {
-        const donation = this.donation;
-        const pseudo = this.pseudo;
-        const tel = this.tel;
-        const email = this.email;
-        const password = this.password;
-        const selected = this.selected;
-        const formData = {
-          donation,
-          pseudo,
-          tel,
-          email,
-          password,
-          selected
-        }
-        this.$store.dispatch('signup', formData)
-      }
-    },
-    computed: {
-      error () {
-        return this.$store.getters.error
-      },
-      passwordType() {
-        return this.hidePassword ? 'password' : 'text'
-      },
-      usersBaker() {
-        return this.$store.getters.usersBaker
-      },
-      usersSchool() {
-        return this.$store.getters.usersSchool
-      }
-    },
-    created() {
-      this.$store.dispatch('initSmeta')
-      this.smetaBaker = this.$store.getters.smetaBaker
-      this.smetaSchool = this.$store.getters.smetaSchool
+export default {
+  data() {
+    return {
+      password: '',
+      hidePassword: true,
+      valid: false,
+      donation: null,
+      pseudoRules: [
+        v => !!v || 'Enter your nickname'
+      ],
+      donRules: [
+        v => !!v || 'Enter donation amount',
+        v => (v && v.length >= 2) || 'Minimal donation - 10 &#8364;'
+      ],
+      passwordRules: [
+        v => !!v || 'Enter your password',
+        v => (v && v.length >= 6) || 'Password must be at least 6 characters'
+      ],
+      emailRules: [
+        v => !!v || 'Enter your email',
+        v => /.+@.+/.test(v) || 'Enter a valid email address',
+        v => (v && v.length >= 8) || 'Enter a valid email address'
+      ],
+      switchRules: [
+        v => !!v || ''
+      ],
+      selected: '',
+      options: ['Baker Street', 'School №53'],
+      telRules: [
+        v => !!v || 'Enter mobile phone number',
+        v => (v && v.length >= 10) || 'Number must be at least 10 characters',
+        v => (v && v.length <= 12) || 'Number must be at least 12 characters'
+      ],
+      terms: false,
+      errors: [],
+      projects: '',
+      pseudo: '',
+      tel: null,
+      email: '',
+      smetaBaker: [],
+      smetaSchool: []
     }
-  };
+  },
+  methods: {
+    gotDonations(donations) {
+      let sumDonations = null
+      for (let item of donations ) {
+        sumDonations = sumDonations + Number(item.donation)
+      }
+      return sumDonations
+    },
+    needDonations(smeta) {
+      let needSum = null
+      let sum = null
+      for (let item of smeta ) {
+        sum = sum + item.num * item.price
+      }
+      needSum = sum + sum * 0.1
+      return needSum
+    },
+    restDonation(smeta, donations) {
+      let need = this.needDonations(smeta)
+      let sum = this.gotDonations(donations)
+      let rest = need - sum
+      return rest
+    },
+    fetchDonations() {
+      this.$store.dispatch('fetchDonations')
+    },
+    onDismissed() {
+      this.$store.dispatch('clearError')
+    },
+    onSubmit() {
+      const donation = this.donation;
+      const pseudo = this.pseudo;
+      const tel = this.tel;
+      const email = this.email;
+      const password = this.password;
+      const selected = this.selected;
+      const formData = {
+        donation,
+        pseudo,
+        tel,
+        email,
+        password,
+        selected
+      }
+      this.$store.dispatch('signup', formData)
+    }
+  },
+  computed: {
+    error () {
+      return this.$store.getters.error
+    },
+    passwordType() {
+      return this.hidePassword ? 'password' : 'text'
+    },
+    usersBaker() {
+      return this.$store.getters.usersBaker
+    },
+    usersSchool() {
+      return this.$store.getters.usersSchool
+    }
+  },
+  created() {
+    this.$store.dispatch('initSmeta')
+    this.smetaBaker = this.$store.getters.smetaBaker
+    this.smetaSchool = this.$store.getters.smetaSchool
+  }
+};
 </script>

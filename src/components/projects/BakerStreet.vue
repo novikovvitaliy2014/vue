@@ -49,34 +49,34 @@
 </template>
 
 <script>
-  export default {
-    methods: {
-      multiplication(num, price) {
-        return num * price
-      }
-    },
-    computed: {
-      auth() {
-        return this.$store.getters.isAuthenticated
-      },
-      total() {
-        let smetaBaker = this.$store.getters.smetaBaker
-        let sumTotal = 0;
-        for (let item of smetaBaker ) {
-          sumTotal = sumTotal + item.num * item.price
-        }
-        return sumTotal;
-      },
-      salary() {
-        return this.total * 0.1
-      },
-      finalSum() {
-        return this.total + this.salary
-      }
-    },
-    created() {
-      this.$store.dispatch('initSmeta')
-      this.smetaBaker = this.$store.getters.smetaBaker
+export default {
+  methods: {
+    multiplication(num, price) {
+      return num * price
     }
-  };
+  },
+  computed: {
+    auth() {
+      return this.$store.getters.isAuthenticated
+    },
+    total() {
+      let smetaBaker = this.$store.getters.smetaBaker
+      let sumTotal = 0;
+      for (let item of smetaBaker ) {
+        sumTotal = sumTotal + item.num * item.price
+      }
+      return sumTotal;
+    },
+    salary() {
+      return this.total * 0.1
+    },
+    finalSum() {
+      return this.total + this.salary
+    }
+  },
+  created() {
+    this.$store.dispatch('initSmeta')
+    this.smetaBaker = this.$store.getters.smetaBaker
+  }
+};
 </script>

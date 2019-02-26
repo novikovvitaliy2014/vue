@@ -14,35 +14,7 @@ Vue.config.productionTip = false
 
 axios.defaults.baseURL = 'https://vue-city.firebaseio.com'
 
-import Header from './components/header/Header.vue'
-import PageMain from './views/mainPage/PageMain.vue'
-import Logo from './components/header/Logo.vue'
-import Contacts from './components/header/Contacts.vue'
-import Features from './components/forMainPage/Features.vue'
-import About from './components/forMainPage/About.vue'
-import Pro from './components/projects/Pro.vue'
-import BakerStreet from './components/projects/BakerStreet.vue'
-import School from './components/projects/School.vue'
-import Footer from './components/footer/Footer.vue'
-import Donors from './views/donorsPage/Donors.vue'
-import signup from './views/auth/signup.vue'
-import signin from './views/auth/signin.vue'
-
 Vue.use(Vuetify)
-
-Vue.component('app-header', Header);
-Vue.component('PageMain', PageMain);
-Vue.component('app-logo', Logo);
-Vue.component('Contacts', Contacts);
-Vue.component('donors', Donors);
-Vue.component('signup', signup);
-Vue.component('signin', signin);
-Vue.component('Features', Features );
-Vue.component('About', About);
-Vue.component('Pro', Pro);
-Vue.component('app-baker', BakerStreet);
-Vue.component('School', School);
-Vue.component('app-footer', Footer);
 
 new Vue({
   store,
@@ -50,7 +22,7 @@ new Vue({
   render: h => h(App),
   created () {
     firebase.initializeApp({
-      apiKey: "AIzaSyDNMxHSzaOvcKd6E8GasiSoIRXlm7k7x",
+      apiKey: "AIzaSyDNMxHSzaOvcKd6E8GasiSoIRXlm7k7x_4",
       authDomain: "vue-city.firebaseapp.com",
       databaseURL: "https://vue-city.firebaseio.com",
       projectId: "vue-city",
