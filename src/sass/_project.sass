@@ -11,7 +11,7 @@
   padding-top: 5px
 .project__select .v-select__selection
   height: 45px
-  font-size: $font-size-h3
+  font-size: $font-size-h4
 .v-input input
   height: 45px
   max-height: 45px
@@ -46,23 +46,28 @@
   @include mobile-tab
     height: 200px
 .project__smeta
-  display: table
-  @include container ($col-12, $col-11, $col-9, $max-width: 900px)
+  // display: table
+  @include container ($col-11, $col-11, $col-9, $max-width: 900px)
   table
     text-align: center
     width: 100%
-    caption
-      margin: 50px 0 30px 0
-      color: $color-dark
-      text-transform: uppercase
-      font-size: $font-size-h1
+    // border: 2px dashed $color-dark
+    // caption
+    //   margin: 50px 0 30px 0
+    //   color: $color-dark
+    //   text-transform: uppercase
+    //   font-size: $font-size-h1
     tr
-      width: $col-12
+      // width: $col-12
+      // display: flex
+      // flex-wrap: wrap
+      // border: 2px dashed $color-dark
       &:last-child
         color: $color-dark
         font-weight: 700
-        td
-          border-bottom: 2px dashed $color-dark
+        // td
+          // border-bottom: 2px dashed $color-dark
+
     th
       font-size: $font-size-h5
       background: $color-main
@@ -71,22 +76,140 @@
       padding: 0 5px
       font-weight: 400
     td
+      // display: block
       font-size: $font-size-h4
       line-height: $line-height-h3
       height: 50px
       text-transform: capitalcase
       border-bottom: 1px dashed $color-main
       &:first-child
-        width: $col-5
+        // width: $col-5
+      &:last-child
+
+.smeta
+  @include container($col-11, $col-11, $col-9, $max-width: 900px)
+
+.smeta__group
+  &:nth-child(even)
+
+    // background-color: lightgrey
+.smeta__row
+  display: flex
+  justify-content: space-between
+  width: 100%
+  flex-wrap: no-wrap
+  align-items: center
+  // border-bottom: 1px dashed $color-main
+  span
+    flex-grow: 1
+    flex-basis: $col-2
+    text-align: center
+    height: 100%
+    align-items: stretch
+    font-size: $font-size-h4
+    line-height: $line-height-h3
+    &:first-child
+      flex-basis: $col-4
+  &--head
+    background: $color-main
+    color: #fff
+    // border: 1px solid $color-main
+    span
+      font-size: $font-size-h5
+      // color: $color-dark
+  &--btn
+    background-color: $color-light
+    border: 1px solid $color-main
+    button
+      //
+      &:hover
+        background-color: $color-main
+        color: #fff
+        // border: 1px solid #fff
+      // background-color: $color-base
+      flex-grow: 1
+      // color: #fff
+      &:first-child
+        flex-basis: $col-7
+  &--sum
+    border-bottom: 1px dashed $color-main
+    border-top: 1px dashed $color-main
+    color: $color-dark
+    font-weight: bold
+
+.smeta-proof
+  // display: block
+  // flex-wrap: no-wrap
+  // justify-content: space-between
+  background-color: $color-main
+  color: #fff
+  padding-bottom: 10px
+  // @include mobile
+    // flex-wrap: wrap
+    // flex-direction: column
+  h5
+    margin: 0
+  span
+    display: block
+    text-align: center
+.smeta-proof__contacts
+  // min-width: 100%
+  // width: $col-4
+  // @include mobile
+  width: 100%
+.smeta-proof__bill
+  display: flex
+  margin: auto
+  // margin-bottom: 10px
+  // width: $col-8
+  // @include mobile
+  width: 100%
+  max-width: 400px
+.smeta__photos
+  display: flex
+  justify-content: space-between
+  flex-wrap: wrap
+  @include container($col-12, $col-12, $col-12, $max-width: 1700px)
+  margin: 30px 0 50px 0
+.smeta__photo
+  flex-basis: $col-6
+  // img
+    // display: block
+    // width: 100%
+      // background: $color-main
+      // flex-basis: $col-5
+
+  // display: block
+        // display: block
+        // width: $col-12
+        // flex-grow: 1
+// .project__smeta-item
+//   border: 2px dashed $color-dark
+//   width: 100%
+//   tr
+//     border: 2px dashed $color-dark
+//     width: 100%
+// .project__smeta-item .project__smeta-item-row
+//   width: 100%
+//   border: 2px dashed $color-dark
+//   display: flex
+//   justify-content: space-between
+// .project__smeta-item .project__smeta-info
+//   border: 2px dashed $color-dark
+//   // display: flex
+//   // flex-grow: 1
+//   width: 100%
 .slide-fade-enter-active
-  transition: all 500ms ease 300ms
+  transition: all 700ms ease 200ms
 .slide-fade-leave-active
-  transition: all 300ms ease
+  transition: all 500ms ease
 .slide-fade-enter
-  transform: translateX(-200px)
+  // transform: translateY(-250px)
+  // display: block
   opacity: 0
 .slide-fade-leave-to
-  transform: translateX(200px)
+  // transform: translateY(0px)
+  // display: none
   opacity: 0
 .project__container
   align-self: center
@@ -109,9 +232,7 @@ h2.project__title
   font-weight: 400
 h3.project__title
   font-weight: 400
-.project__button
+.project__participation
   @include container ($col-12, $col-11, $col-9, $max-width: 900px)
-.project__button .city__btn
-  height: 50px
-  font-size: $font-size-h4
-  margin-top: 30px
+  margin-top: 40px
+  // @include container ($col-12, $col-11, $col-9, $max-width: 900px)

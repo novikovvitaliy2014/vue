@@ -1,15 +1,19 @@
 .contacts
+  // @include grid
+  margin-left: auto
+  margin-right: -10px
   position: relative
   background-color: #fff
-  width: 100%
+  width: $col-6
   z-index: 1
   border-bottom: 1px solid $color-main
   transition: 300ms ease-in-out
-  transform: translateY(-250px)
+  transform: translateX(200%)
 .contacts__show
-  transform: translateY(1px)
+  transform: translateX(100%)
 .contacts__container
   position: relative
+  // @include grid
   @include container($col-12, $col-11, $col-10, 1100px)
   display: flex
   flex-wrap: wrap

@@ -1,6 +1,6 @@
 .donors
   @include container( $col-11, $col-11, $col-9, $max-width: 900px )
-  margin: 100px auto 20px auto
+  margin: 50px auto 50px auto
   h1
     margin-bottom: 50px
 .donors__row
@@ -8,15 +8,21 @@
   justify-content: center
   width: 100%
   border-bottom: 1px dashed $color-main
+  &--head
+    color: $color-dark
+    font-weight: bold
   &--got-donations
     background-color: $color-light
     color: $color-dark
+    font-weight: bold
   &--need-donations
     background-color: $color-light2
     color: $color-dark2
+    font-weight: bold
   &--rest-donations
     background-color: $color-light
     color: $color-dark
+    font-weight: bold
 .donors__cell
   display: flex
   justify-content: center

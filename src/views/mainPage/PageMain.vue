@@ -2,21 +2,21 @@
   <section>
     <features></features>
     <about></about>
-    <pro></pro>
+    <baker></baker>
   </section>
 </template>
 
 <script>
 import Features from '../../components/forMainPage/Features.vue'
 import About from '../../components/forMainPage/About.vue'
-import Pro from '../../components/projects/Pro.vue'
-// import Contacts from './Contacts.vue'
+import Baker from '../../components/projects/BakerStreet.vue'
+// import Pro from '../../components/projects/Pro.vue'
 
 export default {
   components: {
     Features,
     About,
-    Pro
+    Baker
   }
 };
 </script>

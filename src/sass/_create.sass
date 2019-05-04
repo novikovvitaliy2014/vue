@@ -1,0 +1,80 @@
+.create
+  @include container($col-12, $col-10, $col-10)
+  margin-top: 100px
+.create__link-to-projects
+  display: block
+  margin: 20px auto 100px auto
+  text-align: center
+  text-decoration: underline
+  font-size: $font-size-h5
+  color: $color-dark
+.create__id-exist
+  color: #ff5252
+.create__upload-btn
+  display: flex
+  margin: auto auto 10px auto
+  background-color: $color-main
+  color: #fff
+  padding: 5px 10px
+  border-radius: 5px
+  &:hover
+    background-color: lighten($color-main, 5%)
+
+.create__uploads
+  display: flex
+  justify-content: space-around
+  flex-wrap: no-wrap
+  @include mobile-tab
+    flex-wrap: wrap
+.create__uploads section
+  width: $col-6
+  @include mobile
+    width: $col-10
+.create__img
+  width: 100%
+  height: auto
+.create__pickers
+  display: flex
+  justify-content: space-around
+  flex-wrap: no-wrap
+  @include mobile-tab
+    flex-wrap: wrap
+.create__smeta
+  @include container($col-12, $col-12, $col-10)
+
+.create__smeta-item
+  display: flex
+  flex-wrap: no-wrap
+  justify-content: space-between
+  // @include mobile-tab
+  //   flex-wrap: wrap
+  // div
+  //   display: flex
+  //   flex-direction: column
+  //   justify-content: center
+  //   align-items: center
+  //   width: $col-2
+  //   text-align: center
+    // span
+    //   display: block
+.create__smeta-cell
+  &--name
+    width: $col-4
+  &--quantity
+    width: $col-3
+  &--price
+    width: $col-3
+  &--sum
+    display: flex
+    flex-direction: column
+    justify-content: flex-start
+    align-items: center
+    width: $col-2
+    text-align: center
+    span
+      padding: 2px 0
+.create__smeta--add
+  display: flex
+  margin: auto
+
+

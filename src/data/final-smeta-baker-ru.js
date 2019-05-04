@@ -1,9 +1,9 @@
 export default
   [
     {
-      name: "Bench, item",
+      name: "Скамейки, шт",
       num: 2,
-      price: 50
+      price: 55
     },
     {
       name: "Slab, sq.m",

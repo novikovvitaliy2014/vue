@@ -1,0 +1,40 @@
+.private-projects,
+.private-project
+  @include container($col-12, $col-11, $col-10, 1100px)
+  margin-top: 100px
+.private-project__edit-icons,
+.private-project__edit-date
+  display: flex
+  justify-content: center
+  flex-wrap: no-wrap
+.private-project__edit-icons .layout,
+.private-project__edit-date .layout
+  flex-grow: 0
+.private-project__title
+  // display: flex
+  margin: auto
+  color: $color-dark
+.private-project__desc
+  display: flex
+  justify-content: center
+  // margin: auto
+  // color: $color-b
+.private-project__date
+  display: flex
+  justify-content: center
+.private-project__pre-photos
+  display: flex
+  justify-content: space-between
+  @include mobile
+    flex-wrap: wrap
+.private-project__pre-photo
+  width: $col-6
+  h4
+    color: $color-dark
+    // font-weight: bold
+  // height: 100%
+  // img
+  //   height: 100%
+  @include mobile
+    margin: auto
+    width: $col-10

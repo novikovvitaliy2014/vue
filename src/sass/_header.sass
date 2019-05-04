@@ -8,21 +8,24 @@
   width: 100%
   height: 50px
   background-color: #fff
-  border-bottom: 1px solid $color-main
+.header__progress
+  position: absolute
+  top: -20px
+  z-index: 7
+  // border-bottom: 1px solid $color-main
 .header__top
   position: relative
   height: 100%
-  @include container( $col-12, $col-11, $col-10, 1100px )
+  @include container( $col-12, $col-11, $col-12 )
+  padding: 0 5px
   @include grid
   flex-wrap: nowrap
   z-index: 6
   background-color: #fff
   nav
-    width: $col-6
-    @include mobile
-      width: $col-10
-    @include tab
-      width: $col-8
+    width: $col-8
+    @include mobile-tab
+      display: none
     ul
       display: flex
       flex-wrap: nowrap
@@ -33,15 +36,41 @@
       padding-left: 0
       li
         justify-content: center
-        width: $col-4
+        // width: $col-4
+        // text-decoration: underline
+        border-bottom: 1px solid $color-main
         color: $color-dark
         text-align: center
-        margin-left: 5px
+        // margin-left: 5px
+        margin: auto
         cursor: pointer
         list-style: none
         @include mobile-tab
           margin-left: 0
         &:hover
           color: $color-main
-.header__top .router-link-active
+.header__lang
+  display: block
+  height: 40px
+  width: 80px
+.v-input input[aria-label="Language"]
+  height: 20px
+  width: 10px
+.v-list__tile__content .v-list__tile__title
+  font-size: $font-size-h4
+// .header__lang .v-select__selection
+//   height: 25px
+//   font-size: $font-size-h6
+  // flex-grow: 2
+// .v-input__control
+  // flex-grow: 1
+.v-input
+  flex: 0 1 auto
+.v-input input
+  height: 45px
+  max-height: 45px
+.side-icon
+  @include desk
+.side-logo
   display: flex
+  flex-wrap: no-wrap

@@ -6,6 +6,7 @@
       method="post"
       action="/submit"
       lazy-validation
+      v-if="!success"
      >
       <v-text-field
         type="email"
@@ -29,7 +30,7 @@
 
       <button :disabled="!valid"
                type="submit"
-               class="city__btn"
+               class="btn"
                tag="button">
              Sign in
       </button>
@@ -45,7 +46,11 @@
         Enter a valid email address and password
       </v-alert>
     </v-form>
-    <span @click="forgotPass" class="forgot__question">Forgot your password?</span>
+    <span @click="forgotPass"
+          class="forgot__question"
+          v-if="!success">
+        Forgot your password?
+    </span>
     <p v-if="forgot">Enter the email address associated with your account, we will send to you recovery link</p>
     <v-text-field
         type="email"
@@ -58,7 +63,7 @@
     </v-text-field>
     <button v-if="forgot"
             @click="resetPass"
-            class="city__btn"
+            class="btn"
             >
           Send
     </button>
@@ -75,10 +80,38 @@
       dismissible
       type="success"
       :value="true"
-      v-if="sent"
+      v-if="resetSuccess"
       >
       Recovery link is sent to your email adress
     </v-alert>
+    <!-- <p v-if="error">
+      Check again, something is wrong!
+    </p> -->
+    <v-alert
+      dismissible
+      type="success"
+      :value="true"
+      v-if="success"
+      >
+      You signed in. Now you can create own project or visit Private Projects page!
+    </v-alert>
+    <div class="signin__next">
+      <router-link to="/project/new"
+         tag="a"
+         v-if="success"
+         class="create__link-to-projects"
+         >
+      Create Project
+      </router-link>
+      <router-link to="/private-projects"
+         tag="a"
+         v-if="success"
+         class="create__link-to-projects"
+         >
+      Private Projects
+      </router-link>
+    </div>
+
   </section>
 </template>
 
@@ -116,16 +149,23 @@ export default {
       this.$store.dispatch('clearError')
     },
     onSubmit() {
-      const formData = {
+      const signinData = {
         email: this.email,
         password: this.password
       }
-      this.$store.dispatch('login', {email: formData.email, password: formData.password})
+      this.$store.dispatch('signin', signinData)
+      // console.log(this.user)
     }
   },
   computed: {
     error() {
       return this.$store.getters.error
+    },
+    success() {
+      return this.$store.getters.success
+    },
+    resetSuccess() {
+      return this.$store.getters.resetSuccess
     },
     passwordType() {
       return this.hidePassword ? 'password' : 'text'
@@ -133,9 +173,16 @@ export default {
     resetError() {
       return this.$store.getters.resetError
     },
-    sent() {
-      return this.$store.getters.success
-    }
+    auth() {
+      return this.$store.getters.isAuthenticated !== null && this.$store.getters.isAuthenticated !== undefined
+    },
+    // user(){
+    //   return this.$store.getters.user
+    // }
+  },
+  created () {
+    // this.email === localStorage.getItem('email')
+    // console.log(this.$store.getters.users)
   }
 };
 </script>
