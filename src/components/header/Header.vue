@@ -65,7 +65,7 @@
                 <v-icon>exit_to_app</v-icon>
               Log out
               </span>
-              <!-- <span v-if="user">{{ user.pseudo }}</span> -->
+              <span v-if="user">{{ user.pseudo }}</span>
               <!-- <span >{{ user.pseudo }}</span> -->
               <!-- <span >{{ user }}</span> -->
           </li>
@@ -111,7 +111,8 @@ export default {
       isOpen: false,
       selected: 'Russian',
       languages: ['English','Russian'],
-      locale: "ru"
+      locale: "ru",
+      userIsCreator: false
       // userPseudo: 'R'
     }
   },
@@ -125,23 +126,33 @@ export default {
     loading(){
       return this.$store.getters.loading
     },
+    user(){
+      return this.$store.getters.user
+    },
+    // userIsCreator(){
+    //   return this.$store.getters.projects.find((project) =>{
+    //     return project.creatorId == this.$store.getters.userId
+    //   })
+    // },
     // user(){
-    //   return this.$store.getters.user
-    //   // console.log(this.$store.getters.user)
+    //   let users = this.$store.getters.users
+    //   return users.find((user) => {
+    //     return user.email === this.email
+    //   })
     // },
     // users(){
     //   return this.$store.getters.users
     //   console.log(this.$store.getters.users)
     // }
   },
-  watch: {
-    auth(value) {
-      if (value == null && value == undefined) {
-        this.$store.dispatch("logout")
-        this.$router.push('/signin')
-      }
-    }
-  },
+  // watch: {
+  //   auth(value) {
+  //     if (value == null && value == undefined) {
+  //       this.$store.dispatch("logout")
+  //       this.$router.push('/signin')
+  //     }
+  //   }
+  // },
   methods: {
     setLocale(){
       if (this.selected === 'English'){
@@ -163,6 +174,11 @@ export default {
     //   this.isActive = !this.isActive
     // },
     showMenu() {
+      console.log(this.$store.getters.userId)
+      console.log(this.$store.getters.projects)
+      this.userIsCreator = this.$store.getters.projects.find((project) =>{
+        return project.creatorId == this.$store.getters.userId
+      })
       this.isOpen = !this.isOpen
       this.isActive = !this.isActive
     },

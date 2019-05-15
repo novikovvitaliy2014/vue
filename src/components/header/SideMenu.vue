@@ -47,6 +47,12 @@
             </span>
             <!-- <span>{{ userPseudo }}</span> -->
         </li>
+        <router-link to="/user-page"
+           tag="li"
+           v-if="userIsCreator"
+           >
+           User Page
+        </router-link>
       </ul>
     </nav>
     <!-- <contacts :class="{contacts__show: isActive}"></contacts> -->
@@ -66,6 +72,11 @@ export default {
     }
   },
   computed: {
+    userIsCreator(){
+      return this.$store.getters.projects.find((project) =>{
+        return project.creatorId == this.$store.getters.userId
+      })
+    },
     auth() {
       return this.$store.getters.isAuthenticated !== null && this.$store.getters.isAuthenticated !== undefined
     },
@@ -77,14 +88,15 @@ export default {
     emitShowMenu(){
       this.$emit("emitShowMenu")
     },
-    emitShowContacts() {
-      this.$emit("emitShowContacts")
-    },
+    // emitShowContacts() {
+    //   this.$emit("emitShowContacts")
+    // },
     onLogout() {
       this.$store.dispatch('logout')
     }
   },
   created () {
+    this.$store.dispatch('loadProjects')
     // this.$store.dispatch('fetchUsers')
     // this.userPseudo = this.$store.getters.userPseudo
   }

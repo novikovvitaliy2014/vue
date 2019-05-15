@@ -28,7 +28,12 @@
               @change="onFilePicked_1">
           </section>
           <p>{{ msgFileMax1 }}</p>
-          <v-img :src="editedUrl_1"></v-img>
+          <v-img
+             :src="editedUrl_1"
+             aspect-ratio="1.618"
+             alt="current-view"
+             >
+          </v-img>
           <section>
             <v-btn raised class="green" @click="onPickFile2">Upload New Image 2</v-btn>
             <input
@@ -39,16 +44,21 @@
               @change="onFilePicked_2">
           </section>
           <p>{{ msgFileMax2 }}</p>
-          <v-img :src="editedUrl_2" v-if="true"></v-img>
-          <smeta-form-edit @send-data="takeDataSmeta" :project="project"></smeta-form-edit>
-          <final-smeta-form @send-data="takeDataSmetaFinal"  :project="project" @send-base-urls="takeBaseUrls"></final-smeta-form>
-          <!-- @send-base-urls="takeBaseUrls" -->
+          <v-img
+             :src="editedUrl_2"
+             aspect-ratio="1.618"
+             alt="project-view"
+             >
+          </v-img>
+          <!-- <outlay-form-edit @send-data="takeDataoutlay" :project="project"></outlay-form-edit> -->
+
+          <!-- <final-outlay-form @send-data="takeDataoutlayFinal" @send-base-urls="takeBaseUrls" :project="project" ></final-outlay-form> -->
         </v-card-text>
 
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="green darken-1" flat @click="dialog = false">Close</v-btn>
-          <v-btn color="green darken-1" flat @click="onSaveEdit">Save</v-btn>
+          <v-btn color="green darken-1" flat @click="onSaveEdit" ref="save">Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -56,12 +66,12 @@
 </template>
 
 <script>
-import FinalSmetaForm from './FinalSmetaForm.vue'
-import SmetaFormEdit from './SmetaFormEdit.vue'
+import FinalOutlayForm from './FinalOutlayForm.vue'
+import OutlayFormEdit from './OutlayFormEdit.vue'
   export default {
     components: {
-      "final-smeta-form": FinalSmetaForm,
-      "smeta-form-edit": SmetaFormEdit
+      "final-outlay-form": FinalOutlayForm,
+      "outlay-form-edit": OutlayFormEdit
     },
     props: {
       project: Object
@@ -77,25 +87,37 @@ import SmetaFormEdit from './SmetaFormEdit.vue'
         editedDescription: this.project.description,
         editedUrl_1: '',
         editedUrl_2: '',
-        dataSmeta: {},
-        dataSmetaFinal: {}
+        // dataOutlay: {},
+        // dataoutlayFinal: {}
       }
     },
     computed: {
     },
+    // mounted () {
+    //    this.$on('send-data', (data) => {
+    //      this.dataoutlayFinal = data.dataFinal
+    //     this.baseUrls[0] = data.url_F1
+    //     this.baseUrls[1] = data.url_F2
+    //    })
+    //    console.log(this.dataoutlayFinal)
+    // },
     methods: {
-      takeDataSmeta(data){
-        this.dataSmeta = data
-        console.log(this.dataSmeta)
-      },
-      takeDataSmetaFinal(data){
-        this.dataSmetaFinal = data
-        console.log(this.dataSmetaFinal)
-      },
-      takeBaseUrls(data){
-        this.baseUrls[0] = data.url_F1
-        this.baseUrls[1] = data.url_F2
-      },
+      // takeDataOutlay(data){
+      //   this.dataOutlay = data
+      //   console.log(this.dataOutlay)
+      // },
+      // takeDataoutlayFinal(data){
+      //   this.dataoutlayFinal = data
+      //   // this.baseUrls = data.baseUrls
+      //   // this.baseUrls[1] = data.url_F2
+      //   console.log(this.dataoutlayFinal)
+      //   // console.log(this.baseUrls)
+      // },
+      // takeBaseUrls(data){
+      //   this.baseUrls[0] = data.url_F1
+      //   this.baseUrls[1] = data.url_F2
+      //   console.log(this.baseUrls)
+      // },
       checkField(){
         if (this.editedTitle.trim() === '' || this.editedDescription.trim() === '' ){
           return
@@ -106,8 +128,8 @@ import SmetaFormEdit from './SmetaFormEdit.vue'
         this.$store.dispatch("editProject", {
           title: this.editedTitle,
           description: this.editedDescription,
-          data: this.dataSmeta,
-          dataFinal: this.dataSmetaFinal,
+          dataOutlay: this.dataOutlay,
+          dataFinal: this.dataoutlayFinal,
           editedImages: this.editedImages,
           id: this.project.id
         })
@@ -117,18 +139,23 @@ import SmetaFormEdit from './SmetaFormEdit.vue'
           url_1: this.editedUrl_1,
           url_2: this.editedUrl_2,
           // editedUrls: this.editedUrls,
-          // urlBase1: this.dataSmetaFinal.url_F1,
-          // urlBase2: this.dataSmetaFinal.url_F2,
-          baseUrls: this.baseUrls
+          // urlBase1: this.dataoutlayFinal.url_F1,
+          // urlBase2: this.dataoutlayFinal.url_F2,
+          // baseUrls: this.baseUrls
         })
+        // console.log(this.baseUrls)
         // this.$emit("imagesFinal", { url_F1:this.editedUrl_1, url_F2:this.editedUrl_2 })
         // this.$store.dispatch("editProjectImage", {
         //   image: this.editedImage,
         //   id: this.project.id
         // })
       },
+      // takeFinalData(){
+      //   this.$parent.$refs.finish.click()
+      // },
       async onSaveEdit() {
         try {
+          // await this.takeFinalData()
           await this.checkField()
           // await this.editUser();
           await this.editProject()
@@ -195,9 +222,6 @@ import SmetaFormEdit from './SmetaFormEdit.vue'
           this.editedUrl_2 = pro[1].imageUrl
         }
       }
-
-
-
       // this.editedUrl_1 = this.editedUrls[0]
       // this.editedUrl_2 = this.editedUrls[1]
       // if (this.project.projectImages){

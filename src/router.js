@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Donors from './views/donorsPage/Donors.vue'
 import signup from './views/auth/signup.vue'
 import signin from './views/auth/signin.vue'
+import UserPage from './views/projects/UserPage.vue'
 import PageMain from './views/mainPage/PageMain.vue'
 import store from "./store/store.js"
 import VueRouter from 'vue-router'
@@ -29,6 +30,17 @@ const routes = [
   { path: '/private-projects',
     name: 'PrivateProjects',
     component: PrivateProjects,
+    beforeEnter: (to, from, next) => {
+      if(store.getters.isAuthenticated || localStorage.getItem('userId')) {
+        next()
+      } else {
+        next('/signin')
+      }
+    }
+  },
+  { path: '/user-page',
+    name: 'UserPage',
+    component: UserPage,
     beforeEnter: (to, from, next) => {
       if(store.getters.isAuthenticated || localStorage.getItem('userId')) {
         next()

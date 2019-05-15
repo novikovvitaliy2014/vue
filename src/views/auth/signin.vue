@@ -1,7 +1,7 @@
 <template>
   <section class="signin">
     <h1>Sign in</h1>
-    <v-form @submit.prevent = "onSubmit"
+    <v-form @submit.prevent = "onSubmitSignin"
       v-model="valid"
       method="post"
       action="/submit"
@@ -110,7 +110,12 @@
          >
       Private Projects
       </router-link>
+
     </div>
+    <p>Users{{users}}</p>
+    <p>User{{user}}</p>
+    <p>Projects{{projects}}</p>
+
 
   </section>
 </template>
@@ -119,6 +124,7 @@
 export default {
   data() {
     return {
+      // user: {},
       forgot: false,
       password: '',
       hidePassword: true,
@@ -148,16 +154,62 @@ export default {
     onDismissed() {
       this.$store.dispatch('clearError')
     },
-    onSubmit() {
+    authUser() {
       const signinData = {
         email: this.email,
         password: this.password
       }
       this.$store.dispatch('signin', signinData)
       // console.log(this.user)
+      return Promise.resolve()
+    },
+    fetchUsers(){
+      setTimeout(() => {
+        this.$store.dispatch('fetchUsers')
+      }, 1000)
+
+    },
+    getUserData(){
+      // const users = this.$store.getters.users
+      // const user = users.find((user) => {
+      //   return user.email === this.email
+      // })
+      setTimeout(() => {
+        this.$store.dispatch('getUser', {email: this.email})
+      }, 2000)
+
+    },
+    loadProjects(){
+      setTimeout(() => {
+        this.$store.dispatch('loadProjects')
+      }, 1000)
+
+    },
+    async onSubmitSignin() {
+      try {
+        await this.authUser()
+        console.log("auth")
+        await this.fetchUsers()
+        console.log("fetch")
+        await this.getUserData()
+        console.log("getUser")
+        await this.loadProjects()
+        console.log("loadPros")
+      } catch (e) {
+          console.log(e)
+      }
     }
   },
   computed: {
+    projects(){
+      return this.$store.getters.projects
+    },
+    // fetch(){
+    //   if(this.success){
+    //     this.$store.dispatch('fetchUsers')
+    //   }
+    //   console.log("fetched")
+    // },
     error() {
       return this.$store.getters.error
     },
@@ -176,11 +228,15 @@ export default {
     auth() {
       return this.$store.getters.isAuthenticated !== null && this.$store.getters.isAuthenticated !== undefined
     },
-    // user(){
-    //   return this.$store.getters.user
-    // }
+    user(){
+      return this.$store.getters.user
+    },
+    users(){
+      return this.$store.getters.users
+    }
   },
   created () {
+
     // this.email === localStorage.getItem('email')
     // console.log(this.$store.getters.users)
   }

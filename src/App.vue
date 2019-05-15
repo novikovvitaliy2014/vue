@@ -13,6 +13,7 @@ import PageMain from './views/mainPage/PageMain.vue'
 import Donors from './views/donorsPage/Donors.vue'
 import Signin from './views/auth/signin.vue'
 import Signup from './views/auth/signup.vue'
+import UserPage from './views/projects/UserPage.vue'
 import CreateProject from './views/projects/CreateProject.vue'
 import PrivateProjects from './views/projects/PrivateProjects.vue'
 import PrivateProject from './views/projects/PrivateProject.vue'
@@ -29,7 +30,8 @@ export default {
     PageMain,
     Donors,
     Signin,
-    Signup
+    Signup,
+    "user-page": UserPage
   },
   computed: {
     auth() {
@@ -37,7 +39,7 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('tryAutoSignin')
+    // this.$store.dispatch('tryAutoSignin')
     this.$vuetify.theme.green = "#4CAF50"
     this.$vuetify.theme.primary = "#4CAF50"
     this.$vuetify.theme.greendarken4 = "#1B5E20"
@@ -69,4 +71,6 @@ export default {
   @import "./sass/_side-menu.sass"
   @import "./sass/_private-projects.sass"
   @import "./sass/_create.sass"
+  @import "./sass/_user-page.sass"
+  @import "./sass/_final-photos.sass"
 </style>

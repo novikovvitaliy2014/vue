@@ -1,9 +1,9 @@
 <template>
   <div class="project__participation">
-    <!-- <button class="btn" >Book Donation</button> -->
+    <!-- <button class="btn" @click="showContact">Book Donation</button> -->
     <p>{{$t('enter-contacts')}}</p>
     <div  >
-      <v-form v-model="valid">
+      <v-form v-model="valid" @submit.prevent = "sendContact">
         <v-text-field
           type="text"
           label="Enter your contacts"
@@ -17,10 +17,11 @@
           title="Project author will contact you to negotiate forms of cooperation"
           required>
         </v-text-field>
+        <p>{{ user.pseudo }}</p>
         <span>{{$t('author')}}</span>
         <button class="btn"
+                type="submit"
 
-                @click="sendContact"
                 :disabled="!valid">
               {{$t('send')}}
         </button>
@@ -50,8 +51,12 @@
 
 <script>
   export default {
+    props: {
+      id: String
+    },
     data() {
       return {
+        // pseudo: '',
         valid: false,
         contact: '',
         contactActive: '',
@@ -62,6 +67,9 @@
       }
     },
     computed: {
+      user(){
+        return this.$store.getters.user
+      },
       success(){
         return this.$store.getters.success
       },
@@ -74,15 +82,24 @@
       //   this.contactActive = !this.contactActive
       // },
       sendContact(){
-        this.$store.dispatch('sendContact', {
-          contact: this.contact
+        const contactsData = {
+          contact: this.contact,
+          nickname: this.nickname,
+          id: this.id
+        }
+        this.$store.dispatch('editProject',
+          contactsData
+
           // selected: this.selected
-        })
+        )
       }
     },
     created(){
+      // this.$store.dispatch('fetchUsers')
       this.$store.state.success = false,
       this.$store.state.error = false
+      console.log(this.user)
+      // this.pseudo = this.$store.getters.user.pseudo
     }
   };
 </script>

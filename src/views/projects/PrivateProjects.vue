@@ -8,6 +8,7 @@
       label="Project ID"
       id="projectId"
       v-model='projectId'
+      @focus="loadProjects"
 
       >
     </v-text-field>
@@ -29,8 +30,9 @@
       <!-- <div class="id">{{ project.id }}</div> -->
       <div>{{ project.date | date }}</div>
       <div>{{ project.description }}</div>
+      <div>{{ project.projectImages }}</div>
       <!-- <img :src="project.imageUrl"/> -->
-      <router-link :to="'/private-projects/' + project.id">view project</router-link>
+      <router-link :to="'/private-projects/' + project.id" :project="project">view project</router-link>
     </section>
   </div>
 </template>
@@ -70,9 +72,35 @@
       //   // console.log(this.match)
       //   console.log(this.project)
       //   }
+      // resizeImages(){
+      //   this.$store.dispatch('resizeImages')
+      //   console.log('resized')
+      // },
+      loadProjects(){
+        this.$store.dispatch('loadProjects')
+        console.log('loaded')
+      },
+      // async resizeAndLoad(){
+      //   try {
+      //     console.log('start')
+      //     await this.resizeImages()
+      //     console.log('resized')
+      //     // await this.editUser();
+      //     await this.loadProjects()
+      //     console.log('loaded')
+      //   } catch (e) {
+      //       alert("Error" + e)
+      //   }
+      // },
     },
     created() {
-      this.$store.dispatch('loadProjects')
+      this.$store.dispatch('resizeImages')
+      console.log('resized')
+      // this.$store.dispatch('loadProjects')
+      // this.resizeAndLoad()
+
+
+      // this.$store.dispatch('loadProjects')
       // this.$store.dispatch('tryAutoSignin')
     }
   };

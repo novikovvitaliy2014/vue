@@ -15,7 +15,7 @@
         </div>
       </div>
     </div>
-    <section class="project__smeta" >
+    <section class="project__outlay" >
       <table>
         <caption>Priced outlay</caption>
         <tr>
@@ -24,7 +24,7 @@
           <th>Price of 1 item, &#8364;</th>
           <th>Sum, &#8364;</th>
         </tr>
-        <tr v-for="row in smetaSchool"
+        <tr v-for="row in outlaySchool"
             :key="row.name">
           <td>{{ row.name }}</td>
           <td>{{ row.num }}</td>
@@ -51,9 +51,9 @@
 export default {
   computed: {
     total() {
-      let smetaSchool = this.$store.getters.smetaSchool
+      let outlaySchool = this.$store.getters.outlaySchool
       let sumTotal = 0;
-      for (let item of smetaSchool ) {
+      for (let item of outlaySchool ) {
         sumTotal = sumTotal + item.num * item.price
       }
       return sumTotal;
@@ -71,8 +71,8 @@ export default {
     }
   },
   created() {
-    this.smetaSchool = this.$store.getters.smetaSchool
-    this.$store.dispatch('initSmeta')
+    this.outlaySchool = this.$store.getters.outlaySchool
+    this.$store.dispatch('initOutlay')
   }
 };
 </script>

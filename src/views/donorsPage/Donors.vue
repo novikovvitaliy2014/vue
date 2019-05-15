@@ -29,11 +29,11 @@
         <div class="donors__cell">{{$t('Raised')}}</div>
       </div>
       <div class="donors__row donors__row--need-donations">
-        <div class="donors__cell">{{ needDonations(smetaBaker) }} $</div>
+        <div class="donors__cell">{{ needDonations(outlayBaker) }} $</div>
         <div class="donors__cell">{{$t('demand')}}</div>
       </div>
       <div class="donors__row donors__row--rest-donations">
-        <div class="donors__cell">{{ restDonation(smetaBaker, donors)}} $</div>
+        <div class="donors__cell">{{ restDonation(outlayBaker, donors)}} $</div>
         <div class="donors__cell">{{$t('needed')}}</div>
       </div>
     </section>
@@ -50,11 +50,11 @@
         <div class="donors__cell">Raised</div>
       </div>
       <div class="donors__row donors__row--need-donations">
-        <div class="donors__cell">{{ needDonations(smetaSchool) }} &#8364;</div>
+        <div class="donors__cell">{{ needDonations(outlaySchool) }} &#8364;</div>
         <div class="donors__cell">Project demand</div>
       </div>
       <div class="donors__row donors__row--rest-donations">
-        <div class="donors__cell">{{ restDonation(smetaSchool, usersSchool) }} &#8364;</div>
+        <div class="donors__cell">{{ restDonation(outlaySchool, usersSchool) }} &#8364;</div>
         <div class="donors__cell">Still needed</div>
       </div>
     </section> -->
@@ -68,10 +68,10 @@ export default {
     return {
       // adresses: ["Baker Street","School №53"],
       // selected: '',
-      smetaBaker: [],
+      outlayBaker: [],
       donors: donors,
       showParticipants: false
-      // smetaSchool: []
+      // outlaySchool: []
     }
   },
   methods: {
@@ -85,17 +85,17 @@ export default {
       }
       return sumDonations
     },
-    needDonations(smeta) {
+    needDonations(outlay) {
       // let needSum = 0;
       let sum = 0
-      for (let item of smeta ) {
+      for (let item of outlay ) {
         sum = sum + item.num * item.price
       }
       // needSum = sum + sum * 0.1
       return sum
     },
-    restDonation(smeta, donations) {
-      let need = this.needDonations(smeta)
+    restDonation(outlay, donations) {
+      let need = this.needDonations(outlay)
       let sum = this.gotDonations(donations)
       let rest = need - sum
       return rest
@@ -113,9 +113,9 @@ export default {
     // },
   },
   created () {
-    this.$store.dispatch('initSmeta')
-    this.smetaBaker = this.$store.getters.smetaBaker
-    // this.smetaSchool = this.$store.getters.smetaSchool
+    this.$store.dispatch('initOutlay')
+    this.outlayBaker = this.$store.getters.outlayBaker
+    // this.outlaySchool = this.$store.getters.outlaySchool
   }
 };
 </script>

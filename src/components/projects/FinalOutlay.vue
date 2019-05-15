@@ -1,35 +1,35 @@
 <template>
-  <div class="smeta" v-if="dataFinal">
+  <div class="outlay">
     <h2>{{$t('final-outlay')}}</h2>
-    <div class="smeta__row smeta__row--head"
+    <div class="outlay__row outlay__row--head"
          v-html="$t('table-head-final')">
       <!-- <span>Resource</span>
       <span>Quantity</span>
       <span>Price of 1 item, $</span>
       <span>Sum, $</span> -->
     </div>
-    <section class="smeta__group">
-      <div class="smeta__row">
-        <span>{{ dataFinal.smetaName1F }}</span>
-        <span>{{ dataFinal.smetaQuantity1F }}</span>
-        <span>{{ dataFinal.smetaPrice1F }}</span>
-        <span>{{multiplication(dataFinal.smetaQuantity1F, dataFinal.smetaPrice1F)}}</span>
+    <section class="outlay__group">
+      <div class="outlay__row">
+        <span>{{ dataFinal.outlayName1F }}</span>
+        <span>{{ dataFinal.outlayQuantity1F }}</span>
+        <span>{{ dataFinal.outlayPrice1F }}</span>
+        <span>{{multiplication(dataFinal.outlayQuantity1F, dataFinal.outlayPrice1F)}}</span>
       </div>
-      <div class="smeta__row smeta__row--btn">
+      <div class="outlay__row outlay__row--btn">
         <button @click="showContacts(1)">{{$t('proof')}}</button>
       </div>
       <transition name="slide-fade">
-        <div class="smeta-proof"
+        <div class="outlay-proof"
              v-if="showContact1"
              >
-          <div class="smeta-proof__contacts">
-            <h5>{{ dataFinal.smetaNameSupplier1 }}</h5>
-            <span>{{ dataFinal.smetaContactSupplier1}}</span>
+          <div class="outlay-proof__contacts">
+            <h5>{{ dataFinal.outlayNameSupplier1 }}</h5>
+            <span>{{ dataFinal.outlayContactSupplier1}}</span>
           </div>
-          <img class="smeta-proof__bill"
+          <img class="outlay-proof__bill"
                :src="editedUrl_F1"
                alt="check 1">
-          <!-- <v-img class="smeta-proof__bill"
+          <!-- <v-img class="outlay-proof__bill"
                  :src="editedUrl_F1"
                  width="50"
                  >
@@ -39,51 +39,51 @@
       </transition>
     </section>
 
-    <section class="smeta__group">
-      <div class="smeta__row">
-        <span>{{ dataFinal.smetaName2F }}</span>
-        <span>{{ dataFinal.smetaQuantity2F }}</span>
-        <span>{{ dataFinal.smetaPrice2F }}</span>
-        <span>{{multiplication(dataFinal.smetaQuantity2F, dataFinal.smetaPrice2F)}}</span>
+    <section class="outlay__group">
+      <div class="outlay__row">
+        <span>{{ dataFinal.outlayName2F }}</span>
+        <span>{{ dataFinal.outlayQuantity2F }}</span>
+        <span>{{ dataFinal.outlayPrice2F }}</span>
+        <span>{{multiplication(dataFinal.outlayQuantity2F, dataFinal.outlayPrice2F)}}</span>
       </div>
-      <div class="smeta__row smeta__row--btn">
+      <div class="outlay__row outlay__row--btn">
         <button @click="showContacts(2)">{{$t('proof')}}</button>
       </div>
       <transition name="slide-fade">
-        <div class="smeta-proof"
+        <div class="outlay-proof"
              v-if="showContact2"
              >
-          <div class="smeta-proof__contacts">
-            <h5>{{ dataFinal.smetaNameSupplier2 }}</h5>
-            <span>{{ dataFinal.smetaContactSupplier2}}</span>
+          <div class="outlay-proof__contacts">
+            <h5>{{ dataFinal.outlayNameSupplier2 }}</h5>
+            <span>{{ dataFinal.outlayContactSupplier2}}</span>
           </div>
-          <img class="smeta-proof__bill"
+          <img class="outlay-proof__bill"
                :src="editedUrl_F2"
                alt="check 2">
         </div>
       </transition>
     </section>
-    <section class="smeta__group">
-      <div class="smeta__row">
+    <section class="outlay__group">
+      <div class="outlay__row">
         <span>{{$t('work')}}</span>
         <span>10</span>
         <span>6</span>
         <span>60</span>
       </div>
 
-      <div class="smeta__row smeta__row--btn">
+      <div class="outlay__row outlay__row--btn">
         <button @click="showContacts(3)">{{$t('proof')}}</button>
       </div>
 
       <transition name="slide-fade">
-        <div class="smeta-proof"
+        <div class="outlay-proof"
              v-if="showContact3"
              >
-          <div class="smeta-proof__contacts">
+          <div class="outlay-proof__contacts">
             <h5>Multi Service </h5>
             <span>38 050 456 78 99</span>
           </div>
-          <img class="smeta-proof__bill"
+          <img class="outlay-proof__bill"
                :src="editedUrl_F3"
 
                alt="check 3">
@@ -91,14 +91,14 @@
       </transition>
     </section>
 
-    <div class="smeta__row">
+    <div class="outlay__row">
       <span>{{$t('work-org')}}</span>
       <span>1</span>
       <span></span>
       <span>20</span>
     </div>
 
-    <div class="smeta__row smeta__row--sum">
+    <div class="outlay__row outlay__row--sum">
       <span>{{$t('sum')}}</span>
       <span></span>
       <span></span>
@@ -171,6 +171,7 @@
     },
     created(){
       this.$store.dispatch('loadProjects')
+      console.log(this.imagesBase)
     }
   };
 </script>

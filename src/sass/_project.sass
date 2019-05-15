@@ -45,7 +45,7 @@
     background-size: cover
   @include mobile-tab
     height: 200px
-.project__smeta
+.project__outlay
   // display: table
   @include container ($col-11, $col-11, $col-9, $max-width: 900px)
   table
@@ -86,14 +86,14 @@
         // width: $col-5
       &:last-child
 
-.smeta
+.outlay
   @include container($col-11, $col-11, $col-9, $max-width: 900px)
 
-.smeta__group
+.outlay__group
   &:nth-child(even)
 
     // background-color: lightgrey
-.smeta__row
+.outlay__row
   display: flex
   justify-content: space-between
   width: 100%
@@ -137,7 +137,7 @@
     color: $color-dark
     font-weight: bold
 
-.smeta-proof
+.outlay-proof
   // display: block
   // flex-wrap: no-wrap
   // justify-content: space-between
@@ -152,12 +152,12 @@
   span
     display: block
     text-align: center
-.smeta-proof__contacts
+.outlay-proof__contacts
   // min-width: 100%
   // width: $col-4
   // @include mobile
   width: 100%
-.smeta-proof__bill
+.outlay-proof__bill
   display: flex
   margin: auto
   // margin-bottom: 10px
@@ -165,13 +165,13 @@
   // @include mobile
   width: 100%
   max-width: 400px
-.smeta__photos
+.outlay__photos
   display: flex
   justify-content: space-between
   flex-wrap: wrap
   @include container($col-12, $col-12, $col-12, $max-width: 1700px)
   margin: 30px 0 50px 0
-.smeta__photo
+.outlay__photo
   flex-basis: $col-6
   // img
     // display: block
@@ -183,18 +183,18 @@
         // display: block
         // width: $col-12
         // flex-grow: 1
-// .project__smeta-item
+// .project__outlay-item
 //   border: 2px dashed $color-dark
 //   width: 100%
 //   tr
 //     border: 2px dashed $color-dark
 //     width: 100%
-// .project__smeta-item .project__smeta-item-row
+// .project__outlay-item .project__outlay-item-row
 //   width: 100%
 //   border: 2px dashed $color-dark
 //   display: flex
 //   justify-content: space-between
-// .project__smeta-item .project__smeta-info
+// .project__outlay-item .project__outlay-info
 //   border: 2px dashed $color-dark
 //   // display: flex
 //   // flex-grow: 1
