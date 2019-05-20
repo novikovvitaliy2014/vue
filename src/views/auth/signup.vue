@@ -93,7 +93,7 @@
              type="submit"
              class="btn"
              >
-        book donation
+        sign up
       </button>
       <v-alert
         dismissible

@@ -19,8 +19,8 @@ const routes = [
   { path: '/project/new',
     name: 'CreateProject',
     component: CreateProject,
-    beforeEnter: (to, from, next) => {
-      if(store.getters.isAuthenticated || localStorage.getItem('userId')) {
+    beforeRouteUpdate: (to, from, next) => {
+      if(store.getters.userId) {
         next()
       } else {
         next('/signin')
@@ -30,8 +30,8 @@ const routes = [
   { path: '/private-projects',
     name: 'PrivateProjects',
     component: PrivateProjects,
-    beforeEnter: (to, from, next) => {
-      if(store.getters.isAuthenticated || localStorage.getItem('userId')) {
+    beforeRouteUpdate: (to, from, next) => {
+      if(store.getters.userId) {
         next()
       } else {
         next('/signin')
@@ -41,8 +41,8 @@ const routes = [
   { path: '/user-page',
     name: 'UserPage',
     component: UserPage,
-    beforeEnter: (to, from, next) => {
-      if(store.getters.isAuthenticated || localStorage.getItem('userId')) {
+    beforeRouteUpdate: (to, from, next) => {
+      if(store.getters.userId) {
         next()
       } else {
         next('/signin')
@@ -52,14 +52,14 @@ const routes = [
   { path: '/private-projects/:id',
     name: 'PrivateProject',
     component: PrivateProject,
-    props: true
-    // beforeEnter: (to, from, next) => {
-    //   if(store.getters.projects) {
-    //     next()
-    //   } else {
-    //     next('/signin')
-    //   }
-    // }
+    props: true,
+    beforeRouteUpdate: (to, from, next) => {
+      if(store.getters.userId) {
+        next()
+      } else {
+        next('/signin')
+      }
+    }
   },
   { path: '/signup',
     name: 'signup',

@@ -112,9 +112,9 @@
       </router-link>
 
     </div>
-    <p>Users{{users}}</p>
-    <p>User{{user}}</p>
-    <p>Projects{{projects}}</p>
+    <!-- <p>Users{{users}}</p>
+    <p>User{{user}}</p> -->
+    <!-- <p>Projects{{projects}}</p> -->
 
 
   </section>
@@ -148,6 +148,7 @@ export default {
       this.forgot = !this.forgot
     },
     resetPass() {
+
       const email = this.email
       this.$store.dispatch('resetPassword', email)
     },
@@ -160,22 +161,16 @@ export default {
         password: this.password
       }
       this.$store.dispatch('signin', signinData)
-      // console.log(this.user)
-      return Promise.resolve()
     },
     fetchUsers(){
       setTimeout(() => {
         this.$store.dispatch('fetchUsers')
       }, 1000)
-
     },
     getUserData(){
-      // const users = this.$store.getters.users
-      // const user = users.find((user) => {
-      //   return user.email === this.email
-      // })
       setTimeout(() => {
         this.$store.dispatch('getUser', {email: this.email})
+        localStorage.setItem('pseudo', this.$store.getters.user.pseudo)
       }, 2000)
 
     },
@@ -201,9 +196,9 @@ export default {
     }
   },
   computed: {
-    projects(){
-      return this.$store.getters.projects
-    },
+    // projects(){
+    //   return this.$store.getters.projects
+    // },
     // fetch(){
     //   if(this.success){
     //     this.$store.dispatch('fetchUsers')
@@ -225,17 +220,18 @@ export default {
     resetError() {
       return this.$store.getters.resetError
     },
-    auth() {
-      return this.$store.getters.isAuthenticated !== null && this.$store.getters.isAuthenticated !== undefined
-    },
-    user(){
-      return this.$store.getters.user
-    },
-    users(){
-      return this.$store.getters.users
-    }
+    // auth() {
+    //   return this.$store.getters.userId !== null && this.$store.getters.userId !== undefined
+    // },
+    // user(){
+    //   return this.$store.getters.user
+    // },
+    // users(){
+    //   return this.$store.getters.users
+    // }
   },
   created () {
+    // this.$store.dispatch('tryAutoSignin')
 
     // this.email === localStorage.getItem('email')
     // console.log(this.$store.getters.users)

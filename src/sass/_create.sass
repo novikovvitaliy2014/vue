@@ -12,14 +12,18 @@
   color: #ff5252
 .create__upload-btn
   display: flex
-  margin: auto auto 10px auto
+  margin: 10px auto 10px auto
   background-color: $color-main
   color: #fff
   padding: 5px 10px
   border-radius: 5px
   &:hover
     background-color: lighten($color-main, 5%)
-
+.create__outlay-resource--final,
+.create__outlay-resource--base
+  display: none
+.create__outlay-resource--show
+  display: block
 .create__uploads
   display: flex
   justify-content: space-around
@@ -58,12 +62,15 @@
     // span
     //   display: block
 .create__outlay-cell
-  &--name
-    width: $col-4
+  flex-grow: 1
+  // &--name
+  //   width: $col-4
   &--quantity
-    width: $col-3
+    margin-right: 3px
+  //   width: $col-3
   &--price
-    width: $col-3
+    margin-left: 3px
+    // width: $col-3
   &--sum
     display: flex
     flex-direction: column
@@ -76,5 +83,7 @@
 .create__outlay--add
   display: flex
   margin: auto
+.outlay__message
+  padding: 0 10px
 
 

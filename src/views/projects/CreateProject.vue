@@ -98,10 +98,10 @@
   </div>
 </template>
 <script>
-import OutlayForm from './../../components/dialogs/OutlayForm.vue'
+import OutlayFormForCreate from './../../components/dialogs/OutlayFormForCreate.vue'
   export default {
     components: {
-      "outlay-form": OutlayForm
+      "outlay-form": OutlayFormForCreate
     },
     data() {
       return {
@@ -163,7 +163,7 @@ import OutlayForm from './../../components/dialogs/OutlayForm.vue'
     },
     methods: {
       sendData(data){
-        this.data = data
+        this.dataOutlay = data
         console.log(this.data)
       },
       multiplication(num, price) {
@@ -231,9 +231,11 @@ import OutlayForm from './../../components/dialogs/OutlayForm.vue'
       }
     },
     created(){
+      this.$store.dispatch('tryAutoSignin')
       this.$store.dispatch('loadProjects')
       this.$store.state.success = false
       this.$store.state.error = false
+
       // this.$store.dispatch('tryAutoSignin')
     }
   };

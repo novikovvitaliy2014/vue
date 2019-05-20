@@ -1,12 +1,10 @@
 <template>
   <v-layout row justify-center>
     <v-dialog v-model="dialog" max-width="350px">
-      <!-- <template v-slot:activator="{ on }"> -->
         <v-btn slot="activator" color="green" class="edit-button">
           <v-icon>edit</v-icon>
           <span>edit</span>
         </v-btn>
-      <!-- </template> -->
       <v-card>
         <v-card-title>
           <span class="headline">Edit Project</span>
@@ -25,9 +23,9 @@
               style="display: none"
               ref="fileInput_1"
               accept="image/*"
-              @change="onFilePicked_1">
+              @change="onFiles(0)">
           </section>
-          <p>{{ msgFileMax1 }}</p>
+          <p>{{ msgFileMax_1 }}</p>
           <v-img
              :src="editedUrl_1"
              aspect-ratio="1.618"
@@ -41,18 +39,15 @@
               style="display: none"
               ref="fileInput_2"
               accept="image/*"
-              @change="onFilePicked_2">
+              @change="onFiles(1)">
           </section>
-          <p>{{ msgFileMax2 }}</p>
+          <p>{{ msgFileMax_2 }}</p>
           <v-img
              :src="editedUrl_2"
              aspect-ratio="1.618"
              alt="project-view"
              >
           </v-img>
-          <!-- <outlay-form-edit @send-data="takeDataoutlay" :project="project"></outlay-form-edit> -->
-
-          <!-- <final-outlay-form @send-data="takeDataoutlayFinal" @send-base-urls="takeBaseUrls" :project="project" ></final-outlay-form> -->
         </v-card-text>
 
         <v-card-actions>
@@ -66,20 +61,15 @@
 </template>
 
 <script>
-import FinalOutlayForm from './FinalOutlayForm.vue'
-import OutlayFormEdit from './OutlayFormEdit.vue'
   export default {
-    components: {
-      "final-outlay-form": FinalOutlayForm,
-      "outlay-form-edit": OutlayFormEdit
-    },
     props: {
       project: Object
     },
     data () {
       return {
-        msgFileMax1: "",
-        msgFileMax2: "",
+        msgFileMax_1: "",
+        msgFileMax_2: "",
+        messages: [],
         baseUrls: [],
         editedImages: [],
         dialog: false,
@@ -87,37 +77,12 @@ import OutlayFormEdit from './OutlayFormEdit.vue'
         editedDescription: this.project.description,
         editedUrl_1: '',
         editedUrl_2: '',
+        editedUrls: []
         // dataOutlay: {},
         // dataoutlayFinal: {}
       }
     },
-    computed: {
-    },
-    // mounted () {
-    //    this.$on('send-data', (data) => {
-    //      this.dataoutlayFinal = data.dataFinal
-    //     this.baseUrls[0] = data.url_F1
-    //     this.baseUrls[1] = data.url_F2
-    //    })
-    //    console.log(this.dataoutlayFinal)
-    // },
     methods: {
-      // takeDataOutlay(data){
-      //   this.dataOutlay = data
-      //   console.log(this.dataOutlay)
-      // },
-      // takeDataoutlayFinal(data){
-      //   this.dataoutlayFinal = data
-      //   // this.baseUrls = data.baseUrls
-      //   // this.baseUrls[1] = data.url_F2
-      //   console.log(this.dataoutlayFinal)
-      //   // console.log(this.baseUrls)
-      // },
-      // takeBaseUrls(data){
-      //   this.baseUrls[0] = data.url_F1
-      //   this.baseUrls[1] = data.url_F2
-      //   console.log(this.baseUrls)
-      // },
       checkField(){
         if (this.editedTitle.trim() === '' || this.editedDescription.trim() === '' ){
           return
@@ -128,36 +93,20 @@ import OutlayFormEdit from './OutlayFormEdit.vue'
         this.$store.dispatch("editProject", {
           title: this.editedTitle,
           description: this.editedDescription,
-          dataOutlay: this.dataOutlay,
-          dataFinal: this.dataoutlayFinal,
+          // dataOutlay: this.dataOutlay,
+          // dataFinal: this.dataoutlayFinal,
           editedImages: this.editedImages,
           id: this.project.id
         })
         this.dialog = false
-        // this.editedUrls[0] = this.edited
         this.$emit("imageUrl", {
           url_1: this.editedUrl_1,
           url_2: this.editedUrl_2,
-          // editedUrls: this.editedUrls,
-          // urlBase1: this.dataoutlayFinal.url_F1,
-          // urlBase2: this.dataoutlayFinal.url_F2,
-          // baseUrls: this.baseUrls
         })
-        // console.log(this.baseUrls)
-        // this.$emit("imagesFinal", { url_F1:this.editedUrl_1, url_F2:this.editedUrl_2 })
-        // this.$store.dispatch("editProjectImage", {
-        //   image: this.editedImage,
-        //   id: this.project.id
-        // })
       },
-      // takeFinalData(){
-      //   this.$parent.$refs.finish.click()
-      // },
       async onSaveEdit() {
         try {
-          // await this.takeFinalData()
           await this.checkField()
-          // await this.editUser();
           await this.editProject()
         } catch (e) {
             alert("Error" + e)
@@ -169,50 +118,85 @@ import OutlayFormEdit from './OutlayFormEdit.vue'
       onPickFile2(){
         this.$refs.fileInput_2.click()
       },
-      onFilePicked_1(event){
+      onFilesChange(image) {
         const file = event.target.files[0]
-        if(file){
-          if(file.size < 205000){
-            this.editedImages[0] = file
+        if (file) {
+          if (file.size < 205000) {
+            this.editedImages[image] = file
             const fileReader = new FileReader()
             fileReader.addEventListener('load', () => {
               const result = fileReader.result
-              this.editedUrl_1 = result
+              this.editedUrls[image] = result
             })
             fileReader.readAsDataURL(file)
-            this.msgFileMax1 = ""
+            this.messages[image] = ""
           } else {
-            this.msgFileMax1 = "Maximum file size is 200Kb, please upload another file"
+            this.messages[image] = "Maximum file size is 200Kb, please upload another file"
           }
         } else {
-            this.msgFileMax1 = "New file is not uploaded"
+          this.messages[image] = "New file is not uploaded"
         }
       },
-      onFilePicked_2(event){
-        const file = event.target.files[0]
-        if(file){
-          if(file.size < 205000){
-            this.editedImages[1] = file
-            const fileReader = new FileReader()
-            fileReader.addEventListener('load', () => {
-              const result = fileReader.result
-              this.editedUrl_2 = result
-            })
-            fileReader.readAsDataURL(file)
-            this.msgFileMax2 = ""
-          } else {
-            this.msgFileMax2 = "Maximum file size is 200Kb, please upload another file"
-          }
-        } else {
-            this.msgFileMax2 = "New file is not uploaded"
+       async onFiles(image) {
+        try {
+          await this.onFilesChange(image)
+          console.log("change")
+          await setTimeout(() => {
+            this.urlsShow()
+            this.messagesShow()
+          }, 1000)
+        } catch (e) {
+          console.log(e)
         }
-      }
+      },
+      urlsShow() {
+        this.editedUrl_1 = this.editedUrls[0]
+        this.editedUrl_2 = this.editedUrls[1]
+      },
+      messagesShow() {
+        this.msgFileMax_1 = this.messages[0]
+        this.msgFileMax_2 = this.messages[1]
+      },
+      // onFilePicked_1(event){
+      //   const file = event.target.files[0]
+      //   if(file){
+      //     if(file.size < 205000){
+      //       this.editedImages[0] = file
+      //       const fileReader = new FileReader()
+      //       fileReader.addEventListener('load', () => {
+      //         const result = fileReader.result
+      //         this.editedUrl_1 = result
+      //       })
+      //       fileReader.readAsDataURL(file)
+      //       this.msgFileMax_1 = ""
+      //     } else {
+      //       this.msgFileMax_1 = "Maximum file size is 200Kb, please upload another file"
+      //     }
+      //   } else {
+      //       this.msgFileMax_1 = "New file is not uploaded"
+      //   }
+      // },
+      // onFilePicked_2(event){
+      //   const file = event.target.files[0]
+      //   if(file){
+      //     if(file.size < 205000){
+      //       this.editedImages[1] = file
+      //       const fileReader = new FileReader()
+      //       fileReader.addEventListener('load', () => {
+      //         const result = fileReader.result
+      //         this.editedUrl_2 = result
+      //       })
+      //       fileReader.readAsDataURL(file)
+      //       this.msgFileMax_2 = ""
+      //     } else {
+      //       this.msgFileMax_2 = "Maximum file size is 200Kb, please upload another file"
+      //     }
+      //   } else {
+      //       this.msgFileMax_2 = "New file is not uploaded"
+      //   }
+      // }
     },
     created(){
-      console.log(this.project)
-      // let pro = this.project.projectImages
-      // this.editedUrl_1 = pro ? pro[0] : ""
-      // this.editedUrl_2 = pro ? pro[1] : ""
       let pro = this.project.projectImages
       if(pro){
         if (pro[0]){
@@ -222,16 +206,6 @@ import OutlayFormEdit from './OutlayFormEdit.vue'
           this.editedUrl_2 = pro[1].imageUrl
         }
       }
-      // this.editedUrl_1 = this.editedUrls[0]
-      // this.editedUrl_2 = this.editedUrls[1]
-      // if (this.project.projectImages){
-      //   this.editedUrls = []
-      //   let pro = this.project.projectImages
-      //   for (let i=0; i<pro.length; i++){
-      //     this.editedUrls.push(pro[i])
-      //   }
-      // }
-      // console.log(this.editedUrls)
     }
   };
 </script>

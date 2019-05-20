@@ -35,11 +35,11 @@ export default {
   },
   computed: {
     auth() {
-      return this.$store.getters.isAuthenticated !== null && this.$store.getters.isAuthenticated !== undefined
+      return this.$store.getters.userId !== null && this.$store.getters.userId !== undefined
     }
   },
   created() {
-    // this.$store.dispatch('tryAutoSignin')
+    this.$store.dispatch('tryAutoSignin')
     this.$vuetify.theme.green = "#4CAF50"
     this.$vuetify.theme.primary = "#4CAF50"
     this.$vuetify.theme.greendarken4 = "#1B5E20"

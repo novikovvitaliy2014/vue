@@ -1,8 +1,8 @@
 <template>
   <section class="donors">
-    <button class="btn" @click="gotDonations">open participants
+    <!-- <button class="btn" @click="showList">open participants
       <v-icon dark medium>keyboard_arrow_down</v-icon>
-    </button>
+    </button> -->
     <!-- <v-select
       class="project__select"
       v-model="selected"
@@ -12,7 +12,7 @@
       required>
     </v-select> -->
     <!-- v-if="showParticipants" -->
-    <section class="donors__pro" >
+    <section class="donors__pro" v-if="contacts">
       <h1 >{{$t('list')}}</h1>
 
       <div class="donors__row donors__row--head">
@@ -21,7 +21,7 @@
       </div>
       <div v-for="(contact, index) in contacts"
           :key="index">
-        <div class="donors__row">
+        <div class="donors__row" v-if="contact.donation">
           <div class="donors__cell">{{ contact.donation }} $</div>
           <div class="donors__cell">{{ contact.nickname }}</div>
         </div>
@@ -49,23 +49,23 @@ export default {
       id: String,
       sum: Number
   },
-  data() {
-    return {
-      // outlayBaker: [],
-      // donors: donors,
-      showParticipants: false,
-      // sumDonations: null
-    }
-  },
+  // data() {
+  //   return {
+  //   }
+  // },
   computed: {
     gotDonations() {
       let sumDonations = null
-      for (let i  in this.contacts) {
-        if(this.contacts[i].donation !== undefined){
-          sumDonations = sumDonations + Number(this.contacts[i].donation)
+      if(this.contacts){
+        for (let i  in this.contacts) {
+          if(this.contacts[i].donation !== undefined){
+            sumDonations = sumDonations + Number(this.contacts[i].donation)
+          }
         }
+        return sumDonations
+      } else {
+        return null
       }
-      return sumDonations
     },
     restDonation() {
       let need = this.sum
@@ -80,20 +80,9 @@ export default {
       return this.project.contacts
     }
   },
-  methods: {
-    showList(){
-      this.showParticipants = !this.showParticipants
-    },
-
-    // getDonors() {
-    //   this.$store.dispatch('fetchUsers')
-    // }
-  },
-
-  created () {
-    // this.$store.dispatch('initOutlay')
-    // this.outlayBaker = this.$store.getters.outlayBaker
-    // this.outlaySchool = this.$store.getters.outlaySchool
-  }
+  // methods: {
+  // },
+  // created () {
+  // }
 };
 </script>

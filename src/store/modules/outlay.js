@@ -3,6 +3,7 @@ import outlayBakerRu from "./../../data/outlay-baker-ru.js"
 import finalOutlayBakerEn from "./../../data/final-outlay-baker-en.js"
 import finalOutlayBakerRu from "./../../data/final-outlay-baker-ru.js"
 import {i18n} from '../../plugins/i18n.js'
+
 // import outlaySchool from "./../../data/outlay-school.js"
 
 const state = {

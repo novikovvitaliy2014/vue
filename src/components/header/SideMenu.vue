@@ -53,6 +53,8 @@
            >
            User Page
         </router-link>
+        <!-- <p>{{projects.length}}</p> -->
+        <!-- <p>{{userId}}</p> -->
       </ul>
     </nav>
     <!-- <contacts :class="{contacts__show: isActive}"></contacts> -->
@@ -78,7 +80,7 @@ export default {
       })
     },
     auth() {
-      return this.$store.getters.isAuthenticated !== null && this.$store.getters.isAuthenticated !== undefined
+      return this.$store.getters.userId !== null && this.$store.getters.userId !== undefined
     },
     // userPseudo() {
     //   return this.$store.getters.userPseudo
@@ -96,7 +98,9 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('loadProjects')
+    // this.$store.dispatch('loadProjects')
+    // this.$store.dispatch('fetchUsers')
+    // this.$store.dispatch('getUser', {email: this.email})
     // this.$store.dispatch('fetchUsers')
     // this.userPseudo = this.$store.getters.userPseudo
   }

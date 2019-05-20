@@ -89,8 +89,8 @@
 .outlay
   @include container($col-11, $col-11, $col-9, $max-width: 900px)
 
-.outlay__group
-  &:nth-child(even)
+// .outlay__group
+//   &:nth-child(even)
 
     // background-color: lightgrey
 .outlay__row
@@ -99,21 +99,25 @@
   width: 100%
   flex-wrap: no-wrap
   align-items: center
+  height: auto
+  // border: 1px solid red
   // border-bottom: 1px dashed $color-main
   span
+    // display: flex
+    // border: 1px solid red
+    padding:  0 5px
     flex-grow: 1
-    flex-basis: $col-2
+    width: $col-2
     text-align: center
-    height: 100%
+    // height: auto
     align-items: stretch
-    font-size: $font-size-h4
+    font-size: $font-size-h6
     line-height: $line-height-h3
     &:first-child
-      flex-basis: $col-4
+      width: $col-4
   &--head
     background: $color-main
     color: #fff
-    // border: 1px solid $color-main
     span
       font-size: $font-size-h5
       // color: $color-dark
@@ -141,6 +145,7 @@
   // display: block
   // flex-wrap: no-wrap
   // justify-content: space-between
+  display: none
   background-color: $color-main
   color: #fff
   padding-bottom: 10px
@@ -149,15 +154,21 @@
     // flex-direction: column
   h5
     margin: 0
+  p
+    text-align: center
   span
     display: block
     text-align: center
+.outlay-proof--show
+  display: block
 .outlay-proof__contacts
   // min-width: 100%
   // width: $col-4
   // @include mobile
   width: 100%
-.outlay-proof__bill
+  // p
+  //   text-align: center
+.outlay-proof__check
   display: flex
   margin: auto
   // margin-bottom: 10px
@@ -236,3 +247,5 @@ h3.project__title
   @include container ($col-12, $col-11, $col-9, $max-width: 900px)
   margin-top: 40px
   // @include container ($col-12, $col-11, $col-9, $max-width: 900px)
+.outlay__photo
+  margin-top: 10px

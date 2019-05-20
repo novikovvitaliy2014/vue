@@ -1,12 +1,13 @@
 <template>
   <div>
-    <h2>{{$t('photos')}}</h2>
+
     <section class="outlay__photos">
       <div class="outlay__photo">
         <v-img class="outlay-photo outlay-photo--1"
            :src="Url_F1"
            aspect-ratio="1.618"
            alt="final-photo-1"
+           v-if="Url_F1"
            >
         </v-img>
       </div>
@@ -15,6 +16,7 @@
            :src="Url_F2"
            aspect-ratio="1.618"
            alt="final-photo-2"
+           v-if="Url_F2"
            >
         </v-img>
       </div>
@@ -23,6 +25,7 @@
            :src="Url_F3"
            aspect-ratio="1.618"
            alt="final-photo-3"
+           v-if="Url_F3"
            >
         </v-img>
       </div>
@@ -31,11 +34,9 @@
            :src="Url_F4"
            aspect-ratio="1.618"
            alt="final-photo-4"
+           v-if="Url_F4"
            >
         </v-img>
-        <!-- <img class="outlay-photo outlay-photo--4"
-         :src="Url_F4"
-         alt="final-photo-4"> -->
       </div>
     </section>
   </div>
@@ -47,10 +48,10 @@
       id: String,
       photosBase: Array
     },
-    data() {
-      return {
-      }
-    },
+    // data() {
+    //   return {
+    //   }
+    // },
     computed: {
       urls(){
         const array = []
@@ -87,9 +88,9 @@
         return this.urls[3]
       }
     },
-    methods: {
-    },
-    created(){
-    }
+    // methods: {
+    // },
+    // created(){
+    // }
   };
 </script>

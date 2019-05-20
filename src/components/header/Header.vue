@@ -65,7 +65,7 @@
                 <v-icon>exit_to_app</v-icon>
               Log out
               </span>
-              <span v-if="user">{{ user.pseudo }}</span>
+              <span>{{ userNick }}</span>
               <!-- <span >{{ user.pseudo }}</span> -->
               <!-- <span >{{ user }}</span> -->
           </li>
@@ -118,17 +118,23 @@ export default {
   },
   computed: {
     auth() {
-      return this.$store.getters.isAuthenticated !== null && this.$store.getters.isAuthenticated !== undefined
+      if (this.$store.getters.userId !== null && this.$store.getters.userId !== undefined){
+        return true
+      }
     },
-    // pseudo() {
-    //   return this.$store.getters.pseudo
-    // },
+    userNick() {
+      if(this.$store.getters.user.pseudo){
+        return this.$store.getters.user.pseudo
+      } else {
+        return localStorage.getItem('pseudo')
+      }
+    },
     loading(){
       return this.$store.getters.loading
     },
-    user(){
-      return this.$store.getters.user
-    },
+    // user(){
+    //   return this.$store.getters.user
+    // },
     // userIsCreator(){
     //   return this.$store.getters.projects.find((project) =>{
     //     return project.creatorId == this.$store.getters.userId
@@ -145,14 +151,6 @@ export default {
     //   console.log(this.$store.getters.users)
     // }
   },
-  // watch: {
-  //   auth(value) {
-  //     if (value == null && value == undefined) {
-  //       this.$store.dispatch("logout")
-  //       this.$router.push('/signin')
-  //     }
-  //   }
-  // },
   methods: {
     setLocale(){
       if (this.selected === 'English'){
@@ -170,11 +168,7 @@ export default {
       }
       this.$store.dispatch('initSmeta', this.locale)
     },
-    // showOverlay() {
-    //   this.isActive = !this.isActive
-    // },
     showMenu() {
-      console.log(this.$store.getters.userId)
       console.log(this.$store.getters.projects)
       this.userIsCreator = this.$store.getters.projects.find((project) =>{
         return project.creatorId == this.$store.getters.userId
@@ -182,23 +176,17 @@ export default {
       this.isOpen = !this.isOpen
       this.isActive = !this.isActive
     },
-    // showMenu2() {
-    //   this.isOpen = !this.isOpen;
-    // },
     onLogout() {
       this.$store.dispatch('logout')
     }
   },
+  // mounted(){
+  //   if(!this.$store.getters.userId){
+  //     this.$router.push({ path: '/'})
+  //   }
+  // },
   created () {
-    this.$store.dispatch('fetchUsers')
-
-    // if(this.userId){
-    //   this.$store.dispatch('getUser', this.userId)
-    // }
-    // console.log(this.userId)
-    // this.userPseudo = this.$store.getters.userPseudo
   }
-
 };
 </script>
 

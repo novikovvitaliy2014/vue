@@ -53,9 +53,6 @@
       projects(){
         return this.$store.getters.projects
       },
-      auth() {
-        return this.$store.getters.isAuthenticated !== null && this.$store.getters.isAuthenticated !== undefined
-      },
       loading(){
         return this.$store.getters.loading
       },
@@ -77,8 +74,15 @@
       //   console.log('resized')
       // },
       loadProjects(){
-        this.$store.dispatch('loadProjects')
-        console.log('loaded')
+        if(this.$store.getters.userId === undefined || this.$store.getters.userId === null){
+          // this.$router.push( '/signin')
+          this.$store.dispatch('logout')
+        } else {
+          this.$store.dispatch('loadProjects')
+          console.log('loaded')
+        }
+
+
       },
       // async resizeAndLoad(){
       //   try {
@@ -94,8 +98,10 @@
       // },
     },
     created() {
+      // this.$store.dispatch('tryAutoSignin')
       this.$store.dispatch('resizeImages')
       console.log('resized')
+      console.log(this.$store.getters.userId)
       // this.$store.dispatch('loadProjects')
       // this.resizeAndLoad()
 

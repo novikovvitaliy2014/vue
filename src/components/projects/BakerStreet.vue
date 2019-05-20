@@ -68,12 +68,11 @@
         </div>
 
           <div class="outlay__row outlay__row--btn">
-            <button @click="showContacts(1)">{{$t('proof')}}</button>
+            <button @click="showContacts">{{$t('proof')}}</button>
           </div>
 
         <transition name="slide-fade">
           <div class="outlay-proof"
-               v-if="showContact1"
                >
             <div class="outlay-proof__contacts">
               <h5>Ikea</h5>
@@ -92,12 +91,11 @@
         </div>
 
         <div class="outlay__row outlay__row--btn">
-          <button @click="showContacts(2)">{{$t('proof')}}</button>
+          <button @click="showContacts">{{$t('proof')}}</button>
         </div>
 
         <transition name="slide-fade">
           <div class="outlay-proof"
-               v-if="showContact2"
                >
             <div class="outlay-proof__contacts">
               <h5>Wallmart</h5>
@@ -116,12 +114,11 @@
         </div>
 
         <div class="outlay__row outlay__row--btn">
-          <button @click="showContacts(3)">{{$t('proof')}}</button>
+          <button @click="showContacts">{{$t('proof')}}</button>
         </div>
 
         <transition name="slide-fade">
           <div class="outlay-proof"
-               v-if="showContact3"
                >
             <div class="outlay-proof__contacts">
               <h5>Multi Service </h5>
@@ -209,22 +206,27 @@ export default {
   },
   data() {
     return {
-      showContact1: false,
-      showContact2: false,
-      showContact3: false
+      // showContact1: false,
+      // showContact2: false,
+      // showContact3: false
       // outlayBaker: [],
       // finaloutlayBaker: []
     }
   },
   methods: {
-    showContacts(n){
-      if(n===1){
-        this.showContact1 = !this.showContact1
-      } else if (n===2){
-        this.showContact2 = !this.showContact2
-      } else if (n===3){
-        this.showContact3 = !this.showContact3
-      }
+    // showContacts(n){
+    //   if(n===1){
+    //     this.showContact1 = !this.showContact1
+    //   } else if (n===2){
+    //     this.showContact2 = !this.showContact2
+    //   } else if (n===3){
+    //     this.showContact3 = !this.showContact3
+    //   }
+    // },
+    showContacts(event){
+      let target = event.target
+      let contacts = target.parentNode.nextSibling
+      contacts.classList.toggle('outlay-proof--show')
     },
     multiplication(num, price) {
       return num * price
@@ -246,9 +248,9 @@ export default {
     }
   },
   computed: {
-    auth() {
-      return this.$store.getters.isAuthenticated
-    },
+    // auth() {
+    //   return this.$store.getters.isAuthenticated
+    // },
     outlayBaker(){
       return this.$store.getters.outlayBaker
     },

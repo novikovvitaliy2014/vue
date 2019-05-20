@@ -20,9 +20,9 @@
                 style="display: none"
                 ref="fileInput1"
                 accept="image/*"
-                @change="onFilePicked_1">
-              <p>{{ msgFileMax1 }}</p>
-              <div class="create__img">
+                @change="onFiles(0)">
+              <p>{{ msgFileMax_1 }}</p>
+              <div class="create__img" v-if="url_F1">
                 <v-img
                    :src="url_F1"
                    aspect-ratio="1.618"
@@ -39,13 +39,13 @@
                 style="display: none"
                 ref="fileInput2"
                 accept="image/*"
-                @change="onFilePicked_2">
-              <p>{{ msgFileMax2 }}</p>
-              <div class="create__img">
+                @change="onFiles(1)">
+              <p>{{ msgFileMax_2 }}</p>
+              <div class="create__img" v-if="url_F2">
                 <v-img
                    :src="url_F2"
                    aspect-ratio="1.618"
-                   alt="final-photo-1"
+                   alt="final-photo-2"
                    >
                 </v-img>
               </div>
@@ -58,13 +58,13 @@
                 style="display: none"
                 ref="fileInput3"
                 accept="image/*"
-                @change="onFilePicked_3">
-              <p>{{ msgFileMax3 }}</p>
-              <div class="create__img">
+                @change="onFiles(2)">
+              <p>{{ msgFileMax_3 }}</p>
+              <div class="create__img" v-if="url_F3">
                 <v-img
                    :src="url_F3"
                    aspect-ratio="1.618"
-                   alt="final-photo-1"
+                   alt="final-photo-3"
                    >
                 </v-img>
               </div>
@@ -77,13 +77,13 @@
                 style="display: none"
                 ref="fileInput4"
                 accept="image/*"
-                @change="onFilePicked_4">
-              <p>{{ msgFileMax4 }}</p>
-              <div class="create__img">
+                @change="onFiles(3)">
+              <p>{{ msgFileMax_4 }}</p>
+              <div class="create__img" v-if="url_F4">
                 <v-img
                    :src="url_F4"
                    aspect-ratio="1.618"
-                   alt="final-photo-1"
+                   alt="final-photo-4"
                    >
                 </v-img>
               </div>
@@ -104,67 +104,89 @@
 <script>
 // import FinaloutlayForm from './FinaloutlayForm.vue'
   export default {
-    components: {
-      // "final-outlay-form": FinaloutlayForm,
-    },
+    // components: {
+    //   // "final-outlay-form": FinaloutlayForm,
+    // },
     props: {
       project: Object
     },
     data () {
       return {
         dialog: false,
-        msgFileMax1: "",
-        msgFileMax2: "",
-        msgFileMax3: "",
-        msgFileMax4: "",
+        msgFileMax_1: "",
+        msgFileMax_2: "",
+        msgFileMax_3: "",
+        msgFileMax_4: "",
+        messages: [],
         url_F1: '',
         url_F2: '',
         url_F3: '',
         url_F4: '',
         images: [],
-        // dataPhotos: {},
-        baseUrls: []
+        urls: []
       }
     },
     computed: {
     },
     methods: {
-      updateUrlsOnBase(){
-        // this.baseUrls[0] = this.url_F1,
-        // this.baseUrls[1] = this.url_F2,
-        // this.baseUrls[2] = this.url_F3,
-        // this.baseUrls[3] = this.url_F4
-      },
-      emitBaseUrls(){
-        // this.baseUrls[0] = this.url_F1,
-        // this.baseUrls[1] = this.url_F2,
-        // this.baseUrls[2] = this.url_F3,
-        // this.baseUrls[3] = this.url_F4
-        setTimeout(() => {
-          this.$emit("photoBaseUrl", {
-            baseUrls_1: this.url_F1,
-            baseUrls_2: this.url_F2,
-            baseUrls_3: this.url_F3,
-            baseUrls_4: this.url_F4,
-          })
-        }, 1000)
-        // console.log()
-      },
-      async saveFinalPhotos(){
+      async onFiles(image){
         try {
-          // await this.updateUrlsOnBase()
-          console.log("updateUrls")
-          this.emitBaseUrls()
-          console.log("emit Urls")
-          this.$store.dispatch("editProject", {
-            dataPhotos: this.images,
-            id: this.project.id
-          })
-          this.dialog = false
+          await this.onFilesChange(image)
+          console.log("change")
+          await setTimeout(() => {
+            this.urlsShow()
+            this.messagesShow()
+          }, 500)
         } catch (e) {
             console.log(e)
         }
-
+      },
+      onFilesChange(image){
+        const file = event.target.files[0]
+        if(file){
+          if(file.size < 205000){
+            this.images[image] = file
+            const fileReader = new FileReader()
+            fileReader.addEventListener('load', () => {
+              const result = fileReader.result
+              this.urls[image] = result
+            })
+            fileReader.readAsDataURL(file)
+            this.messages[image] = ""
+          } else {
+            this.messages[image] = "Maximum file size is 200Kb, please upload another file"
+          }
+        } else {
+            this.messages[image] = "New file is not uploaded"
+        }
+      },
+      urlsShow(){
+        this.url_F1 = this.urls[0]
+        this.url_F2 = this.urls[1]
+        this.url_F3 = this.urls[2]
+        this.url_F4 = this.urls[3]
+      },
+      messagesShow(){
+        this.msgFileMax_1 = this.messages[0]
+        this.msgFileMax_2 = this.messages[1]
+        this.msgFileMax_3 = this.messages[2]
+        this.msgFileMax_4 = this.messages[3]
+      },
+      emitBaseUrls(){
+        this.$emit("photoBaseUrl", {
+          baseUrls_1: this.url_F1,
+          baseUrls_2: this.url_F2,
+          baseUrls_3: this.url_F3,
+          baseUrls_4: this.url_F4,
+        })
+      },
+      saveFinalPhotos(){
+        this.emitBaseUrls()
+        this.$store.dispatch("editProject", {
+          dataPhotos: this.images,
+          id: this.project.id
+        })
+        this.dialog = false
       },
       onPickFile1(){
         this.$refs.fileInput1.click()
@@ -178,102 +200,20 @@
       onPickFile4(){
         this.$refs.fileInput4.click()
       },
-      onFilePicked_1(event){
-        const file = event.target.files[0]
-        if(file){
-          if(file.size < 205000){
-            this.images[0] = file
-            const fileReader = new FileReader()
-            fileReader.addEventListener('load', () => {
-              const result = fileReader.result
-              this.url_F1 = result
-            })
-            fileReader.readAsDataURL(file)
-            this.msgFileMax1 = ""
-          } else {
-            this.msgFileMax1 = "Maximum file size is 200Kb, please upload another file"
-          }
-        } else {
-            this.msgFileMax1 = "New file is not uploaded"
-        }
-      },
-      onFilePicked_2(event){
-        const file = event.target.files[0]
-        if(file){
-          if(file.size < 205000){
-            this.images[1] = file
-            const fileReader = new FileReader()
-            fileReader.addEventListener('load', () => {
-              const result = fileReader.result
-              this.url_F2 = result
-            })
-            fileReader.readAsDataURL(file)
-            this.msgFileMax2 = ""
-          } else {
-            this.msgFileMax2 = "Maximum file size is 200Kb, please upload another file"
-          }
-        } else {
-            this.msgFileMax2 = "New file is not uploaded"
-        }
-      },
-      onFilePicked_3(event){
-        const file = event.target.files[0]
-        if(file){
-          if(file.size < 205000){
-            this.images[2] = file
-            const fileReader = new FileReader()
-            fileReader.addEventListener('load', () => {
-              const result = fileReader.result
-              this.url_F3 = result
-            })
-            fileReader.readAsDataURL(file)
-            this.msgFileMax3 = ""
-          } else {
-            this.msgFileMax3 = "Maximum file size is 200Kb, please upload another file"
-          }
-        } else {
-            this.msgFileMax3 = "New file is not uploaded"
-        }
-      },
-      onFilePicked_4(event){
-        const file = event.target.files[0]
-        if(file){
-          if(file.size < 205000){
-            this.images[3] = file
-            const fileReader = new FileReader()
-            fileReader.addEventListener('load', () => {
-              const result = fileReader.result
-              this.url_F4 = result
-            })
-            fileReader.readAsDataURL(file)
-            this.msgFileMax4 = ""
-          } else {
-            this.msgFileMax4 = "Maximum file size is 200Kb, please upload another file"
-          }
-        } else {
-            this.msgFileMax4 = "New file is not uploaded"
-        }
-      }
-
     },
     created(){
-      let img = this.project.dataPhotos
-
-      if(img){
-        if(img[0]) {
-          this.url_F1 = img[0].imageUrl
+      const storeImage = this.project.dataPhotos
+      // const base = this.urlsDialog
+      if(storeImage){
+        for(let i = 0; i < 4; i++) {
+          if (storeImage[i] != undefined && storeImage[i] != "") {
+              this.urls[i] = storeImage[i].imageUrl
+          } else {
+            this.urls[i] = ""
+          }
         }
-        if(img[1]) {
-          this.url_F2 = img[1].imageUrl
-        }
-        if(img[2]) {
-          this.url_F3 = img[2].imageUrl
-        }
-        if(img[3]) {
-          this.url_F4 = img[3].imageUrl
-        }
+        this.urlsShow()
       }
-
     }
   };
 </script>

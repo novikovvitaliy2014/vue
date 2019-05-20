@@ -17,7 +17,7 @@
           title="Project author will contact you to negotiate forms of cooperation"
           required>
         </v-text-field>
-        <p>{{ user.pseudo }}</p>
+        <p>{{ userNick }}</p>
         <span>{{$t('author')}}</span>
         <button class="btn"
                 type="submit"
@@ -67,8 +67,12 @@
       }
     },
     computed: {
-      user(){
-        return this.$store.getters.user
+      userNick() {
+        if(this.$store.getters.user.pseudo){
+          return this.$store.getters.user.pseudo
+        } else {
+          return localStorage.getItem('pseudo')
+        }
       },
       success(){
         return this.$store.getters.success
@@ -84,18 +88,18 @@
       sendContact(){
         const contactsData = {
           contact: this.contact,
-          nickname: this.nickname,
+          nickname: this.user.pseudo,
           id: this.id
         }
         this.$store.dispatch('editProject',
           contactsData
-
           // selected: this.selected
         )
       }
     },
     created(){
       // this.$store.dispatch('fetchUsers')
+
       this.$store.state.success = false,
       this.$store.state.error = false
       console.log(this.user)
