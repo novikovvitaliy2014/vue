@@ -1,21 +1,19 @@
 <template>
   <v-layout row justify-center>
-    <v-dialog v-model="dialog" max-width="320px"  >
-      <!-- <template v-slot:activator="{ on }"> -->
+    <v-dialog v-model="dialog" max-width="400px"  >
         <v-btn slot="activator" color="green" class="edit-button">
           <v-icon>edit</v-icon>
-          <span>Edit Date</span>
+          <span>{{ $t('edit-date') }}</span>
         </v-btn>
-      <!-- </template> -->
       <v-card>
         <v-card-title>
-          <span class="headline">Edit Date</span>
+          <span class="headline">{{ $t('edit-date') }}</span>
         </v-card-title>
         <v-date-picker v-model="editableDate"
           class="dialog__picker mt-2">
           <template scope="{save, cancel}" actions>
-            <v-btn color="green darken-1" flat @click.native="dialog = false">Close</v-btn>
-            <v-btn color="green darken-1" flat @click.native="onSaveEdit">Save</v-btn>
+            <v-btn color="green darken-1" flat @click.native="dialog = false">{{ $t('close') }}</v-btn>
+            <v-btn color="green darken-1" flat @click.native="onSaveEdit">{{ $t('save') }}</v-btn>
           </template>
         </v-date-picker>
       </v-card>

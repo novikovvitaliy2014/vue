@@ -17,7 +17,6 @@ import UserPage from './views/projects/UserPage.vue'
 import CreateProject from './views/projects/CreateProject.vue'
 import PrivateProjects from './views/projects/PrivateProjects.vue'
 import PrivateProject from './views/projects/PrivateProject.vue'
-// import Signup from './views/auth/signup.vue'
 
 import WebFontLoader from 'webfontloader'
 export default {
@@ -72,5 +71,4 @@ export default {
   @import "./sass/_private-projects.sass"
   @import "./sass/_create.sass"
   @import "./sass/_user-page.sass"
-  @import "./sass/_final-photos.sass"
 </style>

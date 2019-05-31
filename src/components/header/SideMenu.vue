@@ -6,58 +6,44 @@
                        tag="li"
                        v-if="!auth"
                        >
-        Sign in
+        {{ $t('nav-signin') }}
         </router-link>
         <router-link to="/signup"
                      tag="li"
                      v-if="!auth"
                      >
-        Sign up
+        {{ $t('nav-signup') }}
         </router-link>
         <router-link to="/project/new"
            tag="li"
            >
-        Create Project
+        {{ $t('nav-create') }}
         </router-link>
         <router-link to="/private-projects"
            tag="li"
            >
-        Private Projects
+        {{ $t('nav-projects') }}
         </router-link>
-        <!-- <li @click="emitShowContacts"
-            >
-        Contacts
-        </li> -->
-        <router-link to="#"
+        <router-link to="/contacts"
            tag="li"
            >
-        Contacts
+        {{ $t('nav-contacts') }}
         </router-link>
-        <!-- <router-link to="/donors"
-                     tag="li"
-                     v-if="auth"
-                     >
-        Participants
-        </router-link> -->
         <li v-if="auth"
             @click="onLogout"
             >
             <span>
-              <v-icon>exit_to_app</v-icon>Log out
+              <v-icon>exit_to_app</v-icon>{{ $t('nav-logout') }}
             </span>
-            <!-- <span>{{ userPseudo }}</span> -->
         </li>
         <router-link to="/user-page"
            tag="li"
            v-if="userIsCreator"
            >
-           User Page
+           {{ $t('nav-user') }}
         </router-link>
-        <!-- <p>{{projects.length}}</p> -->
-        <!-- <p>{{userId}}</p> -->
       </ul>
     </nav>
-    <!-- <contacts :class="{contacts__show: isActive}"></contacts> -->
   </div>
 </template>
 
@@ -70,7 +56,7 @@ export default {
   },
   data () {
     return {
-      isActive: false,
+      isActive: false
     }
   },
   computed: {
@@ -81,29 +67,15 @@ export default {
     },
     auth() {
       return this.$store.getters.userId !== null && this.$store.getters.userId !== undefined
-    },
-    // userPseudo() {
-    //   return this.$store.getters.userPseudo
-    // }
+    }
   },
   methods: {
     emitShowMenu(){
       this.$emit("emitShowMenu")
     },
-    // emitShowContacts() {
-    //   this.$emit("emitShowContacts")
-    // },
     onLogout() {
       this.$store.dispatch('logout')
     }
-  },
-  created () {
-    // this.$store.dispatch('loadProjects')
-    // this.$store.dispatch('fetchUsers')
-    // this.$store.dispatch('getUser', {email: this.email})
-    // this.$store.dispatch('fetchUsers')
-    // this.userPseudo = this.$store.getters.userPseudo
   }
-
 };
 </script>

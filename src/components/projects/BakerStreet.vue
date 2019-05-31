@@ -1,82 +1,68 @@
 <template>
   <div class="project__container project__container--baker">
-    <h2 class="project__title">Project №1</h2>
-    <h3 class="project__title">Mounting of 2 benches and laying slabs in the Baker Street</h3>
-    <h4 class="project__title">Period of the participants engaging: 01.09.19.- 30.09.19.</h4>
+    <section class="project__title" v-html="$t('project-example')">
+    </section>
     <div class="project__images">
       <div class="project__image">
-        <p>Now</p>
-        <div class="project__img project__img--before-bench">
-        </div>
+        <p>{{$t("photos-explain-1")}}</p>
+        <v-img class="project__img project__img--before-bench"
+          aspect-ratio="1:1.618">
+        </v-img>
       </div>
       <div class="project__image">
-        <p>Project Preview</p>
-        <div class="project__img project__img--bench">
-        </div>
+        <p>{{$t("photos-explain-2")}}</p>
+        <v-img class="project__img project__img--bench"
+          aspect-ratio="1:1.618">
+        </v-img>
       </div>
     </div>
     <div class="project__outlay" >
       <h2>{{$t("preliminary")}}</h2>
       <table>
         <tr v-html="$t('table-head')">
-          <!-- <th>Resource</th>
-          <th>Quantity</th>
-          <th>Price of 1 item, $</th>
-          <th>Sum, $</th> -->
         </tr>
         <tr v-for="row in outlayBaker"
             :key="row.name">
           <td>{{ row.name }}</td>
           <td>{{ row.num }}</td>
-          <td>{{ row.price }}</td>
-          <td >{{ multiplication(row.num, row.price) }}</td>
+          <td>{{ row.price }} $</td>
+          <td >{{ multiplication(row.num, row.price) }} $</td>
         </tr>
-        <!-- <tr>
-          <td>{{ $t('fee') }}</td>
-          <td>10%</td>
-          <td></td>
-          <td>{{ salary(outlayBaker) }}</td>
-        </tr> -->
         <tr>
-          <td>{{$t("sum")}}</td>
+          <td>{{$t("sum")}} </td>
           <td></td>
           <td></td>
-          <td>{{ finalSum(outlayBaker) }}</td>
+          <td>{{ finalSum(outlayBaker) }} $</td>
         </tr>
       </table>
     </div>
 
-    <donate-btn></donate-btn>
-    <donors></donors>
-
     <div class="outlay" >
       <h2>{{$t('final-outlay')}}</h2>
+      <h4>{{$t('creator-final')}}</h4>
       <div class="outlay__row outlay__row--head"
            v-html="$t('table-head-final')">
-        <!-- <span>Resource</span>
-        <span>Quantity</span>
-        <span>Price of 1 item, $</span>
-        <span>Sum, $</span> -->
       </div>
-
       <section class="outlay__group">
         <div class="outlay__row">
           <span>{{$t('bench')}}</span>
           <span>2</span>
-          <span>65</span>
-          <span>130</span>
+          <span>65 $</span>
+          <span>130 $</span>
         </div>
 
-          <div class="outlay__row outlay__row--btn">
-            <button @click="showContacts">{{$t('proof')}}</button>
-          </div>
+        <div class="outlay__row outlay__row--btn">
+          <button @click="showContacts">{{$t('proof')}}
+            <v-icon small color="green">keyboard_arrow_down</v-icon>
+          </button>
+        </div>
 
         <transition name="slide-fade">
           <div class="outlay-proof"
                >
             <div class="outlay-proof__contacts">
               <h5>Ikea</h5>
-              <span>38 050 456 78 99</span>
+              <span>+447 50 456 78 99</span>
             </div>
             <img class="outlay-proof__bill" src="../../img/ikea.jpg" alt="walmart bill">
           </div>
@@ -86,12 +72,14 @@
         <div class="outlay__row">
           <span>{{$t('slab')}}</span>
           <span>12</span>
-          <span>5</span>
-          <span>60</span>
+          <span>5 $</span>
+          <span>60 $</span>
         </div>
 
         <div class="outlay__row outlay__row--btn">
-          <button @click="showContacts">{{$t('proof')}}</button>
+          <button @click="showContacts">{{$t('proof')}}
+            <v-icon small color="green">keyboard_arrow_down</v-icon>
+          </button>
         </div>
 
         <transition name="slide-fade">
@@ -99,7 +87,7 @@
                >
             <div class="outlay-proof__contacts">
               <h5>Wallmart</h5>
-              <span>38 050 456 78 99</span>
+              <span>+447 0 456 78 99</span>
             </div>
             <img class="outlay-proof__bill" src="../../img/walmart.jpg" alt="walmart bill">
           </div>
@@ -108,13 +96,15 @@
       <section class="outlay__group">
         <div class="outlay__row">
           <span>{{$t('work')}}</span>
-          <span>10</span>
-          <span>6</span>
-          <span>60</span>
+          <span>12</span>
+          <span>5 $</span>
+          <span>60 $</span>
         </div>
 
         <div class="outlay__row outlay__row--btn">
-          <button @click="showContacts">{{$t('proof')}}</button>
+          <button @click="showContacts">{{$t('proof')}}
+            <v-icon small color="green">keyboard_arrow_down</v-icon>
+          </button>
         </div>
 
         <transition name="slide-fade">
@@ -122,7 +112,7 @@
                >
             <div class="outlay-proof__contacts">
               <h5>Multi Service </h5>
-              <span>38 050 456 78 99</span>
+              <span>+447 9 456 78 99</span>
             </div>
             <img class="outlay-proof__bill" src="../../img/invoice.png" alt="invoice">
           </div>
@@ -133,66 +123,52 @@
         <span>{{$t('work-org')}}</span>
         <span>1</span>
         <span></span>
-        <span>20</span>
+        <span>20 $</span>
       </div>
 
       <div class="outlay__row outlay__row--sum">
         <span>{{$t('sum')}}</span>
         <span></span>
         <span></span>
-        <span>270</span>
+        <span>270 $</span>
       </div>
     </div>
-    <h2>{{$t('photos')}}</h2>
-    <section class="outlay__photos">
-      <div class="outlay__photo">
-        <img src="../../img/bench.jpg" alt="">
-      </div>
-      <div class="outlay__photo">
-        <img src="../../img/bench.jpg" alt="">
-      </div>
-      <div class="outlay__photo">
-        <img src="../../img/bench.jpg" alt="">
-      </div>
-      <div class="outlay__photo">
-        <img src="../../img/bench.jpg" alt="">
-      </div>
-    </section>
 
-    <!-- <div class="project__outlay" >
-      <table>
-        <caption>Final Priced outlay</caption>
-        <tr>
-          <th>Resource</th>
-          <th>Quantity</th>
-          <th>Price of 1 item, &#8364;</th>
-          <th>Sum, &#8364;</th>
-        </tr>
-        <div v-for="row in finaloutlayBaker"
-            :key="row.name" class="project__outlay-item">
-          <div class="project__outlay-item-row">
-            <div>{{ row.name }}</div>
-            <div>{{ row.num }}</div>
-            <div>{{ row.price }}</div>
-            <div>{{ multiplication(row.num, row.price) }}</div>
-          </div>
-          <div class="project__outlay-info">Платежные документы и контакты поставщика материалов/услуг</div>
+      <h2>{{$t('photos')}}</h2>
+      <h4 class="outlay__photos--container">{{$t('creator-photo')}}</h4>
+      <section class="outlay__photos">
+        <div class="outlay__photo">
+          <v-img
+            :src="require('../../img/bench.jpg')"
+            aspect-ratio="1.618"
+            >
+          </v-img>
         </div>
+        <div class="outlay__photo">
+          <v-img
+            :src="require('../../img/3.jpg')"
+            aspect-ratio="1.618"
+            >
+          </v-img>
+        </div>
+        <div class="outlay__photo">
+          <v-img
+            :src="require('../../img/01.jpg')"
+            aspect-ratio="1.618"
+            >
+          </v-img>
+        </div>
+        <div class="outlay__photo">
+          <v-img
+            :src="require('../../img/2.jpg')"
+            aspect-ratio="1.618"
+            >
+          </v-img>
+        </div>
+      </section>
+      <donate-btn></donate-btn>
+      <donors></donors>
 
-        <tr>
-          <td>Manager's fee</td>
-          <td>10%</td>
-          <td></td>
-          <td>{{ salary(finaloutlayBaker) }}</td>
-        </tr>
-        <tr>
-          <td>Final Sum:</td>
-          <td></td>
-          <td></td>
-          <td>{{ finalSum(finaloutlayBaker) }}</td>
-        </tr>
-      </table>
-    </div> -->
   </div>
 </template>
 
@@ -204,77 +180,30 @@ export default {
     Donors,
     "donate-btn": donateBtn
   },
-  data() {
-    return {
-      // showContact1: false,
-      // showContact2: false,
-      // showContact3: false
-      // outlayBaker: [],
-      // finaloutlayBaker: []
-    }
-  },
   methods: {
-    // showContacts(n){
-    //   if(n===1){
-    //     this.showContact1 = !this.showContact1
-    //   } else if (n===2){
-    //     this.showContact2 = !this.showContact2
-    //   } else if (n===3){
-    //     this.showContact3 = !this.showContact3
-    //   }
-    // },
     showContacts(event){
-      let target = event.target
-      let contacts = target.parentNode.nextSibling
+      const target = event.target
+      const contacts = target.parentNode.nextSibling
       contacts.classList.toggle('outlay-proof--show')
     },
     multiplication(num, price) {
       return num * price
     },
-    // salary(outlay) {
-    //   let sumTotal = 0
-    //   for (let item of outlay ) {
-    //     sumTotal = sumTotal + item.num * item.price
-    //   }
-    //   return sumTotal * 0.1
-    // },
     finalSum(outlay) {
       let sumTotal = 0
       for (let item of outlay ) {
         sumTotal = sumTotal + item.num * item.price
       }
       return sumTotal
-      // return this.salary(salaryFrom) * 10 + this.salary(salaryFrom)
     }
   },
   computed: {
-    // auth() {
-    //   return this.$store.getters.isAuthenticated
-    // },
     outlayBaker(){
       return this.$store.getters.outlayBaker
-    },
-    finaloutlayBaker(){
-      return this.$store.getters.finalOutlayBaker
     }
-
-    // total(outlay) {
-    //   // let outlayV = outlay
-    //   // let outlay = this.$store.getters.outlayBaker
-    //   // let outlay = this.$store.getters.finaloutlayBaker
-
-    //   let sumTotal = 0
-    //   for (let item of outlay ) {
-    //     sumTotal = sumTotal + item.num * item.price
-    //   }
-    //   return sumTotal
-    // },
-
   },
   created() {
-    this.$store.dispatch('initOutlay')
-    // this.outlayBaker = this.$store.getters.outlayBaker
-    // this.finaloutlayBaker = this.$store.getters.finaloutlayBaker
+    this.$store.dispatch('initOutlay', this.$i18n.locale)
   }
 };
 </script>

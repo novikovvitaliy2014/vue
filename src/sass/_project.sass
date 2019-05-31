@@ -2,16 +2,16 @@
   padding-bottom: 40px
   margin-top: 40px
 .v-list__tile__title
-  font-size: $font-size-h3
+  font-size: $font-size-h5
 .project .project__select
   @include container( $col-11, $col-9, $col-9, $max-width: 900px )
 .project__select .v-select__slot label
-  font-size: $font-size-h3
+  font-size: $font-size-h5
   height: 30px
   padding-top: 5px
 .project__select .v-select__selection
   height: 45px
-  font-size: $font-size-h4
+  font-size: $font-size-h5
 .v-input input
   height: 45px
   max-height: 45px
@@ -31,12 +31,7 @@
     text-transform: uppercase
 .project__img
   height: 250px
-  &--basket-old
-    background: url("img/basket-old-2.jpg") no-repeat 0 center
-    background-size: cover
-  &--basket
-    background: url("img/basket2.jpg") no-repeat 0 center
-    background-size: cover
+  width: 100%
   &--before-bench
     background: url("img/before-bench.jpg") no-repeat 0 center
     background-size: cover
@@ -46,53 +41,34 @@
   @include mobile-tab
     height: 200px
 .project__outlay
-  // display: table
-  @include container ($col-11, $col-11, $col-9, $max-width: 900px)
+  @include container ($col-11, $col-11, $col-11, $max-width: 900px)
+  margin-bottom: 90px
   table
     text-align: center
     width: 100%
-    // border: 2px dashed $color-dark
-    // caption
-    //   margin: 50px 0 30px 0
-    //   color: $color-dark
-    //   text-transform: uppercase
-    //   font-size: $font-size-h1
     tr
-      // width: $col-12
-      // display: flex
-      // flex-wrap: wrap
-      // border: 2px dashed $color-dark
+      font-size: $font-size-h4
+      @include mobile
+        font-size: $font-size-h6
       &:last-child
         color: $color-dark
         font-weight: 700
-        // td
-          // border-bottom: 2px dashed $color-dark
-
     th
-      font-size: $font-size-h5
+      font-size: $font-size-h6
       background: $color-main
       color: #fff
       height: 60px
       padding: 0 5px
       font-weight: 400
+      &::first-child
+        width: $col-4
     td
-      // display: block
-      font-size: $font-size-h4
       line-height: $line-height-h3
       height: 50px
       text-transform: capitalcase
       border-bottom: 1px dashed $color-main
-      &:first-child
-        // width: $col-5
-      &:last-child
-
 .outlay
-  @include container($col-11, $col-11, $col-9, $max-width: 900px)
-
-// .outlay__group
-//   &:nth-child(even)
-
-    // background-color: lightgrey
+  @include container($col-11, $col-11, $col-11, $max-width: 900px)
 .outlay__row
   display: flex
   justify-content: space-between
@@ -100,39 +76,45 @@
   flex-wrap: no-wrap
   align-items: center
   height: auto
-  // border: 1px solid red
-  // border-bottom: 1px dashed $color-main
+  border-bottom: 1px dashed $color-main
+  @include mobile
+    font-size: $font-size-h6
   span
-    // display: flex
-    // border: 1px solid red
     padding:  0 5px
     flex-grow: 1
     width: $col-2
     text-align: center
-    // height: auto
     align-items: stretch
-    font-size: $font-size-h6
     line-height: $line-height-h3
     &:first-child
-      width: $col-4
+      width: $col-5
+    &:nth-child(2)
+      width: $col-3
+    &:last-child
+      color: $color-dark
   &--head
+    display: flex
     background: $color-main
     color: #fff
+    height: 70px
     span
-      font-size: $font-size-h5
-      // color: $color-dark
+      line-height: 70px
+      font-size: $font-size-h6
+      border-right: 2px solid #fff
+      &:nth-child(3)
+        line-height: 100%
+        border-right: none
+      &:last-child
+        border-left: 2px solid #fff
+        color: #fff
   &--btn
     background-color: $color-light
     border: 1px solid $color-main
     button
-      //
       &:hover
         background-color: $color-main
         color: #fff
-        // border: 1px solid #fff
-      // background-color: $color-base
       flex-grow: 1
-      // color: #fff
       &:first-child
         flex-basis: $col-7
   &--sum
@@ -142,16 +124,10 @@
     font-weight: bold
 
 .outlay-proof
-  // display: block
-  // flex-wrap: no-wrap
-  // justify-content: space-between
   display: none
   background-color: $color-main
   color: #fff
   padding-bottom: 10px
-  // @include mobile
-    // flex-wrap: wrap
-    // flex-direction: column
   h5
     margin: 0
   p
@@ -162,18 +138,10 @@
 .outlay-proof--show
   display: block
 .outlay-proof__contacts
-  // min-width: 100%
-  // width: $col-4
-  // @include mobile
   width: 100%
-  // p
-  //   text-align: center
 .outlay-proof__check
   display: flex
   margin: auto
-  // margin-bottom: 10px
-  // width: $col-8
-  // @include mobile
   width: 100%
   max-width: 400px
 .outlay__photos
@@ -182,59 +150,51 @@
   flex-wrap: wrap
   @include container($col-12, $col-12, $col-12, $max-width: 1700px)
   margin: 30px 0 50px 0
+  &--container
+    @include container($col-11, $col-11, $col-9, $max-width: 700px)
+    margin: 0px auto 0
+.outlay__photo--img
+  width: 100%
+  max-width: 100%
+  height: auto
 .outlay__photo
-  flex-basis: $col-6
-  // img
-    // display: block
-    // width: 100%
-      // background: $color-main
-      // flex-basis: $col-5
-
-  // display: block
-        // display: block
-        // width: $col-12
-        // flex-grow: 1
-// .project__outlay-item
-//   border: 2px dashed $color-dark
-//   width: 100%
-//   tr
-//     border: 2px dashed $color-dark
-//     width: 100%
-// .project__outlay-item .project__outlay-item-row
-//   width: 100%
-//   border: 2px dashed $color-dark
-//   display: flex
-//   justify-content: space-between
-// .project__outlay-item .project__outlay-info
-//   border: 2px dashed $color-dark
-//   // display: flex
-//   // flex-grow: 1
-//   width: 100%
+  width: $col-6
+  margin: auto
+  @include mobile
+    width: $col-10
 .slide-fade-enter-active
   transition: all 700ms ease 200ms
 .slide-fade-leave-active
   transition: all 500ms ease
 .slide-fade-enter
-  // transform: translateY(-250px)
-  // display: block
   opacity: 0
 .slide-fade-leave-to
-  // transform: translateY(0px)
-  // display: none
   opacity: 0
 .project__container
   align-self: center
 .project__container p
   position: relative
-  padding: 10px 25px
+  padding: 10px 0px
   @include mobile-tab
     padding: 8px
-    // margin-bottom: $font-size-base
   background-color: #fff
   border-radius: 2px
 .project__title
-  @include container( $col-11, $col-9, $col-9, $max-width: 900px )
+  @include container( $col-11, $col-11, $col-9, $max-width: 900px )
   padding: 20px
+  h4
+    text-transform: uppercase
+    margin-bottom: 40px
+  p
+    text-align: center
+    background-color: transparent
+    margin: 0 auto
+    padding: 5px
+.project__image p
+  font-size: $font-size-h6
+  height: 70px
+  background-color: transparent
+  margin: 30px auto 0
 h4.project__title
   color: $color-main2
   font-weight: 400
@@ -244,8 +204,15 @@ h2.project__title
 h3.project__title
   font-weight: 400
 .project__participation
-  @include container ($col-12, $col-11, $col-9, $max-width: 900px)
+  @include container ($col-11, $col-11, $col-11, $max-width: 900px)
   margin-top: 40px
-  // @include container ($col-12, $col-11, $col-9, $max-width: 900px)
+  p
+    background-color: transparent
+.donor__contact input::placeholder
+  font-size: $font-size-h6
+.outlay__photos
+  margin-bottom: 30px
 .outlay__photo
   margin-top: 10px
+.outlay__message
+  @include container ($col-11, $col-11, $col-11, $max-width: 900px)

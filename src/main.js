@@ -13,7 +13,6 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import {i18n} from './plugins/i18n.js'
 
-// Vue.use(VueI18n)
 Vue.config.productionTip = false
 
 axios.defaults.baseURL = 'https://vue-city.firebaseio.com'
@@ -42,6 +41,5 @@ new Vue({
       }
     })
     firebase.auth().useDeviceLanguage()
-    // this.$store.dispatch('loadProjects')
   }
 }).$mount('#app')

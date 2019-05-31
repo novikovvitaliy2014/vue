@@ -10,7 +10,6 @@
           >
         </v-text-field>
         <v-text-field
-
           v-model="dataOutlay[0].outlayQuantity"
           label="Quantity needed"
           class="create__outlay-cell create__outlay-cell--quantity"
@@ -146,11 +145,38 @@
     <button
         color="green"
         @click="sendData"
-        :disabled="projectIdExist"
+        :disabled="projectIdExist || valid"
         type="submit"
         class="btn">
         Create Project
       </button>
+      <v-alert
+        dismissible
+        error
+        :value="true"
+        class="alert__error"
+        v-if="error"
+        >
+        Check again, something is wrong!
+      </v-alert>
+      <!-- <p v-if="error">
+
+      </p> -->
+      <v-alert
+        dismissible
+        type="success"
+        :value="true"
+        v-if="success"
+        >
+        Your project is uploaded to the list of Private Projects!
+      </v-alert>
+      <router-link to="/private-projects"
+         tag="a"
+         v-if="success"
+         class="create__link-to-projects"
+         >
+      Private Projects
+      </router-link>
       <!-- :disabled="!valid || projectIdExist" -->
   </section>
 </template>
@@ -193,51 +219,19 @@
             outlayName: ''
           }
         ],
-        // outlayQuantity1: '',
-        // outlayPrice1: '',
-        // outlayName1: '',
-        // outlayQuantity2: '',
-        // outlayPrice2: '',
-        // outlayName2: '',
-        // outlayQuantity3: '',
-        // outlayPrice3: '',
-        // outlayName3: '',
-        // outlayQuantity4: '',
-        // outlayPrice4: '',
-        // outlayName4: '',
-        // outlayQuantity5: '',
-        // outlayPrice5: '',
-        // outlayName5: '',
-        // outlayName1F: '',
-        // valid: false,
-        // title: '',
-        // projectId: null,
-        // description: '',
-        // images: [],
         donRules: [
         v => !!v || 'Enter project title',
         v => (v && v.length >= 6) || 'Title must be at least 6 characters'
         ],
-        // projectIdRules: [
-        // v => !!v || 'Enter project ID',
-        // v => (v && v.length >= 6) || 'ID must be at least 6 numbers'
-        // ],
-        // picker: new Date().toISOString().substr(0, 10),
-        // date: new Date().toISOString().substr(0, 10),
-        // time: new Date(),
-        // projectId: '',
-
-        // error: false,
-        // success: false
       }
     },
     computed: {
-      // error() {
-      //   return this.$store.getters.error
-      // },
-      // success() {
-      //   return this.$store.getters.success
-      // },
+      error() {
+        return this.$store.getters.error
+      },
+      success() {
+        return this.$store.getters.success
+      },
       projects(){
         return this.$store.getters.projects
       },
@@ -259,6 +253,11 @@
       }
      },
     created(){
+      this.$store.commit('setError',{status: false})
+      this.$store.commit('setSuccess',{status: false})
+      // this.$store.state.success = false
+      // this.$store.state.error = false
+
       // this.$store.dispatch('loadProjects')
     }
 };

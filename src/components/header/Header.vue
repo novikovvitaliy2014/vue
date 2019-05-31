@@ -9,9 +9,6 @@
       :indeterminate="true"
     ></v-progress-linear>
     <div class="header__top">
-      <!-- <v-btn @click="showMenu">
-        Menu
-      </v-btn> -->
       <div class="side-logo">
         <v-toolbar-side-icon class="side-icon"
           @click="showMenu"
@@ -22,57 +19,38 @@
           <logo></logo>
         </router-link>
       </div>
-      <!-- <v-toolbar> -->
-
-        <!-- <v-spacer></v-spacer> -->
-
       <nav>
         <ul>
           <router-link to="/project/new"
              tag="li"
-
              >
-          Create Project
+          {{ $t('nav-create') }}
           </router-link>
           <router-link to="/private-projects"
              tag="li"
-
              >
-          Private Projects
+          {{ $t('nav-projects') }}
           </router-link>
           <router-link to="/signup"
                        tag="li"
                        v-if="!auth"
                        >
-          Sign up
+          {{ $t('nav-signup') }}
           </router-link>
           <router-link to="/signin"
                        tag="li"
                        v-if="!auth"
                        >
-          Sign in
+          {{ $t('nav-signin') }}
           </router-link>
-          <!-- <router-link to="/donors"
-                       tag="li"
-                       v-if="auth"
-                       >
-          Participants
-          </router-link> -->
           <li v-if="auth"
               @click="onLogout"
               >
               <span>
                 <v-icon>exit_to_app</v-icon>
-              Log out
+                {{ $t('nav-logout') }}
               </span>
-              <span>{{ userNick }}</span>
-              <!-- <span >{{ user.pseudo }}</span> -->
-              <!-- <span >{{ user }}</span> -->
           </li>
-          <!-- <li @click="showContacts"
-              >
-          Contacts
-          </li> -->
         </ul>
       </nav>
       <v-select
@@ -109,47 +87,19 @@ export default {
     return {
       isActive: false,
       isOpen: false,
-      selected: 'Russian',
+      selected: 'English',
       languages: ['English','Russian'],
-      locale: "ru",
+      locale: "en",
       userIsCreator: false
-      // userPseudo: 'R'
     }
   },
   computed: {
     auth() {
-      if (this.$store.getters.userId !== null && this.$store.getters.userId !== undefined){
-        return true
-      }
-    },
-    userNick() {
-      if(this.$store.getters.user.pseudo){
-        return this.$store.getters.user.pseudo
-      } else {
-        return localStorage.getItem('pseudo')
-      }
+      return this.$store.getters.userId !== null && this.$store.getters.userId !== undefined
     },
     loading(){
       return this.$store.getters.loading
-    },
-    // user(){
-    //   return this.$store.getters.user
-    // },
-    // userIsCreator(){
-    //   return this.$store.getters.projects.find((project) =>{
-    //     return project.creatorId == this.$store.getters.userId
-    //   })
-    // },
-    // user(){
-    //   let users = this.$store.getters.users
-    //   return users.find((user) => {
-    //     return user.email === this.email
-    //   })
-    // },
-    // users(){
-    //   return this.$store.getters.users
-    //   console.log(this.$store.getters.users)
-    // }
+    }
   },
   methods: {
     setLocale(){
@@ -166,10 +116,9 @@ export default {
         })
         this.locale = 'ru'
       }
-      this.$store.dispatch('initSmeta', this.locale)
+      this.$store.dispatch('initOutlay', this.locale)
     },
     showMenu() {
-      console.log(this.$store.getters.projects)
       this.userIsCreator = this.$store.getters.projects.find((project) =>{
         return project.creatorId == this.$store.getters.userId
       })
@@ -180,12 +129,10 @@ export default {
       this.$store.dispatch('logout')
     }
   },
-  // mounted(){
-  //   if(!this.$store.getters.userId){
-  //     this.$router.push({ path: '/'})
-  //   }
-  // },
   created () {
+    if(!this.$store.getters.user){
+      this.$store.dispatch('logout')
+    }
   }
 };
 </script>

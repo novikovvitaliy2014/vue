@@ -1,17 +1,18 @@
 <template>
   <section class="signin">
-    <h1>Sign in</h1>
+    <h1>{{$t('nav-signin')}}</h1>
+    <h4>{{$t('signin-explain')}}</h4>
     <v-form @submit.prevent = "onSubmitSignin"
       v-model="valid"
       method="post"
       action="/submit"
       lazy-validation
-      v-if="!success"
+      v-if="!auth"
      >
       <v-text-field
         type="email"
         :rules="emailRules"
-        label="Email"
+        :label="$t('email')"
         id="email"
         v-model='email'
         required
@@ -20,7 +21,7 @@
       <v-text-field
         :type="passwordType"
         :rules="passwordRules"
-        label="Password"
+        :label="$t('password')"
         id="password"
         v-model='password'
         :append-icon="hidePassword ? 'visibility_off' : 'visibility'"
@@ -32,7 +33,7 @@
                type="submit"
                class="btn"
                tag="button">
-             Sign in
+             {{$t('nav-signin')}}
       </button>
 
       <v-alert
@@ -43,19 +44,20 @@
         class="alert__error"
         v-if="error"
         >
-        Enter a valid email address and password
+        {{$t('valid-email')}}
       </v-alert>
     </v-form>
     <span @click="forgotPass"
           class="forgot__question"
-          v-if="!success">
-        Forgot your password?
+          v-if="!auth">
+          {{$t('forgot-password')}}
     </span>
-    <p v-if="forgot">Enter the email address associated with your account, we will send to you recovery link</p>
+    <p v-if="forgot">
+    {{$t('email-for-reset')}}</p>
     <v-text-field
         type="email"
         :rules="emailRules"
-        label="Email"
+        :label="$t('email')"
         v-if="forgot"
         v-model='email'
         required
@@ -65,7 +67,7 @@
             @click="resetPass"
             class="btn"
             >
-          Send
+          {{$t('send')}}
     </button>
 
     <v-alert
@@ -74,7 +76,7 @@
       :value="true"
       v-if="resetError"
       >
-      We're sorry. We weren't able to identify you given the information provided.
+      {{$t('email-error')}}
     </v-alert>
     <v-alert
       dismissible
@@ -82,41 +84,32 @@
       :value="true"
       v-if="resetSuccess"
       >
-      Recovery link is sent to your email adress
+      {{$t('reset-sent')}}
     </v-alert>
-    <!-- <p v-if="error">
-      Check again, something is wrong!
-    </p> -->
     <v-alert
       dismissible
       type="success"
       :value="true"
-      v-if="success"
+      v-if="auth"
       >
-      You signed in. Now you can create own project or visit Private Projects page!
+      {{$t('signed-in')}}
     </v-alert>
     <div class="signin__next">
       <router-link to="/project/new"
          tag="a"
-         v-if="success"
+         v-if="auth"
          class="create__link-to-projects"
          >
-      Create Project
+      {{$t('nav-create')}}
       </router-link>
       <router-link to="/private-projects"
          tag="a"
-         v-if="success"
+         v-if="auth"
          class="create__link-to-projects"
          >
-      Private Projects
+      {{$t('nav-projects')}}
       </router-link>
-
     </div>
-    <!-- <p>Users{{users}}</p>
-    <p>User{{user}}</p> -->
-    <!-- <p>Projects{{projects}}</p> -->
-
-
   </section>
 </template>
 
@@ -124,20 +117,19 @@
 export default {
   data() {
     return {
-      // user: {},
       forgot: false,
       password: '',
       hidePassword: true,
       valid: true,
       donation: null,
       passwordRules: [
-        v => !!v || 'Enter your password',
-        v => (v && v.length >= 6) || 'Password must be at least 6 characters'
+        v => !!v || this.$i18n.t('enter-data'),
+        v => (v && v.length >= 6) || this.$i18n.t('min-6')
       ],
       emailRules: [
-        v => !!v || 'Enter your email',
-        v => /.+@.+/.test(v) || 'Enter a valid email address',
-        v => (v && v.length >= 8) || 'Enter a valid email address'
+        v => !!v || this.$i18n.t('enter-data'),
+        v => /.+@.+/.test(v) || this.$i18n.t('valid-email'),
+        v => (v && v.length >= 8) || this.$i18n.t('valid-email')
       ],
       errors: [],
       email: ''
@@ -148,7 +140,6 @@ export default {
       this.forgot = !this.forgot
     },
     resetPass() {
-
       const email = this.email
       this.$store.dispatch('resetPassword', email)
     },
@@ -165,46 +156,38 @@ export default {
     fetchUsers(){
       setTimeout(() => {
         this.$store.dispatch('fetchUsers')
+      }, 2000)
+    },
+    loadProjects(){
+      setTimeout(() => {
+        this.$store.dispatch('loadProjects')
       }, 1000)
     },
     getUserData(){
       setTimeout(() => {
         this.$store.dispatch('getUser', {email: this.email})
         localStorage.setItem('pseudo', this.$store.getters.user.pseudo)
-      }, 2000)
-
-    },
-    loadProjects(){
-      setTimeout(() => {
-        this.$store.dispatch('loadProjects')
-      }, 1000)
-
+      }, 3000)
     },
     async onSubmitSignin() {
       try {
         await this.authUser()
-        console.log("auth")
         await this.fetchUsers()
-        console.log("fetch")
-        await this.getUserData()
-        console.log("getUser")
         await this.loadProjects()
-        console.log("loadPros")
+        await this.getUserData()
       } catch (e) {
-          console.log(e)
+          // console.log(e)
       }
     }
   },
   computed: {
-    // projects(){
-    //   return this.$store.getters.projects
-    // },
-    // fetch(){
-    //   if(this.success){
-    //     this.$store.dispatch('fetchUsers')
-    //   }
-    //   console.log("fetched")
-    // },
+    userNick() {
+      if(this.$store.getters.user){
+        return this.$store.getters.user.pseudo
+      } else if (localStorage.getItem('pseudo')){
+        return localStorage.getItem('pseudo')
+      }
+    },
     error() {
       return this.$store.getters.error
     },
@@ -220,21 +203,13 @@ export default {
     resetError() {
       return this.$store.getters.resetError
     },
-    // auth() {
-    //   return this.$store.getters.userId !== null && this.$store.getters.userId !== undefined
-    // },
-    // user(){
-    //   return this.$store.getters.user
-    // },
-    // users(){
-    //   return this.$store.getters.users
-    // }
+    auth() {
+      return this.$store.getters.userId !== null && this.$store.getters.userId !== undefined
+    }
   },
   created () {
-    // this.$store.dispatch('tryAutoSignin')
-
-    // this.email === localStorage.getItem('email')
-    // console.log(this.$store.getters.users)
+    this.$store.commit('setError',{status: false})
+    this.$store.commit('setSuccess',{status: false})
   }
 };
 </script>

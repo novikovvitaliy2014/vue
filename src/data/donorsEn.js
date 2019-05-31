@@ -1,6 +1,18 @@
 export default
   [
     {
+      pseudo: "Viktor Palich",
+      donation: 45
+    },
+    {
+      pseudo: "Anna 33",
+      donation: 15
+    },
+    {
+      pseudo: "Olga",
+      donation: 30
+    },
+    {
       pseudo: "Robert 1971",
       donation: 12
     },
@@ -21,24 +33,11 @@ export default
       donation: 10
     },
     {
-      pseudo: "Anna",
-      donation: 15
-    },
-    {
-      pseudo: "Olga",
-      donation: 30
-    },
-
-    {
-      pseudo: "Lee seller",
+      pseudo: "Lee Cooper",
       donation: 20
     },
     {
-      pseudo: "Andersson",
+      pseudo: "Mike Yurich",
       donation: 35
-    },
-    {
-      pseudo: "Viktor",
-      donation: 45
     }
-  ];
+  ]

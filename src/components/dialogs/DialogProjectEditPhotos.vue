@@ -1,27 +1,26 @@
 <template>
   <v-layout row justify-center>
-    <v-dialog v-model="dialog" max-width="350px">
-      <!-- <template v-slot:activator="{ on }"> -->
+    <v-dialog v-model="dialog" max-width="400px">
         <v-btn slot="activator" color="green" class="edit-button">
           <v-icon>edit</v-icon>
-          <span>edit</span>
+          <span>{{ $t('edit') }}</span>
         </v-btn>
-      <!-- </template> -->
       <v-card>
         <v-card-title>
-          <span class="headline">Edit Final Photos</span>
+          <span class="headline">{{ $t('edit-pro') }}</span>
         </v-card-title>
         <v-card-text>
+          <h4>{{$t('photos')}}</h4>
           <div>
             <section>
-              <button type="button" raised class="create__upload-btn" @click="onPickFile1">Upload Photo 1</button>
+              <button type="button" raised class="create__upload-btn" @click="onPickFile1">{{$t('upload-photo')}}</button>
               <input
                 type="file"
                 style="display: none"
                 ref="fileInput1"
                 accept="image/*"
                 @change="onFiles(0)">
-              <p>{{ msgFileMax_1 }}</p>
+              <p class="msg-error">{{ msgFileMax_1 }}</p>
               <div class="create__img" v-if="url_F1">
                 <v-img
                    :src="url_F1"
@@ -33,14 +32,14 @@
             </section>
 
             <section>
-              <button type="button" raised class="create__upload-btn" @click="onPickFile2">Upload Photo 2</button>
+              <button type="button" raised class="create__upload-btn" @click="onPickFile2">{{$t('upload-photo')}}</button>
               <input
                 type="file"
                 style="display: none"
                 ref="fileInput2"
                 accept="image/*"
                 @change="onFiles(1)">
-              <p>{{ msgFileMax_2 }}</p>
+              <p class="msg-error">{{ msgFileMax_2 }}</p>
               <div class="create__img" v-if="url_F2">
                 <v-img
                    :src="url_F2"
@@ -52,14 +51,14 @@
             </section>
 
             <section>
-              <button type="button" raised class="create__upload-btn" @click="onPickFile3">Upload Photo 3</button>
+              <button type="button" raised class="create__upload-btn" @click="onPickFile3">{{$t('upload-photo')}}</button>
               <input
                 type="file"
                 style="display: none"
                 ref="fileInput3"
                 accept="image/*"
                 @change="onFiles(2)">
-              <p>{{ msgFileMax_3 }}</p>
+              <p class="msg-error">{{ msgFileMax_3 }}</p>
               <div class="create__img" v-if="url_F3">
                 <v-img
                    :src="url_F3"
@@ -71,14 +70,14 @@
             </section>
 
             <section>
-              <button type="button" raised class="create__upload-btn" @click="onPickFile4">Upload Photo 4</button>
+              <button type="button" raised class="create__upload-btn" @click="onPickFile4">{{$t('upload-photo')}}</button>
               <input
                 type="file"
                 style="display: none"
                 ref="fileInput4"
                 accept="image/*"
                 @change="onFiles(3)">
-              <p>{{ msgFileMax_4 }}</p>
+              <p class="msg-error">{{ msgFileMax_4 }}</p>
               <div class="create__img" v-if="url_F4">
                 <v-img
                    :src="url_F4"
@@ -93,8 +92,8 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="green darken-1" flat @click="dialog = false">Close</v-btn>
-          <v-btn color="green darken-1" flat @click="saveFinalPhotos">Save</v-btn>
+          <v-btn color="green darken-1" flat @click="dialog = false">{{$t('close')}}</v-btn>
+          <v-btn color="green darken-1" flat @click="saveFinalPhotos">{{$t('save')}}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -102,11 +101,7 @@
 </template>
 
 <script>
-// import FinaloutlayForm from './FinaloutlayForm.vue'
   export default {
-    // components: {
-    //   // "final-outlay-form": FinaloutlayForm,
-    // },
     props: {
       project: Object
     },
@@ -126,25 +121,22 @@
         urls: []
       }
     },
-    computed: {
-    },
     methods: {
       async onFiles(image){
         try {
           await this.onFilesChange(image)
-          console.log("change")
           await setTimeout(() => {
             this.urlsShow()
             this.messagesShow()
-          }, 500)
+          }, 1000)
         } catch (e) {
-            console.log(e)
+            // console.log(e)
         }
       },
       onFilesChange(image){
         const file = event.target.files[0]
         if(file){
-          if(file.size < 205000){
+          if(file.size < 500000){
             this.images[image] = file
             const fileReader = new FileReader()
             fileReader.addEventListener('load', () => {
@@ -154,10 +146,10 @@
             fileReader.readAsDataURL(file)
             this.messages[image] = ""
           } else {
-            this.messages[image] = "Maximum file size is 200Kb, please upload another file"
+            this.messages[image] = this.$i18n.t('msg-file-size')
           }
         } else {
-            this.messages[image] = "New file is not uploaded"
+            this.messages[image] = this.$i18n.t('msg-file-empty')
         }
       },
       urlsShow(){
@@ -203,7 +195,6 @@
     },
     created(){
       const storeImage = this.project.dataPhotos
-      // const base = this.urlsDialog
       if(storeImage){
         for(let i = 0; i < 4; i++) {
           if (storeImage[i] != undefined && storeImage[i] != "") {

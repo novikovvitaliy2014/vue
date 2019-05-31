@@ -24,12 +24,8 @@ const store = new Vuex.Store({
     users: [],
     resetError: null,
     resetSuccess: null,
-    // nick: null
   },
   mutations: {
-    // getNick(state, payload){
-    //   state.nick = payload
-    // },
     resetError(state, payload) {
       state.resetError = payload
     },
@@ -64,13 +60,13 @@ const store = new Vuex.Store({
       state.projects = payload
     },
     setError(state, payload) {
-      state.error = payload
+      state.error = payload.status
     },
     clearError(state) {
       state.error = null
     },
-    setSuccess(state) {
-      state.success = true
+    setSuccess(state, payload) {
+      state.success = payload.status
     },
     clearSuccess(state) {
       state.success = false
@@ -97,9 +93,9 @@ const store = new Vuex.Store({
       if(payload.dataFinal){
         project.dataFinal = payload.dataFinal
       }
-      // if(payload.contact){
-      //   project.contacts = payload
-      // }
+      if(payload.currency){
+        project.currency = payload.currency
+      }
       if(payload.donation){
         project.contacts[payload.index] = payload
       }
@@ -180,18 +176,15 @@ const store = new Vuex.Store({
             localStorage.setItem('userId', user.data.localId)
             localStorage.setItem('pseudo', signupData.pseudo)
             localStorage.setItem('expirationDate', expirationDate)
-            // localStorage.setItem('email', signupData.email)
             dispatch('storeUser', signupData) // save to users.json
             router.replace('/')
           })
           .catch(error => {
-            commit('setError', error)
-            console.log(error)
+            commit('setError', {status: error})
             }
           )
       },
       signin ({commit, dispatch, state}, signinData) {
-        // dispatch('tryAutoSignin')
         commit('clearError')
         axios.post('/verifyPassword?key=AIzaSyDNMxHSzaOvcKd6E8GasiSoIRXlm7k7x_4', {
           email: signinData.email,
@@ -201,23 +194,18 @@ const store = new Vuex.Store({
           .then(user => {
             const now = Math.floor(Date.now())
             const expirationDate = now + (1000 * 3600 * 24 * 30)
-            // const expirationDate = new Date(now.getTime() + user.data.expiresIn * 1000)
             localStorage.setItem('token', user.data.idToken)
             localStorage.setItem('userId', user.data.localId)
-            // localStorage.getItem('userId', user.data.localId)
             localStorage.setItem('expirationDate', expirationDate)
             commit('authUser', {
               token: user.data.idToken,
               userId: user.data.localId
             })
-            commit('setSuccess')
-            console.log(user.data.idToken)
-            console.log(user.data)
-            return
+            commit('setSuccess', {status: true})
           })
           .catch(error => {
-            commit('setError', error)
-            console.log(error)
+            commit('setError', {status: error})
+            // console.log(error)
             }
           )
       },
@@ -228,7 +216,6 @@ const store = new Vuex.Store({
         localStorage.removeItem('expirationDate')
         localStorage.removeItem('token')
         localStorage.removeItem('userId')
-        localStorage.removeItem('pseudo')
         router.replace('/signin')
       },
       storeUser ({state}, signupData) {
@@ -246,6 +233,7 @@ const store = new Vuex.Store({
         projectId: payload.projectId,
         dataOutlay: payload.dataOutlay,
         date: payload.date.toISOString(),
+        currency: payload.currency,
         creatorId: getters.userId
       }
       let key
@@ -258,7 +246,6 @@ const store = new Vuex.Store({
         })
         .then(key => {
           let imagesArray = payload.images
-          // let newImagesArray = []
           if(imagesArray != undefined) {
             for(let i = 0; i < 2; i++) {
               if(imagesArray[i] != undefined){
@@ -266,9 +253,10 @@ const store = new Vuex.Store({
               }
             }
           }
+          commit('setSuccess', {status: true})
         })
         .catch(error => {
-          commit('setError', error)
+          commit('setError', {status: error})
         })
     },
     resizeImages({commit, state}){
@@ -303,11 +291,11 @@ const store = new Vuex.Store({
           }
         })
         .catch(error => {
-          console.log(error)
+          // console.log(error)
         })
     },
     loadProjects({commit, state}) {
-      // commit('setLoading', true)
+      commit('setLoading', true)
       globalAxios.get('/projects.json' + '?auth=' + state.idToken)
         .then(res => {
           const projects = []
@@ -317,6 +305,7 @@ const store = new Vuex.Store({
               id: key,
               title: obj[key].title,
               description: obj[key].description,
+              currency: obj[key].currency,
               date: obj[key].date,
               projectImages: obj[key].images,
               dataOutlay: obj[key].dataOutlay,
@@ -329,11 +318,11 @@ const store = new Vuex.Store({
             })
           }
           commit('setLoadedProjects', projects)
-          // commit('setLoading', false)
+          commit('setLoading', false)
         })
         .catch(error => {
-          console.log(error)
-          // commit('setLoading', true)
+          // console.log(error)
+          commit('setLoading', false)
         })
     },
     deleteProject({state, commit}, payload) {
@@ -374,6 +363,9 @@ const store = new Vuex.Store({
       if(payload.description){
         projectForServer.description = payload.description
       }
+      if(payload.currency){
+        projectForServer.currency = payload.currency
+      }
       if(payload.date){
         projectForServer.date = payload.date
       }
@@ -383,7 +375,7 @@ const store = new Vuex.Store({
       if(payload.dataFinal){
         projectForServer.dataFinal = payload.dataFinal
       }
-      if(payload.contact){
+      if(payload.contact && !payload.donation){
         firebase.database().ref('projects').child(payload.id).child("contacts").push(payload)
       }
       if(payload.donation){
@@ -402,7 +394,6 @@ const store = new Vuex.Store({
               }
             }
           }
-          // if(payload.dataFinal) {
             if(payload.dataFinalImages){
               let imagesArray = payload.dataFinalImages
               for(let i = 0; i < 5; i++ ){
@@ -411,7 +402,6 @@ const store = new Vuex.Store({
                 }
               }
             }
-          // }
           if(payload.dataPhotos) {
             let imagesArray = payload.dataPhotos
             for(let i = 0; i < 4; i++ ){
@@ -423,23 +413,11 @@ const store = new Vuex.Store({
         })
       .then(() => {
           commit('editProject', payload)
+          commit('setSuccess', {status: true})
         })
         .catch(error => {
-          console.log(error)
-        })
-    },
-    sendContact({commit}, payload){
-      const contactsData = {
-        contact: payload.contact,
-        nickname: payload.nickname
-      }
-      firebase.database().ref('projects').child(payload.key).child("contacts").push(contactsData)
-        .then(() => {
-          commit('storeContact', payload)
-          commit('sendSuccess')
-        })
-        .catch(error => {
-          commit('setError', error)
+          commit('setError', {status: error})
+          // console.log(error)
         })
     }
   },
@@ -450,9 +428,6 @@ const store = new Vuex.Store({
     users (state) {
      return state.users
     },
-    // isAuthenticated (state) {
-    //   return state.userId
-    // },
     projects(state) {
       return state.projects.sort((projectA, projectB) => {
         return projectA.date > projectB.date
@@ -465,9 +440,6 @@ const store = new Vuex.Store({
         })
       }
     },
-    // images(state, getters) {
-    //   return getters.project.images
-    // },
     userId(state) {
       return state.userId
     },
@@ -485,7 +457,7 @@ const store = new Vuex.Store({
     },
     resetSuccess (state) {
       return state.resetSuccess
-    },
+    }
   },
   modules: {
     outlay,

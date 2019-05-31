@@ -1,7 +1,6 @@
 <template>
-  <div class="private-project">
-    <h1>Private Pro</h1>
-    <section>
+  <div >
+    <section class="private-project">
       <v-card v-if="project">
         <v-card-title>
           <h3 class="private-project__title">{{ project.title }}</h3>
@@ -12,7 +11,7 @@
             </app-dialog-edit-project>
             <v-btn class="delete-icon" @click="deleteProject" color="green">
               <v-icon >fas fa-trash-alt</v-icon>
-              <span>Delete</span>
+              <span>{{ $t('delete') }}</span>
             </v-btn>
           </div>
         </template>
@@ -34,7 +33,7 @@
         </v-card-text>
         <section class="private-project__pre-photos">
           <div class="private-project__pre-photo">
-            <h4>Current View</h4>
+            <h4>{{ $t('current-view') }}</h4>
             <v-img class="outlay-photo outlay-photo--1"
                :src="currentImage"
                aspect-ratio="1.618"
@@ -44,7 +43,7 @@
             </v-img>
           </div>
           <div class="private-project__pre-photo">
-            <h4>Project View</h4>
+            <h4>{{ $t('project-view') }}</h4>
             <v-img class="outlay-photo outlay-photo--1"
                :src="projectImage"
                aspect-ratio="1.618"
@@ -62,11 +61,10 @@
           </app-dialog-edit-project-outlay>
           <v-btn class="delete-icon" @click="deleteOutlay" color="green">
             <v-icon >fas fa-trash-alt</v-icon>
-            <span>Delete</span>
+            <span>{{ $t('delete') }}</span>
           </v-btn>
         </div>
-        <section class="private-project__outlay" v-if="project.dataOutlay">
-          <!-- v-if="project.dataOutlay" -->
+        <section class="outlay" v-if="project.dataOutlay">
           <div class="outlay__row outlay__row--head"
                v-html="$t('table-head-final')">
           </div>
@@ -74,38 +72,38 @@
           <div class="outlay__row" v-if="project.dataOutlay[0].outlayName">
             <span>{{ dataOutlay[0].outlayName }}</span>
             <span>{{ dataOutlay[0].outlayQuantity }}</span>
-            <span>{{ dataOutlay[0].outlayPrice }}</span>
+            <span>{{ dataOutlay[0].outlayPrice }} {{ project.currency }}</span>
             <span>{{multiplication(dataOutlay[0].outlayQuantity, dataOutlay[0].outlayPrice)}}</span>
           </div>
           <div class="outlay__row" v-if="project.dataOutlay[1].outlayName">
             <span>{{ dataOutlay[1].outlayName }}</span>
             <span>{{ dataOutlay[1].outlayQuantity }}</span>
-            <span>{{ dataOutlay[1].outlayPrice }}</span>
+            <span>{{ dataOutlay[1].outlayPrice }} {{ project.currency }}</span>
             <span>{{multiplication(dataOutlay[1].outlayQuantity, dataOutlay[1].outlayPrice)}}</span>
           </div>
           <div class="outlay__row" v-if="project.dataOutlay[2].outlayName">
             <span>{{ dataOutlay[2].outlayName }}</span>
             <span>{{ dataOutlay[2].outlayQuantity }}</span>
-            <span>{{ dataOutlay[2].outlayPrice }}</span>
+            <span>{{ dataOutlay[2].outlayPrice }} {{ project.currency }}</span>
             <span>{{multiplication(dataOutlay[2].outlayQuantity, dataOutlay[2].outlayPrice)}}</span>
           </div>
           <div class="outlay__row" v-if="project.dataOutlay[3].outlayName">
             <span>{{ dataOutlay[3].outlayName }}</span>
             <span>{{ dataOutlay[3].outlayQuantity }}</span>
-            <span>{{ dataOutlay[3].outlayPrice }}</span>
+            <span>{{ dataOutlay[3].outlayPrice }} {{ project.currency }}</span>
             <span>{{multiplication(dataOutlay[3].outlayQuantity, dataOutlay[3].outlayPrice)}}</span>
           </div>
           <div class="outlay__row" v-if="project.dataOutlay[4].outlayName">
             <span>{{ dataOutlay[4].outlayName }}</span>
             <span>{{ dataOutlay[4].outlayQuantity }}</span>
-            <span>{{ dataOutlay[4].outlayPrice }}</span>
+            <span>{{ dataOutlay[4].outlayPrice }} {{ project.currency }}</span>
             <span>{{multiplication(dataOutlay[4].outlayQuantity, dataOutlay[4].outlayPrice)}}</span>
           </div>
           <div class="outlay__row outlay__row--sum">
             <span>{{$t('sum')}}</span>
             <span></span>
             <span></span>
-            <span>{{sum}}</span>
+            <span>{{sum}} {{ project.currency }}</span>
           </div>
         </section>
 
@@ -113,28 +111,27 @@
         <project-donors :id="id" :sum="sum"></project-donors>
 
         <h2>{{$t('final-outlay')}}</h2>
-        <p v-if="!project.dataFinal && userIsCreator" class="outlay__message">Dear project creator, you can add or edit final outlay after project realization. Push the button "EDIT" </p>
-        <p v-if="!project.dataFinal && !userIsCreator" class="outlay__message">Final outlay could be published here by project creator after project realization. </p>
+        <p v-if="!project.dataFinal && userIsCreator" class="outlay__message">{{$t('creator-final')}} </p>
+        <p v-if="!project.dataFinal && !userIsCreator" class="outlay__message">{{$t('user-final')}}</p>
         <div class="private-project__edit-icons" v-if="userIsCreator">
           <app-dialog-edit-project-final :project="project" @imageUrlFinal="urlUpdateFinal">
           </app-dialog-edit-project-final>
           <v-btn class="delete-icon" @click="deleteFinalOutlay" color="green">
             <v-icon >fas fa-trash-alt</v-icon>
-            <span>Delete</span>
+            <span>{{ $t('delete') }}</span>
           </v-btn>
         </div>
         <final-outlay :id="id" :imagesBase="imagesBase"></final-outlay>
-        <!-- v-if="project.dataFinal" -->
 
         <h2>{{$t('photos')}}</h2>
-        <p v-if="!project.dataPhotos && userIsCreator" class="outlay__message">Dear project creator, you can add or edit final photos of realized project here. Push the button "EDIT" </p>
-        <p v-if="!project.dataPhotos && !userIsCreator" class="outlay__message">Final photos of realized project could be published here by project creator after project realization. </p>
+        <p v-if="!project.dataPhotos && userIsCreator" class="outlay__message">{{$t('creator-photo')}}</p>
+        <p v-if="!project.dataPhotos && !userIsCreator" class="outlay__message">{{$t('user-photo')}} </p>
         <div class="private-project__edit-icons" v-if="userIsCreator">
           <app-dialog-edit-project-photos :project="project" @photoBaseUrl="photoBaseUrl">
           </app-dialog-edit-project-photos>
           <v-btn class="delete-icon" @click="deletePhotos" color="green">
             <v-icon >fas fa-trash-alt</v-icon>
-            <span>Delete</span>
+            <span>{{ $t('delete') }}</span>
           </v-btn>
         </div>
 
@@ -159,15 +156,10 @@ export default {
   props: ['id'],
   data() {
     return {
-      // urls: [],
-      // finaloutlay: true,
       imagesBase: [],
       photosBase: [],
-      // images: [],
-      // currentImage: "",
-      // projectImage: "",
-      // editedUrl_F1: this.project.currentImage.imageUrl,
-      // project: {}
+      currentImage: null,
+      projectImage: null
     }
   },
   components: {
@@ -185,14 +177,10 @@ export default {
   computed: {
     project() {
       return this.$store.getters.project(this.id)
-      console.log(this.$store.getters.project(this.id))
     },
     dataOutlay(){
       return this.project.dataOutlay
     },
-    // auth() {
-    //   return this.$store.getters.userId !== null && this.$store.getters.userId !== undefined
-    // },
     userIsCreator(){
       if(this.project){
         return this.$store.getters.userId === this.project.creatorId
@@ -200,7 +188,7 @@ export default {
       return false
     },
     sum(){
-      let dataOutlay = this.project.dataOutlay
+      const dataOutlay = this.project.dataOutlay
       let sum = null
       if(dataOutlay) {
         for( let i = 0; i < 5; i++) {
@@ -212,39 +200,22 @@ export default {
         }
       }
       return sum
-    },
-    currentImage(){
-      let pro = this.project.projectImages
-      if(pro){
-        if (pro[0]){
-          return pro[0].imageUrl
-        } else {
-          return ''
-        }
-      }
-    },
-    projectImage(){
-      let pro = this.project.projectImages
-      if(pro){
-        if (pro[1]){
-          return pro[1].imageUrl
-        } else {
-          return ''
-        }
-      }
     }
   },
   methods: {
     multiplication(num, price) {
       if(!isNaN(num) && !isNaN(price)){
-        return num * price
+        return num * price + " " + this.project.currency
       }
       return 'error'
-
     },
     urlUpdate(payload){
-      this.currentImage = payload.url_1
-      this.projectImage = payload.url_2
+      if(payload.url_1){
+        this.currentImage = payload.url_1
+      }
+      if(payload.url_2){
+        this.projectImage = payload.url_2
+      }
     },
     urlUpdateFinal(payload){
       this.imagesBase = payload.baseUrls
@@ -256,7 +227,6 @@ export default {
       base[2] = payload.baseUrls_3
       base[3] = payload.baseUrls_4
       this.photosBase = base
-      // console.log(this.photosBase)
     },
     deleteProject() {
       this.$store.dispatch("deleteProject", this.project)
@@ -274,17 +244,26 @@ export default {
     }
   },
   created() {
-    // this.$store.dispatch('fetchUsers')
+    this.$store.dispatch('tryAutoSignin')
     this.$store.dispatch('loadProjects')
-    // let pro = this.project.projectImages
-    // if(pro){
-    //   if (pro[0]){
-    //     this.currentImage = pro[0].imageUrl
-    //   }
-    //   if (pro[1]){
-    //     this.projectImage = pro[1].imageUrl
-    //   }
-    // }
+    setTimeout(()=>{
+      if(!this.$store.getters.user && !localStorage.getItem('pseudo') || !this.project) {
+        if(this.projects.length === 0){
+          this.$store.dispatch('logout')
+        }
+      }
+      const pro = this.project.projectImages
+      if(pro){
+        if (pro[0]) {
+        this.currentImage = pro[0].imageUrl
+        }
+        if (pro[1]) {
+          this.projectImage = pro[1].imageUrl
+        }
+      }
+    }, 2500)
+    this.$store.commit('setError',{status: false})
+    this.$store.commit('setSuccess',{status: false})
   }
 };
 </script>

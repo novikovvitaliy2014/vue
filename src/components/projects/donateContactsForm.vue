@@ -1,51 +1,56 @@
 <template>
   <div class="project__participation">
-    <!-- <button class="btn" @click="showContact">Book Donation</button> -->
-    <p>{{$t('enter-contacts')}}</p>
+    <h4>{{$t('donate-contacts')}}</h4>
+    <p>{{$t('example-contacts')}}</p>
     <div  >
       <v-form v-model="valid" @submit.prevent = "sendContact">
         <v-text-field
           type="text"
-          label="Enter your contacts"
+          :label="$t('contacts-label')"
           :rules="contactRules"
-          placeholder="Email or Phone number or Skype or social link, etc."
+          placeholder="WhatsApp: +447 356 78 90"
+          @focus="cleanStatus"
           id="contact"
           class="donor__contact"
           v-model="contact"
           lazy-validation
           color="green"
-          title="Project author will contact you to negotiate forms of cooperation"
           required>
         </v-text-field>
-        <p>{{ userNick }}</p>
-        <span>{{$t('author')}}</span>
+        <p class="donor__usernick">{{ userNick }}</p>
         <button class="btn"
                 type="submit"
-
-                :disabled="!valid">
+                :disabled="!valid && !empty"
+                >
               {{$t('send')}}
         </button>
-
       </v-form>
 
       <v-alert
         dismissible
+        v-model="successSent"
         type="success"
         :value="true"
-        v-if="success"
         >
-        Thank you! Your contact is sent.
+        {{$t('contacts-sent')}}
       </v-alert>
       <v-alert
         dismissible
+        v-model="filling"
+        type="error"
+        :value="true"
+        >
+        {{$t('create-valid')}}
+      </v-alert>
+      <v-alert
+        dismissible
+        v-if="error"
         error
         :value="true"
-        v-if="error"
         >
-        Check again, something is wrong!
+        {{ error }}
       </v-alert>
     </div>
-
   </div>
 </template>
 
@@ -56,54 +61,63 @@
     },
     data() {
       return {
-        // pseudo: '',
-        valid: false,
+        successSent: false,
+        filling: false,
+        valid: true,
         contact: '',
         contactActive: '',
         contactRules: [
-          v => !!v || 'Enter your contact',
-          v => (v && v.length >= 8) || 'Contact must be at least 8 characters'
+          v => !!v || this.$i18n.t("enter-data"),
+          v => (v && v.length >= 6) || this.$i18n.t("min-6")
         ],
       }
     },
     computed: {
+      empty(){
+        return this.contact.trim() === ''
+      },
       userNick() {
-        if(this.$store.getters.user.pseudo){
+        if(this.$store.getters.user){
           return this.$store.getters.user.pseudo
         } else {
           return localStorage.getItem('pseudo')
         }
-      },
-      success(){
-        return this.$store.getters.success
       },
       error(){
         return this.$store.getters.error
       }
     },
     methods: {
-      // showContact(){
-      //   this.contactActive = !this.contactActive
-      // },
+      cleanStatus(){
+        this.$store.commit('setError',{status: false})
+        this.$store.commit('setSuccess',{status: false})
+      },
       sendContact(){
         const contactsData = {
           contact: this.contact,
-          nickname: this.user.pseudo,
+          nickname: this.userNick,
           id: this.id
         }
-        this.$store.dispatch('editProject',
-          contactsData
-          // selected: this.selected
-        )
+        if(!this.userNick) {
+          this.$store.dispatch('logout')
+        } else if(!this.valid){
+          this.filling = true
+          return
+        } else {
+          this.$store.dispatch('editProject', contactsData)
+          this.successSent = true
+        }
+        this.cleanStatus()
       }
     },
     created(){
-      // this.$store.dispatch('fetchUsers')
-
-      this.$store.state.success = false,
-      this.$store.state.error = false
-      console.log(this.user)
-      // this.pseudo = this.$store.getters.user.pseudo
+      setTimeout(()=>{
+        if(!this.userNick) {
+          this.$store.dispatch('logout')
+        }
+      },2500)
+      this.$store.commit('setError',{status: false})
+      this.$store.commit('setSuccess',{status: false})
     }
   };
 </script>

@@ -7,6 +7,7 @@ import PageMain from './views/mainPage/PageMain.vue'
 import store from "./store/store.js"
 import VueRouter from 'vue-router'
 import CreateProject from './views/projects/CreateProject.vue'
+import Contacts from './components/header/Contacts.vue'
 import PrivateProjects from './views/projects/PrivateProjects.vue'
 import PrivateProject from './views/projects/PrivateProject.vue'
 Vue.use(VueRouter)
@@ -20,7 +21,7 @@ const routes = [
     name: 'CreateProject',
     component: CreateProject,
     beforeRouteUpdate: (to, from, next) => {
-      if(store.getters.userId) {
+      if(store.getters.userId && store.getters.projects) {
         next()
       } else {
         next('/signin')
@@ -31,7 +32,7 @@ const routes = [
     name: 'PrivateProjects',
     component: PrivateProjects,
     beforeRouteUpdate: (to, from, next) => {
-      if(store.getters.userId) {
+      if(store.getters.userId && store.getters.projects) {
         next()
       } else {
         next('/signin')
@@ -41,6 +42,17 @@ const routes = [
   { path: '/user-page',
     name: 'UserPage',
     component: UserPage,
+    beforeRouteUpdate: (to, from, next) => {
+      if(store.getters.userId) {
+        next()
+      } else {
+        next('/signin')
+      }
+    }
+  },
+  { path: '/contacts',
+    name: 'Contacts',
+    component: Contacts,
     beforeRouteUpdate: (to, from, next) => {
       if(store.getters.userId) {
         next()
@@ -65,21 +77,6 @@ const routes = [
     name: 'signup',
     component: signup
   },
-  // { path: '/profile',
-  //   name: 'profile',
-  //   component: profile
-  // },
-  // { path: '/donors',
-  //     name: 'CreateProject'
-  //     component: Donors,
-  //     beforeEnter: (to, from, next) => {
-  //       if(store.getters.isAuthenticated) {
-  //         next()
-  //       } else {
-  //         next('/signin')
-  //       }
-  //     }
-  // },
   { path: '/signin',
     name: 'signin',
     component: signin

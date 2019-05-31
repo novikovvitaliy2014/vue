@@ -1,32 +1,27 @@
 <template>
   <div class="project__participation">
-    <!-- <button class="btn" >Book Donation</button> -->
-    <p>{{$t('enter-contacts')}}</p>
+    <h4>{{$t('donate-contacts')}}</h4>
+    <p>{{$t('example-contacts')}}</p>
     <div  >
       <v-form v-model="valid">
         <v-text-field
           type="text"
-          label="Enter your contacts"
+          :label="$t('contacts-label')"
           :rules="contactRules"
-          placeholder="Email or Phone number or Skype or social link, etc."
+          placeholder="WhatsApp: +447 356 78 90"
           id="contact"
           class="donor__contact"
           v-model="contact"
           lazy-validation
           color="green"
-          title="Project author will contact you to negotiate forms of cooperation"
           required>
         </v-text-field>
-        <span>{{$t('author')}}</span>
         <button class="btn"
-
                 @click="sendContact"
                 :disabled="!valid">
               {{$t('send')}}
         </button>
-
       </v-form>
-
       <v-alert
         dismissible
         type="success"
@@ -44,7 +39,6 @@
         Check again, something is wrong!
       </v-alert>
     </div>
-
   </div>
 </template>
 
@@ -56,8 +50,8 @@
         contact: '',
         contactActive: '',
         contactRules: [
-          v => !!v || 'Enter your contact',
-          v => (v && v.length >= 8) || 'Contact must be at least 8 characters'
+          v => !!v || this.$i18n.t("enter-data"),
+          v => (v && v.length >= 6) || this.$i18n.t("min-6")
         ],
       }
     },
@@ -70,14 +64,8 @@
       }
     },
     methods: {
-      // showContact(){
-      //   this.contactActive = !this.contactActive
-      // },
       sendContact(){
-        this.$store.dispatch('sendContact', {
-          contact: this.contact
-          // selected: this.selected
-        })
+        alert(this.$i18n.t("demo"))
       }
     },
     created(){

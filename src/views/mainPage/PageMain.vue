@@ -3,6 +3,11 @@
     <features></features>
     <about></about>
     <baker></baker>
+    <!-- <router-link :to="'/project/new'"
+      tag="button"
+      class="btn btn--container"
+      >{{$t("nav-create")}}
+    </router-link> -->
   </section>
 </template>
 
@@ -10,7 +15,6 @@
 import Features from '../../components/forMainPage/Features.vue'
 import About from '../../components/forMainPage/About.vue'
 import Baker from '../../components/projects/BakerStreet.vue'
-// import Pro from '../../components/projects/Pro.vue'
 
 export default {
   components: {

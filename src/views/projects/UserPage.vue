@@ -1,20 +1,32 @@
 <template>
   <div class="user-page">
-    <h1 >User Page</h1>
+    <h1 >{{ $t('user-page') }}</h1>
     <section>
+      <div class="user-page__user-data">
+        <h4>{{ $t('user-data') }}</h4>
+        <p><span>Nickname: </span> {{user.pseudo}}</p>
+        <p><span>Project: </span>{{project.title}}</p>
+        <p><span>Project ID: </span>{{project.projectId}}</p>
+      </div>
+      <h4>{{ $t('contacts-data') }}</h4>
       <div v-for="(contact, index) in contacts"
           :key="index">
-        <div class="donors__row">
-          <div class="donors__cell">{{ contact.nickname }} </div>
-          <div class="donors__cell">{{ contact.contact }}</div>
-          <div class="donors__cell">
-          <v-text-field
-            v-model="contact.donation"
-            label="Donation"
-            >
-          </v-text-field>
+        <div class="donors__block">
+          <div class="donors__row donors__row--user-page">
+            <div class="donors__cell">{{ contact.nickname }} </div>
+            <div class="donors__cell">{{ contact.contact }}</div>
           </div>
-          <v-btn @click="saveToPublic(index)">Save to Public List</v-btn>
+          <div class="donors__row donors__row--user-page">
+            <v-text-field
+              class="donors__cell donors__cell--donation"
+              type="number"
+              v-model="contact.donation"
+              :label="$t('donation')"
+              :title="$t('contacts-title')"
+              >
+            </v-text-field>
+            <v-btn class="user-page__savePublicBtn" @click="saveToPublic(index)">{{ saveBtn(index) }} </v-btn>
+          </div>
         </div>
       </div>
     </section>
@@ -23,33 +35,45 @@
 
 <script>
   export default {
-    // data() {
-    //   return {
-    //   }
-    // },
     computed: {
-      // auth() {
-      //   return this.$store.getters.userId !== null && this.$store.getters.userId !== undefined
-      // },
-      // projects(){
-      //   return this.$store.getters.projects
-      // },
+      // Only first project shows
+      // Project will be deleted after 3 month
       project(){
         return this.$store.getters.projects.find((project) =>{
-          return project.creatorId == this.$store.getters.userId
+          return project.creatorId === this.$store.getters.userId
         })
       },
+      user(){
+        return this.$store.getters.user
+      },
+      // project_2(){
+      //   return this.$store.getters.projects.find((project) =>{
+      //     const pro = project.creatorId === this.$store.getters.userId
+      //     if(project.projectId !== this.project.projectId){
+      //       return pro
+      //     }
+      //     return
+      //   })
+      // },
       contacts(){
-        return this.project.contacts
+        if(this.project){
+          return this.project.contacts
+        }
       }
     },
     methods: {
+      saveBtn(index){
+        if(this.contacts[index].donation !== undefined && this.contacts[index].donation !== ''){
+          return this.$i18n.t('save-new')
+        } else {
+          return this.$i18n.t('save-to-public')
+        }
+      },
       saveToPublic(index){
         if(!this.contacts[index].donation){
-          alert("Enter donation sum")
+          alert(this.$i18n.t('enter-data'))
           return
         }
-        // console.log(this.contacts[index].id)
         const publicList = {
           donation: this.contacts[index].donation,
           nickname: this.contacts[index].nickname,
@@ -60,16 +84,27 @@
         this.$store.dispatch('editProject',
           publicList
         )
-        // console.log(publicList)
+        const target = event.target
+        target.innerHTML = this.$i18n.t('saved') + this.contacts[index].donation
+        target.parentNode.style.border = "2px solid green"
+        target.style.color = "green"
+        setTimeout(()=>{
+          target.innerHTML = this.$i18n.t('save-new')
+          target.parentNode.style.border = "none"
+          target.style.color = "inherit"
+        }, 3000)
       },
     },
     created() {
       this.$store.dispatch('tryAutoSignin')
       setTimeout(()=>{
-        this.$store.dispatch('fetchUsers')
         this.$store.dispatch('loadProjects')
-      },1500)
-
+      },500)
+      setTimeout(()=>{
+        if(!this.project || Object.keys(this.user).length === 0){
+          this.$store.dispatch('logout')
+        }
+      },4500)
     }
   };
 </script>

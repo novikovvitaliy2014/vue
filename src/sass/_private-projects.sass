@@ -1,24 +1,33 @@
+.private-projects__project
+  margin: auto
+  @include container($col-12, $col-10, $col-10, $max-width: 900px)
+.private-projects__project-title,
+.private-projects__project-date,
+.private-projects__project-btn
+  text-align: center
+.private-projects__project-description
+  margin-top: 30px
+.private-project
+  display: block
 .private-projects,
 .private-project
-  @include container($col-12, $col-11, $col-10, 1100px)
+  @include container($col-11, $col-11, $col-10, $max-width: 900px)
   margin-top: 100px
 .private-project__edit-icons,
 .private-project__edit-date
   display: flex
   justify-content: center
-  flex-wrap: no-wrap
+  flex-wrap: wrap
+  margin-bottom: 50px
 .private-project__edit-icons .layout,
 .private-project__edit-date .layout
   flex-grow: 0
 .private-project__title
-  // display: flex
   margin: auto
   color: $color-dark
 .private-project__desc
   display: flex
   justify-content: center
-  // margin: auto
-  // color: $color-b
 .private-project__date
   display: flex
   justify-content: center
@@ -31,10 +40,7 @@
   width: $col-6
   h4
     color: $color-dark
-    // font-weight: bold
-  // height: 100%
-  // img
-  //   height: 100%
+    margin-top: 20px
   @include mobile
     margin: auto
     width: $col-10

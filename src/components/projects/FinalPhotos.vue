@@ -1,45 +1,38 @@
 <template>
-  <div>
-
-    <section class="outlay__photos">
-      <div class="outlay__photo">
-        <v-img class="outlay-photo outlay-photo--1"
-           :src="Url_F1"
-           aspect-ratio="1.618"
-           alt="final-photo-1"
-           v-if="Url_F1"
-           >
-        </v-img>
-      </div>
-      <div class="outlay__photo">
-        <v-img class="outlay-photo outlay-photo--2"
-           :src="Url_F2"
-           aspect-ratio="1.618"
-           alt="final-photo-2"
-           v-if="Url_F2"
-           >
-        </v-img>
-      </div>
-      <div class="outlay__photo">
-        <v-img class="outlay-photo outlay-photo--3"
-           :src="Url_F3"
-           aspect-ratio="1.618"
-           alt="final-photo-3"
-           v-if="Url_F3"
-           >
-        </v-img>
-      </div>
-      <div class="outlay__photo">
-        <v-img class="outlay-photo outlay-photo--4"
-           :src="Url_F4"
-           aspect-ratio="1.618"
-           alt="final-photo-4"
-           v-if="Url_F4"
-           >
-        </v-img>
-      </div>
-    </section>
-  </div>
+  <section class="outlay__photos">
+    <div class="outlay__photo" v-if="Url_F1">
+      <v-img class="outlay-photo outlay-photo--1"
+         :src="Url_F1"
+         aspect-ratio="1.618"
+         alt="final-photo-1"
+         >
+      </v-img>
+    </div>
+    <div class="outlay__photo" v-if="Url_F2">
+      <v-img class="outlay-photo outlay-photo--2"
+         :src="Url_F2"
+         aspect-ratio="1.618"
+         alt="final-photo-2"
+         >
+      </v-img>
+    </div>
+    <div class="outlay__photo" v-if="Url_F3">
+      <v-img class="outlay-photo outlay-photo--3"
+         :src="Url_F3"
+         aspect-ratio="1.618"
+         alt="final-photo-3"
+         >
+      </v-img>
+    </div>
+    <div class="outlay__photo" v-if="Url_F4">
+      <v-img class="outlay-photo outlay-photo--4"
+         :src="Url_F4"
+         aspect-ratio="1.618"
+         alt="final-photo-4"
+         >
+      </v-img>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -48,10 +41,6 @@
       id: String,
       photosBase: Array
     },
-    // data() {
-    //   return {
-    //   }
-    // },
     computed: {
       urls(){
         const array = []
@@ -63,14 +52,13 @@
           } else if (img.length > 0 && img[i] != undefined && img[i] != "") {
             array[i] = img[i].imageUrl
           } else {
-            array[i] = " "
+            array[i] = ""
           }
         }
         return array
       },
       project() {
         return this.$store.getters.project(this.id)
-        console.log(this.$store.getters.project(this.id))
       },
       dataPhotos(){
         return this.project.dataPhotos
@@ -87,10 +75,6 @@
       Url_F4(){
         return this.urls[3]
       }
-    },
-    // methods: {
-    // },
-    // created(){
-    // }
+    }
   };
 </script>

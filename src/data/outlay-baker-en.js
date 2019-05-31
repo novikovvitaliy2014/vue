@@ -20,4 +20,4 @@ export default
       num: 1,
       price: 20
     }
-  ];
+  ]

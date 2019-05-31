@@ -16,7 +16,7 @@ export default
       price: 5
     },
     {
-      name: "Работа организатора, кв.м",
+      name: "Работа организатора",
       num: 1,
       price: 20
     }
