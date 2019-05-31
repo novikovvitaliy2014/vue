@@ -1,6 +1,5 @@
 import outlayBakerEn from "./../../data/outlay-baker-en.js"
 import outlayBakerRu from "./../../data/outlay-baker-ru.js"
-import {i18n} from '../../plugins/i18n.js'
 
 
 const state = {

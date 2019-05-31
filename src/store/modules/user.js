@@ -4,7 +4,7 @@ const state = {
 const mutations = {
 }
 const actions = {
-  tryAutoSignin ({commit}, payload) {
+  tryAutoSignin ({commit}) {
     const token = localStorage.getItem('token')
     if(!token) {
       return

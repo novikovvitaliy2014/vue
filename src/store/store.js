@@ -1,13 +1,13 @@
 import Vue from "vue"
 import Vuex from "vuex"
-import { mapState, mapGetter, mapActions } from 'vuex'
+// import { mapState, mapGetter, mapActions } from 'vuex'
 import axios from './../axios-auth'
 import globalAxios from 'axios'
 import * as firebase from 'firebase'
 import router from '../router.js'
 import outlay from './modules/outlay.js'
 import user from './modules/user.js'
-import {i18n} from '../plugins/i18n.js'
+// import {i18n} from '../plugins/i18n.js'
 
 Vue.use(Vuex)
 const store = new Vuex.Store({
@@ -34,7 +34,6 @@ const store = new Vuex.Store({
     },
     getUsers(state, payload){
       state.users = payload
-      console.log(state.users)
     },
     getUser(state, payload){
       const user = state.users.find((user) => {
@@ -108,15 +107,12 @@ const store = new Vuex.Store({
     },
     deleteProject(state, payload){
       state.projects.splice(payload, 1)
-      console.log(state.projects)
     },
     deleteFinalOutlay(state, payload){
       state.projects[payload].dataFinal = []
-      console.log(state.projects[payload])
     },
     deleteOutlay(state, payload){
       state.projects[payload].dataOutlay = []
-      console.log(state.projects[payload])
     },
     storeContact(state, payload){
       const contact = {}
@@ -140,7 +136,6 @@ const store = new Vuex.Store({
       commit('getUser', payload)
     },
     fetchUsers ({commit, state}) {
-      console.log(state.idToken)
       if (!state.idToken) {
         return
       }
@@ -154,9 +149,8 @@ const store = new Vuex.Store({
           users.push(user)
         }
         commit('getUsers', users)
-        console.log(users)
       })
-      .catch(error => alert(error))
+      // .catch(error => console.log(error))
     },
     signup ({commit, dispatch}, signupData) {
       commit('clearError')
@@ -184,7 +178,7 @@ const store = new Vuex.Store({
             }
           )
       },
-      signin ({commit, dispatch, state}, signinData) {
+      signin ({commit}, signinData) {
         commit('clearError')
         axios.post('/verifyPassword?key=AIzaSyDNMxHSzaOvcKd6E8GasiSoIRXlm7k7x_4', {
           email: signinData.email,
@@ -226,7 +220,7 @@ const store = new Vuex.Store({
         }
       },
 
-     createProject ({commit, dispatch, state, getters}, payload) {
+     createProject ({commit, getters}, payload) {
       const project = {
         title: payload.title,
         description: payload.description,
@@ -237,7 +231,6 @@ const store = new Vuex.Store({
         creatorId: getters.userId
       }
       let key
-      let newImagesDataArray = []
       firebase.database().ref('projects').push(project)
       // globalAxios.post('/projects.json' + '?auth=' + state.idToken, project)
         .then((data) => {
@@ -259,7 +252,7 @@ const store = new Vuex.Store({
           commit('setError', {status: error})
         })
     },
-    resizeImages({commit, state}){
+    resizeImages({state}){
       globalAxios.get('/projects.json' + '?auth=' + state.idToken)
         .then(res => {
           const obj = res.data
@@ -290,16 +283,15 @@ const store = new Vuex.Store({
             }
           }
         })
-        .catch(error => {
-          // console.log(error)
-        })
+        // .catch(error => {
+        //   console.log(error)
+        // })
     },
     loadProjects({commit, state}) {
       commit('setLoading', true)
-      globalAxios.get('/projects.json' + '?auth=' + state.idToken)
-        .then(res => {
+      firebase.database().ref('projects').on('value', snap => {
+          const obj = snap.val()
           const projects = []
-          const obj = res.data
           for (let key in obj) {
             projects.push({
               id: key,
@@ -321,8 +313,8 @@ const store = new Vuex.Store({
           commit('setLoading', false)
         })
         .catch(error => {
-          // console.log(error)
           commit('setLoading', false)
+          // console.log(error)
         })
     },
     deleteProject({state, commit}, payload) {
@@ -382,8 +374,8 @@ const store = new Vuex.Store({
         firebase.database().ref('projects').child(payload.id).child("contacts").child(payload.index).update(payload)
       }
       let key = payload.id
-      let newImagesArray = []
-      let newImagesArrayFinal = []
+      // let newImagesArray = []
+      // let newImagesArrayFinal = []
       firebase.database().ref('projects').child(payload.id).update(projectForServer)
       .then(() => {
           if(payload.editedImages) {

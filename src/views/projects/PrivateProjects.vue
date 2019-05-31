@@ -52,6 +52,7 @@
     methods: {
       loadProjects(){
         this.$store.dispatch('loadProjects')
+
         setTimeout(()=>{
           if(!this.projects  || this.projects.length === 0) {
             this.$store.dispatch('logout')

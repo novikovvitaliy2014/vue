@@ -9,28 +9,12 @@
 <script>
 import Header from './components/header/Header.vue'
 import Footer from './components/footer/Footer.vue'
-import PageMain from './views/mainPage/PageMain.vue'
-import Donors from './views/donorsPage/Donors.vue'
-import Signin from './views/auth/signin.vue'
-import Signup from './views/auth/signup.vue'
-import UserPage from './views/projects/UserPage.vue'
-import CreateProject from './views/projects/CreateProject.vue'
-import PrivateProjects from './views/projects/PrivateProjects.vue'
-import PrivateProject from './views/projects/PrivateProject.vue'
 
-import WebFontLoader from 'webfontloader'
+// import WebFontLoader from 'webfontloader'
 export default {
   components: {
     'app-header': Header,
     'app-footer': Footer,
-    'private-projects': PrivateProjects,
-    'private-project': PrivateProject,
-    CreateProject,
-    PageMain,
-    Donors,
-    Signin,
-    Signup,
-    "user-page": UserPage
   },
   computed: {
     auth() {
@@ -43,13 +27,13 @@ export default {
     this.$vuetify.theme.primary = "#4CAF50"
     this.$vuetify.theme.greendarken4 = "#1B5E20"
   },
-  mounted () {
-    WebFontLoader.load({
-      google: {
-        families: ['Roboto:100,300,400,500,700,900']
-      }
-    })
-  }
+  // mounted () {
+  //   WebFontLoader.load({
+  //     google: {
+  //       families: ['Roboto:100,300,400,500,700,900']
+  //     }
+  //   })
+  // }
 };
 </script>
 

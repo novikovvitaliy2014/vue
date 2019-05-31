@@ -73,14 +73,12 @@
 
 <script>
 import Logo from './Logo.vue'
-import Contacts from './Contacts.vue'
 import SideMenu from './SideMenu.vue'
 
 
 export default {
   components: {
     Logo,
-    Contacts,
     "side": SideMenu
   },
   data () {

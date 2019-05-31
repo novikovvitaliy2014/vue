@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Donors from './views/donorsPage/Donors.vue'
+// import Donors from './views/donorsPage/Donors.vue'
 import signup from './views/auth/signup.vue'
 import signin from './views/auth/signin.vue'
 import UserPage from './views/projects/UserPage.vue'

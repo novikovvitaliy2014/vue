@@ -139,7 +139,7 @@
       <section class="outlay__photos">
         <div class="outlay__photo">
           <v-img
-            :src="require('../../img/bench.jpg')"
+            :src="require('../../img/bench3.jpg')"
             aspect-ratio="1.618"
             >
           </v-img>
@@ -160,7 +160,7 @@
         </div>
         <div class="outlay__photo">
           <v-img
-            :src="require('../../img/2.jpg')"
+            :src="require('../../img/basket2.jpg')"
             aspect-ratio="1.618"
             >
           </v-img>

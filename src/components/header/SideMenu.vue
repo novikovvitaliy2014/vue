@@ -48,12 +48,8 @@
 </template>
 
 <script>
-import Contacts from './Contacts.vue'
 
 export default {
-  components: {
-    Contacts
-  },
   data () {
     return {
       isActive: false

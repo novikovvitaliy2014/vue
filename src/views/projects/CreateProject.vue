@@ -342,7 +342,6 @@
           ],
         valid: false,
         title: '',
-        projectId: null,
         description: '',
         url_1: '',
         url_2: '',
@@ -450,7 +449,7 @@
           await this.checkForm()
           await this.dispatch()
         } catch(e){
-          console.log(e)
+          // console.log(e)
         }
       },
       onPickFile1(){

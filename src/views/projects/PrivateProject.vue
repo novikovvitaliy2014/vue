@@ -245,7 +245,10 @@ export default {
   },
   created() {
     this.$store.dispatch('tryAutoSignin')
-    this.$store.dispatch('loadProjects')
+    this.$store.dispatch('resizeImages')
+    setTimeout(()=>{
+      this.$store.dispatch('loadProjects')
+    }, 2000)
     setTimeout(()=>{
       if(!this.$store.getters.user && !localStorage.getItem('pseudo') || !this.project) {
         if(this.projects.length === 0){
@@ -261,7 +264,7 @@ export default {
           this.projectImage = pro[1].imageUrl
         }
       }
-    }, 2500)
+    }, 3000)
     this.$store.commit('setError',{status: false})
     this.$store.commit('setSuccess',{status: false})
   }
