@@ -132,7 +132,7 @@ const store = new Vuex.Store({
     clearError({commit}) {
       commit('clearError')
     },
-    getUser({commit, state}, payload){
+    getUser({commit}, payload){
       commit('getUser', payload)
     },
     fetchUsers ({commit, state}) {
@@ -287,7 +287,7 @@ const store = new Vuex.Store({
         //   console.log(error)
         // })
     },
-    loadProjects({commit, state}) {
+    loadProjects({commit}) {
       commit('setLoading', true)
       firebase.database().ref('projects').on('value', snap => {
           const obj = snap.val()
@@ -312,10 +312,10 @@ const store = new Vuex.Store({
           commit('setLoadedProjects', projects)
           commit('setLoading', false)
         })
-        .catch(error => {
-          commit('setLoading', false)
-          // console.log(error)
-        })
+        // .catch(error => {
+        //   commit('setLoading', false)
+        //   // console.log(error)
+        // })
     },
     deleteProject({state, commit}, payload) {
       const pros = state.projects
