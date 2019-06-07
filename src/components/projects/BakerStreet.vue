@@ -64,7 +64,7 @@
               <h5>Ikea</h5>
               <span>+447 50 456 78 99</span>
             </div>
-            <img class="outlay-proof__bill" src="../../img/ikea.jpg" alt="walmart bill">
+            <img class="outlay-proof__check" src="../../img/ikea.jpg" alt="walmart bill">
           </div>
         </transition>
       </section>
@@ -89,7 +89,7 @@
               <h5>Wallmart</h5>
               <span>+447 0 456 78 99</span>
             </div>
-            <img class="outlay-proof__bill" src="../../img/walmart.jpg" alt="walmart bill">
+            <img class="outlay-proof__check" src="../../img/walmart.jpg" alt="walmart bill">
           </div>
         </transition>
       </section>
@@ -114,7 +114,7 @@
               <h5>Multi Service </h5>
               <span>+447 9 456 78 99</span>
             </div>
-            <img class="outlay-proof__bill" src="../../img/invoice.png" alt="invoice">
+            <img class="outlay-proof__check" src="../../img/invoice.png" alt="invoice">
           </div>
         </transition>
       </section>

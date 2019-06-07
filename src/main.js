@@ -8,8 +8,8 @@ import App from './App.vue'
 import store from "./store/store.js"
 import router from './router'
 import DateFilter from './filters/date.js'
-import 'roboto-fontface/css/roboto/roboto-fontface.css'
-// import 'material-design-icons-iconfont/dist/material-design-icons.css'
+// import 'roboto-fontface/css/roboto/roboto-fontface.css'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 // import '@fortawesome/fontawesome-free/css/all.css'
 import {i18n} from './plugins/i18n.js'
 

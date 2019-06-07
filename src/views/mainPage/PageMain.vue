@@ -16,6 +16,7 @@ import Features from '../../components/forMainPage/Features.vue'
 import About from '../../components/forMainPage/About.vue'
 import Baker from '../../components/projects/BakerStreet.vue'
 
+
 export default {
   components: {
     Features,

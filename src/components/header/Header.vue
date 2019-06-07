@@ -87,7 +87,7 @@ export default {
       isOpen: false,
       selected: 'English',
       languages: ['English','Russian'],
-      locale: "en",
+      locale: 'en',
       userIsCreator: false
     }
   },
@@ -112,7 +112,7 @@ export default {
           this.$i18n.setLocaleMessage('ru', msgs)
           this.$i18n.locale = 'ru'
         })
-        this.locale = 'ru'
+        this.locale = 'en'
       }
       this.$store.dispatch('initOutlay', this.locale)
     },

@@ -3,7 +3,7 @@ import outlayBakerRu from "./../../data/outlay-baker-ru.js"
 
 
 const state = {
-  outlayBaker: outlayBakerRu
+  outlayBaker: outlayBakerEn
 }
 const mutations = {
   'setOutlay' (state, payload) {
@@ -22,10 +22,7 @@ const actions = {
 const getters = {
   outlayBaker(state) {
     return state.outlayBaker
-  },
-  finalOutlayBaker(state) {
-    return state.finalOutlayBaker
-  },
+  }
 }
 
 export default {

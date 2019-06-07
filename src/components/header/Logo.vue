@@ -1,7 +1,9 @@
 <template>
   <div class="logo">
-    <a class="logo__link" href="#">City</a>
-    <img class="header__logo" src="./../../img/LogoLC.png" alt="logo">
+    <a class="logo__link" href="#">
+      <span>Donate</span>
+      <span>Systems</span>
+    </a>
   </div>
 </template>
 

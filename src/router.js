@@ -10,6 +10,7 @@ import CreateProject from './views/projects/CreateProject.vue'
 import Contacts from './components/header/Contacts.vue'
 import PrivateProjects from './views/projects/PrivateProjects.vue'
 import PrivateProject from './views/projects/PrivateProject.vue'
+import VueYandexMetrika from 'vue-yandex-metrika'
 Vue.use(VueRouter)
 
 const routes = [
@@ -87,6 +88,16 @@ const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
     routes
+})
+
+Vue.use(VueYandexMetrika, {
+    id: 53910325,
+    router: router,
+    env: process.env.NODE_ENV,
+    clickmap:true,
+    trackLinks:true,
+    accurateTrackBounce:true,
+    webvisor:true
 })
 
 export default router

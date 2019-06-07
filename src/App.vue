@@ -22,6 +22,7 @@ export default {
     }
   },
   created() {
+    this.$i18n.locale = 'en'
     this.$store.dispatch('tryAutoSignin')
     this.$vuetify.theme.green = "#4CAF50"
     this.$vuetify.theme.primary = "#4CAF50"

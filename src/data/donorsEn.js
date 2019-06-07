@@ -25,7 +25,7 @@ export default
       donation: 15
     },
     {
-      pseudo: "Jhon",
+      pseudo: "Konstantin S.",
       donation: 18
     },
     {
