@@ -10,7 +10,7 @@
             <app-dialog-edit-project :project="project" @imageUrl="urlUpdate">
             </app-dialog-edit-project>
             <v-btn class="delete-icon" @click="deleteProject" color="green">
-              <v-icon >fas fa-trash-alt</v-icon>
+              <v-icon >delete</v-icon>
               <span>{{ $t('delete') }}</span>
             </v-btn>
           </div>
@@ -60,7 +60,7 @@
           <app-dialog-edit-project-outlay :project="project">
           </app-dialog-edit-project-outlay>
           <v-btn class="delete-icon" @click="deleteOutlay" color="green">
-            <v-icon >fas fa-trash-alt</v-icon>
+            <v-icon >delete</v-icon>
             <span>{{ $t('delete') }}</span>
           </v-btn>
         </div>
@@ -117,7 +117,7 @@
           <app-dialog-edit-project-final :project="project" @imageUrlFinal="urlUpdateFinal">
           </app-dialog-edit-project-final>
           <v-btn class="delete-icon" @click="deleteFinalOutlay" color="green">
-            <v-icon >fas fa-trash-alt</v-icon>
+            <v-icon >delete</v-icon>
             <span>{{ $t('delete') }}</span>
           </v-btn>
         </div>
@@ -130,7 +130,7 @@
           <app-dialog-edit-project-photos :project="project" @photoBaseUrl="photoBaseUrl">
           </app-dialog-edit-project-photos>
           <v-btn class="delete-icon" @click="deletePhotos" color="green">
-            <v-icon >fas fa-trash-alt</v-icon>
+            <v-icon >delete</v-icon>
             <span>{{ $t('delete') }}</span>
           </v-btn>
         </div>
@@ -152,6 +152,12 @@ import FinalOutlay from './../../components/projects/FinalOutlay.vue'
 import FinalPhotos from './../../components/projects/FinalPhotos.vue'
 import donateContactsForm from '../../components/projects/donateContactsForm.vue'
 import ProjectDonors from '../../views/donorsPage/ProjectDonors.vue'
+
+import VBtn from 'vuetify/es5/components/VBtn/VBtn'
+import VIcon from 'vuetify/es5/components/VIcon/VIcon'
+import VCard from 'vuetify/es5/components/VCard/VCard'
+import VImg from 'vuetify/es5/components/VImg/VImg'
+
 export default {
   props: ['id'],
   data() {
@@ -163,6 +169,10 @@ export default {
     }
   },
   components: {
+    VBtn,
+    VIcon,
+    VCard,
+    VImg,
     "final-outlay": FinalOutlay,
     "final-photos": FinalPhotos,
     "app-dialog-edit-project": DialogProjectEdit,

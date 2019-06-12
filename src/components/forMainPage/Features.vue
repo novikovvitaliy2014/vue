@@ -5,3 +5,7 @@
     </div>
   </section>
 </template>
+
+<style lang="sass">
+  @import "./../../sass/_features.sass"
+</style>

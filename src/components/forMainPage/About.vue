@@ -17,9 +17,13 @@
         </div>
         <div class="about__row-img about__row-img--4">
         </div>
-        <article class="about__row-desc"v-html="$t('final')">
+        <article class="about__row-desc" v-html="$t('final')">
         </article>
       </section>
     </div>
   </section>
 </template>
+
+<style lang="sass">
+  @import "./../../sass/_about.sass"
+</style>

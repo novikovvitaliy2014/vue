@@ -36,7 +36,11 @@
 </template>
 
 <script>
+import VImg from 'vuetify/es5/components/VImg/VImg'
   export default {
+    components: {
+      VImg
+    },
     props: {
       id: String,
       photosBase: Array

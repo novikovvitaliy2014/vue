@@ -301,7 +301,28 @@
   </div>
 </template>
 <script>
-  export default {
+import VForm from 'vuetify/es5/components/VForm/VForm'
+import VAlert from 'vuetify/es5/components/VAlert/VAlert'
+import VTextField from 'vuetify/es5/components/VTextField/VTextField'
+import VBtn from 'vuetify/es5/components/VBtn/VBtn'
+import VIcon from 'vuetify/es5/components/VIcon/VIcon'
+import VSelect from 'vuetify/es5/components/VSelect/VSelect'
+import VTextarea from 'vuetify/es5/components/VTextarea/VTextarea'
+import VDatePicker from 'vuetify/es5/components/VDatePicker/VDatePicker'
+import VTimePicker from 'vuetify/es5/components/VTimePicker/VTimePicker'
+
+export default {
+  components: {
+    VForm,
+    VAlert,
+    VTextField,
+    VSelect,
+    VBtn,
+    VTextarea,
+    VIcon,
+    VDatePicker,
+    VTimePicker
+  },
     data() {
       return {
         msgFileMax_1: "",
@@ -510,3 +531,7 @@
       }
 };
 </script>
+
+<style lang="sass">
+  @import "./../../sass/_create.sass"
+</style>

@@ -10,11 +10,10 @@
     ></v-progress-linear>
     <div class="header__top">
       <div class="side-logo">
-        <v-toolbar-side-icon class="side-icon"
+        <button class="side-icon"
           @click="showMenu"
           >
-        </v-toolbar-side-icon>
-
+        </button>
         <router-link to="/">
           <logo></logo>
         </router-link>
@@ -43,23 +42,30 @@
                        >
           {{ $t('nav-signin') }}
           </router-link>
-          <li v-if="auth"
-              @click="onLogout"
-              >
-              <span>
-                <v-icon>exit_to_app</v-icon>
-                {{ $t('nav-logout') }}
-              </span>
+          <li class="header__nav-logout" v-if="auth"
+            @click="onLogout"
+            >
+            <span>
+              {{ $t('nav-logout') }}
+            </span>
           </li>
         </ul>
       </nav>
-      <v-select
+      <!-- <v-select
         class="header__lang"
         v-model="selected"
         :items="languages"
         @change="setLocale"
         label="Language">
-      </v-select>
+      </v-select> -->
+      <div class="header__lang">
+        <span>Language</span>
+        <select v-model="selected"  @change="setLocale" label="Language">
+          <option selected>English</option>
+          <option>Russian</option>
+        </select>
+      </div>
+
     </div>
     <div :class="{overlay__show: isActive}"
           class="overlay"
@@ -75,9 +81,11 @@
 import Logo from './Logo.vue'
 import SideMenu from './SideMenu.vue'
 
+import VProgressLinear from 'vuetify/es5/components/VProgressLinear/VProgressLinear'
 
 export default {
   components: {
+    VProgressLinear,
     Logo,
     "side": SideMenu
   },
@@ -112,7 +120,7 @@ export default {
           this.$i18n.setLocaleMessage('ru', msgs)
           this.$i18n.locale = 'ru'
         })
-        this.locale = 'en'
+        this.locale = 'ru'
       }
       this.$store.dispatch('initOutlay', this.locale)
     },

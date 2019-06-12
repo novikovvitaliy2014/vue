@@ -1,6 +1,8 @@
 .about
   border-bottom: 1px dashed $color-main
   margin-bottom: 70px
+  @include mobile
+    margin-top: 50px
   p
     font-size: $font-size-h6
     margin: auto
@@ -23,16 +25,16 @@
   overflow: hidden
   width: $col-6
   &--1
-    background: url("img/01.jpg") no-repeat 0 center
+    background: url("../../img/01.jpg") no-repeat 0 center
     background-size: cover
   &--2
-    background: url("img/3.jpg") no-repeat 0 center
+    background: url("../../img/3.jpg") no-repeat 0 center
     background-size: cover
   &--3
-    background: url("img/2.jpg") no-repeat 0 center
+    background: url("../../img/2.jpg") no-repeat 0 center
     background-size: cover
   &--4
-    background: url("img/6.jpg") no-repeat 0 center
+    background: url("../../img/6.jpg") no-repeat 0 center
     background-size: cover
   @include mobile
     &--1

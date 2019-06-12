@@ -1,7 +1,6 @@
 <template>
   <section class="donors">
     <button class="btn" @click="showList">{{$t('open-donors')}}
-      <v-icon dark medium>keyboard_arrow_down</v-icon>
     </button>
     <section class="donors__pro" v-if="showParticipants">
       <h1 >{{$t('list')}}</h1>
@@ -73,3 +72,7 @@ export default {
   }
 };
 </script>
+
+<style lang="sass">
+  @import "./../../sass/_donors.sass"
+</style>

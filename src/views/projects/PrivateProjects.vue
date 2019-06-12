@@ -26,7 +26,11 @@
 </template>
 
 <script>
+import VTextField from 'vuetify/es5/components/VTextField/VTextField'
   export default {
+    components: {
+      VTextField
+    },
     data() {
       return {
         numberRules: [
@@ -71,3 +75,7 @@
     }
   };
 </script>
+
+<style lang="sass">
+  @import "./../../sass/_private-projects.sass"
+</style>

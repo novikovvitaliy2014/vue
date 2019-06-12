@@ -53,7 +53,6 @@
 
         <div class="outlay__row outlay__row--btn">
           <button @click="showContacts">{{$t('proof')}}
-            <v-icon small color="green">keyboard_arrow_down</v-icon>
           </button>
         </div>
 
@@ -78,7 +77,6 @@
 
         <div class="outlay__row outlay__row--btn">
           <button @click="showContacts">{{$t('proof')}}
-            <v-icon small color="green">keyboard_arrow_down</v-icon>
           </button>
         </div>
 
@@ -103,7 +101,6 @@
 
         <div class="outlay__row outlay__row--btn">
           <button @click="showContacts">{{$t('proof')}}
-            <v-icon small color="green">keyboard_arrow_down</v-icon>
           </button>
         </div>
 
@@ -175,8 +172,11 @@
 <script>
 import Donors from '../../views/donorsPage/Donors.vue'
 import donateBtn from './donateBtn.vue'
+import VImg  from 'vuetify/es5/components/VImg/VImg'
+
 export default {
   components: {
+    VImg,
     Donors,
     "donate-btn": donateBtn
   },

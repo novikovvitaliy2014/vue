@@ -153,7 +153,11 @@
 </template>
 
 <script>
+import VIcon from 'vuetify/es5/components/VIcon/VIcon'
   export default {
+    components: {
+      VIcon
+    },
     props: {
       id: String,
       imagesBase: Array

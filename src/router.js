@@ -1,26 +1,25 @@
 import Vue from 'vue'
-// import Donors from './views/donorsPage/Donors.vue'
-import signup from './views/auth/signup.vue'
-import signin from './views/auth/signin.vue'
-import UserPage from './views/projects/UserPage.vue'
 import PageMain from './views/mainPage/PageMain.vue'
 import store from "./store/store.js"
 import VueRouter from 'vue-router'
-import CreateProject from './views/projects/CreateProject.vue'
 import Contacts from './components/header/Contacts.vue'
-import PrivateProjects from './views/projects/PrivateProjects.vue'
-import PrivateProject from './views/projects/PrivateProject.vue'
-import VueYandexMetrika from 'vue-yandex-metrika'
 Vue.use(VueRouter)
+
+// const CreateProject = () => import(/* webpackChunkName: "create" */ './views/projects/CreateProject.vue')
+// const PrivateProjects = () => import(/* webpackChunkName: "Private-Projects" */ './views/projects/PrivateProjects.vue')
+// const PrivateProject = () => import(/* webpackChunkName: "Private-Project" */ './views/projects/PrivateProject.vue')
+// const signup = () => import(/* webpackChunkName: "signup" */ './views/auth/signup.vue')
+// const signin = () => import(/* webpackChunkName: "signin" */ './views/auth/signin.vue')
+// const UserPage = () => import(/* webpackChunkName: "UserPage" */ './views/projects/UserPage.vue')
 
 const routes = [
   { path: '/',
     name: 'PageMain',
-    component: PageMain
+    component: PageMain,
   },
   { path: '/project/new',
     name: 'CreateProject',
-    component: CreateProject,
+    component: () => import(/* webpackChunkName: "create" */ './views/projects/CreateProject.vue'),
     beforeRouteUpdate: (to, from, next) => {
       if(store.getters.userId && store.getters.projects) {
         next()
@@ -31,7 +30,7 @@ const routes = [
   },
   { path: '/private-projects',
     name: 'PrivateProjects',
-    component: PrivateProjects,
+    component: () => import(/* webpackChunkName: "Private-Projects" */ './views/projects/PrivateProjects.vue'),
     beforeRouteUpdate: (to, from, next) => {
       if(store.getters.userId && store.getters.projects) {
         next()
@@ -42,7 +41,7 @@ const routes = [
   },
   { path: '/user-page',
     name: 'UserPage',
-    component: UserPage,
+    component: () => import(/* webpackChunkName: "UserPage" */ './views/projects/UserPage.vue'),
     beforeRouteUpdate: (to, from, next) => {
       if(store.getters.userId) {
         next()
@@ -64,7 +63,7 @@ const routes = [
   },
   { path: '/private-projects/:id',
     name: 'PrivateProject',
-    component: PrivateProject,
+    component: () => import(/* webpackChunkName: "Private-Project" */ './views/projects/PrivateProject.vue'),
     props: true,
     beforeRouteUpdate: (to, from, next) => {
       if(store.getters.userId) {
@@ -76,29 +75,20 @@ const routes = [
   },
   { path: '/signup',
     name: 'signup',
-    component: signup
+    component: () => import(/* webpackChunkName: "signup" */ './views/auth/signup.vue')
   },
   { path: '/signin',
     name: 'signin',
-    component: signin
+    component: () => import(/* webpackChunkName: "signin" */ './views/auth/signin.vue')
   }
 ]
 
 const router = new VueRouter({
-    mode: 'history',
+    mode: 'hash',
     base: process.env.BASE_URL,
     routes
 })
 
-Vue.use(VueYandexMetrika, {
-    id: 53910325,
-    router: router,
-    env: process.env.NODE_ENV,
-    clickmap:true,
-    trackLinks:true,
-    accurateTrackBounce:true,
-    webvisor:true
-})
 
 export default router
 

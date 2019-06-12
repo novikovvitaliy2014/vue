@@ -83,7 +83,18 @@
 </template>
 
 <script>
+import VForm from 'vuetify/es5/components/VForm/VForm'
+import VAlert from 'vuetify/es5/components/VAlert/VAlert'
+import VTextField from 'vuetify/es5/components/VTextField/VTextField'
+import VCheckbox from 'vuetify/es5/components/VCheckbox/VCheckbox'
+
 export default {
+  components: {
+    VForm,
+    VAlert,
+    VTextField,
+    VCheckbox
+  },
   data() {
     return {
       password: '',
@@ -142,3 +153,7 @@ export default {
   }
 };
 </script>
+
+<style lang="sass">
+  @import "./../../sass/_auth.sass"
+</style>

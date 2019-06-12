@@ -114,7 +114,16 @@
 </template>
 
 <script>
+import VForm from 'vuetify/es5/components/VForm/VForm'
+import VAlert from 'vuetify/es5/components/VAlert/VAlert'
+import VTextField from 'vuetify/es5/components/VTextField/VTextField'
+
 export default {
+  components: {
+    VForm,
+    VAlert,
+    VTextField
+  },
   data() {
     return {
       forgot: false,
@@ -213,3 +222,7 @@ export default {
   }
 };
 </script>
+
+<style lang="sass">
+  @import "./../../sass/_auth.sass"
+</style>

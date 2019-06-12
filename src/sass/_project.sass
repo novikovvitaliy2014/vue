@@ -1,20 +1,20 @@
 .project
   padding-bottom: 40px
   margin-top: 40px
-.v-list__tile__title
-  font-size: $font-size-h5
-.project .project__select
-  @include container( $col-11, $col-9, $col-9, $max-width: 900px )
-.project__select .v-select__slot label
-  font-size: $font-size-h5
-  height: 30px
-  padding-top: 5px
-.project__select .v-select__selection
-  height: 45px
-  font-size: $font-size-h5
-.v-input input
-  height: 45px
-  max-height: 45px
+// .v-list__tile__title
+//   font-size: $font-size-h5
+// .project .project__select
+//   @include container( $col-11, $col-9, $col-9, $max-width: 900px )
+// .project__select .v-select__slot label
+//   font-size: $font-size-h5
+//   height: 30px
+//   padding-top: 5px
+// .project__select .v-select__selection
+//   height: 45px
+//   font-size: $font-size-h5
+// .v-input input
+//   height: 45px
+//   max-height: 45px
 .project__images
   display: flex
   justify-content: space-between
@@ -33,10 +33,10 @@
   height: 250px
   width: 100%
   &--before-bench
-    background: url("img/before-bench.jpg") no-repeat 0 center
+    background: url("img/before-bench.jpg") no-repeat center center
     background-size: cover
   &--bench
-    background: url("img/bench3.jpg") no-repeat 0 bottom
+    background: url("img/bench3.jpg") no-repeat center 80%
     background-size: cover
   @include mobile-tab
     height: 200px
@@ -109,20 +109,25 @@
         color: #fff
   &--btn
     background-color: $color-light
-    border: 1px solid $color-main
     button
-      &:hover
-        background-color: $color-main
-        color: #fff
-      flex-grow: 1
-      &:first-child
-        flex-basis: $col-7
+      width: 100%
+      background: url('./img/arrow_down.svg') right center no-repeat
+      background-size: 30px
+      @include mobile
+        padding-bottom: 15px
+        background: url('./img/arrow_down.svg') center 10px no-repeat
+        background-size: 30px
+    &:hover
+      background-color: $color-main
+      color: #fff
+    flex-grow: 1
+    &:first-child
+      flex-basis: $col-7
   &--sum
     border-bottom: 1px dashed $color-main
     border-top: 1px dashed $color-main
     color: $color-dark
     font-weight: bold
-
 .outlay-proof
   display: none
   background-color: $color-main
@@ -149,6 +154,7 @@
   display: flex
   justify-content: space-between
   flex-wrap: wrap
+  margin-bottom: 30px
   @include container($col-12, $col-12, $col-12, $max-width: 1700px)
   margin: 30px 0 50px 0
   &--container
@@ -161,16 +167,17 @@
 .outlay__photo
   width: $col-6
   margin: auto
+  margin-top: 10px
   @include mobile
     width: $col-10
-.slide-fade-enter-active
-  transition: all 700ms ease 200ms
-.slide-fade-leave-active
-  transition: all 500ms ease
-.slide-fade-enter
-  opacity: 0
-.slide-fade-leave-to
-  opacity: 0
+// .slide-fade-enter-active
+//   transition: all 700ms ease 200ms
+// .slide-fade-leave-active
+//   transition: all 500ms ease
+// .slide-fade-enter
+//   opacity: 0
+// .slide-fade-leave-to
+//   opacity: 0
 .project__container
   align-self: center
 .project__container p
@@ -211,9 +218,5 @@ h3.project__title
     background-color: transparent
 .donor__contact input::placeholder
   font-size: $font-size-h6
-.outlay__photos
-  margin-bottom: 30px
-.outlay__photo
-  margin-top: 10px
 .outlay__message
   @include container ($col-11, $col-11, $col-11, $max-width: 900px)

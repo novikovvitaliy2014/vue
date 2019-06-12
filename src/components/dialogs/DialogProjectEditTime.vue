@@ -23,7 +23,20 @@
 </template>
 
 <script>
+import VCard from 'vuetify/es5/components/VCard/VCard'
+import VBtn from 'vuetify/es5/components/VBtn/VBtn'
+import VDialog from 'vuetify/es5/components/VDialog/VDialog'
+import VIcon from 'vuetify/es5/components/VIcon/VIcon'
+import VTimePicker from 'vuetify/es5/components/VTimePicker/VTimePicker'
+
   export default {
+    components: {
+      VCard,
+      VBtn,
+      VDialog,
+      VIcon,
+      VTimePicker
+    },
     props: {
       project: Object
     },

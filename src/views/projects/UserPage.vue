@@ -34,7 +34,11 @@
 </template>
 
 <script>
+import VTextField from 'vuetify/es5/components/VTextField/VTextField'
   export default {
+    components: {
+      VTextField
+    },
     computed: {
       // Only first project shows
       // Project will be deleted after 3 month
@@ -109,3 +113,6 @@
   };
 </script>
 
+<style lang="sass">
+  @import "./../../sass/_user-page.sass"
+</style>

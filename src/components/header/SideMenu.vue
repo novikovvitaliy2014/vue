@@ -29,11 +29,11 @@
            >
         {{ $t('nav-contacts') }}
         </router-link>
-        <li v-if="auth"
+        <li class="side__logout" v-if="auth"
             @click="onLogout"
             >
             <span>
-              <v-icon>exit_to_app</v-icon>{{ $t('nav-logout') }}
+              {{ $t('nav-logout') }}
             </span>
         </li>
         <router-link to="/user-page"

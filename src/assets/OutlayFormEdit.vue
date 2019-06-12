@@ -1,4 +1,29 @@
 <template>
+Как лучше заменить использование SetTimeout например в таком случае ниже. Без него не работает, т.к. action авторизации во vuex завершается позже.
+  async onSignin() {
+    try {
+      await this.authUser()
+      await this.getUserData()
+    } cath...
+
+  authUser() {
+    this.$store.dispatch('signin')
+  }
+  getUserData(){
+    setTimeout(() => {
+      this.$store.dispatch('getUserData')
+    }, 1000)
+  }
+
+
+  <form @submit="onSubmit">
+    <input>
+    <app-extra-form></app-extra-form>
+    <button type="submit">Send</button>
+  </form>
+
+
+
   <section class="create__outlay">
     <h4>Outlay</h4>
     <!-- <p>{{project}}</p> -->

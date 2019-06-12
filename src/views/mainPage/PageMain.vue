@@ -1,5 +1,6 @@
 <template>
   <section>
+
     <features></features>
     <about></about>
     <baker></baker>

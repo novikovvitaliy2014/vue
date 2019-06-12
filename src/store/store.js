@@ -1,13 +1,11 @@
 import Vue from "vue"
 import Vuex from "vuex"
-// import { mapState, mapGetter, mapActions } from 'vuex'
 import axios from './../axios-auth'
 import globalAxios from 'axios'
 import * as firebase from 'firebase'
 import router from '../router.js'
 import outlay from './modules/outlay.js'
 import user from './modules/user.js'
-// import {i18n} from '../plugins/i18n.js'
 
 Vue.use(Vuex)
 const store = new Vuex.Store({
@@ -374,8 +372,6 @@ const store = new Vuex.Store({
         firebase.database().ref('projects').child(payload.id).child("contacts").child(payload.index).update(payload)
       }
       let key = payload.id
-      // let newImagesArray = []
-      // let newImagesArrayFinal = []
       firebase.database().ref('projects').child(payload.id).update(projectForServer)
       .then(() => {
           if(payload.editedImages) {
@@ -409,7 +405,6 @@ const store = new Vuex.Store({
         })
         .catch(error => {
           commit('setError', {status: error})
-          // console.log(error)
         })
     }
   },

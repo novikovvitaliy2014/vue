@@ -45,10 +45,26 @@
           margin-left: 0
         &:hover
           color: $color-main
+.header__nav-logout
+  background: url('./img/exit.svg') 0 center no-repeat
+  background-size: auto 80%
+  span
+    padding-left: 30px
 .header__lang
   display: block
-  height: 40px
+  // height: 30px
   width: 80px
+  margin-top: -5px
+  span
+    font-size: 0.8*$font-size-h6
+    color: $color-dark
+  select
+    // font-size: 0.8*$font-size-h6
+    width: 80px
+    border-bottom: 1px solid $color-main
+    background: url("./img/drop.svg") right bottom no-repeat
+    background-size: 25px
+    margin-bottom: -10px
 .v-input input[aria-label="Language"]
   height: 20px
   width: 10px

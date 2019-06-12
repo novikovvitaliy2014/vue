@@ -43,7 +43,15 @@
 </template>
 
 <script>
+import VForm from 'vuetify/es5/components/VForm/VForm'
+import VAlert from 'vuetify/es5/components/VAlert/VAlert'
+import VTextField from 'vuetify/es5/components/VTextField/VTextField'
   export default {
+    components: {
+      VForm,
+      VTextField,
+      VAlert
+    },
     data() {
       return {
         valid: false,
