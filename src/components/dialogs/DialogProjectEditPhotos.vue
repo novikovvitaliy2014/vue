@@ -13,7 +13,7 @@
           <h4>{{$t('photos')}}</h4>
           <div>
             <section>
-              <button type="button" raised class="create__upload-btn" @click="onPickFile1">{{$t('upload-photo')}}</button>
+              <button type="button" raised class="btn" @click="onPickFile1">{{$t('upload-photo')}}</button>
               <input
                 type="file"
                 style="display: none"
@@ -32,7 +32,7 @@
             </section>
 
             <section>
-              <button type="button" raised class="create__upload-btn" @click="onPickFile2">{{$t('upload-photo')}}</button>
+              <button type="button" raised class="btn" @click="onPickFile2">{{$t('upload-photo')}}</button>
               <input
                 type="file"
                 style="display: none"
@@ -51,7 +51,7 @@
             </section>
 
             <section>
-              <button type="button" raised class="create__upload-btn" @click="onPickFile3">{{$t('upload-photo')}}</button>
+              <button type="button" raised class="btn" @click="onPickFile3">{{$t('upload-photo')}}</button>
               <input
                 type="file"
                 style="display: none"
@@ -70,7 +70,7 @@
             </section>
 
             <section>
-              <button type="button" raised class="create__upload-btn" @click="onPickFile4">{{$t('upload-photo')}}</button>
+              <button type="button" raised class="btn" @click="onPickFile4">{{$t('upload-photo')}}</button>
               <input
                 type="file"
                 style="display: none"
@@ -106,8 +106,6 @@ import VBtn from 'vuetify/es5/components/VBtn/VBtn'
 import VDialog from 'vuetify/es5/components/VDialog/VDialog'
 import VImg from 'vuetify/es5/components/VImg/VImg'
 import VIcon from 'vuetify/es5/components/VIcon/VIcon'
-import VSelect from 'vuetify/es5/components/VSelect/VSelect'
-import VTextField from 'vuetify/es5/components/VTextField/VTextField'
 
   export default {
     components: {
@@ -115,9 +113,7 @@ import VTextField from 'vuetify/es5/components/VTextField/VTextField'
       VBtn,
       VDialog,
       VImg,
-      VIcon,
-      VSelect,
-      VTextField
+      VIcon
     },
     props: {
       project: Object

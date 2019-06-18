@@ -192,7 +192,7 @@ export default {
       return this.project.dataOutlay
     },
     userIsCreator(){
-      if(this.project){
+      if(this.project && this.$store.getters.userId){
         return this.$store.getters.userId === this.project.creatorId
       }
       return false
@@ -254,24 +254,26 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('tryAutoSignin')
-    this.$store.dispatch('resizeImages')
+    // this.$store.dispatch('tryAutoSignin')
+    // this.$store.dispatch('resizeImages')
+    // setTimeout(()=>{
+    // this.$store.dispatch('loadProjects')
+    // }, 2000)
+
     setTimeout(()=>{
-      this.$store.dispatch('loadProjects')
-    }, 2000)
-    setTimeout(()=>{
-      if(!this.$store.getters.user && !localStorage.getItem('pseudo') || !this.project) {
-        if(this.projects.length === 0){
-          this.$store.dispatch('logout')
-        }
+      if(!this.project) {
+        this.$router.push('/')
+        // if(Object.keys(this.project).length === 0){
+         // this.$store.dispatch('logout')
+        // }
       }
-      const pro = this.project.projectImages
-      if(pro){
-        if (pro[0]) {
-        this.currentImage = pro[0].imageUrl
+      const images = this.project.projectImages
+      if(this.project && images){
+        if (images[0]) {
+        this.currentImage = images[0].imageUrl
         }
-        if (pro[1]) {
-          this.projectImage = pro[1].imageUrl
+        if (images[1]) {
+          this.projectImage = images[1].imageUrl
         }
       }
     }, 3000)
@@ -280,3 +282,4 @@ export default {
   }
 };
 </script>
+

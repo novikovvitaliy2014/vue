@@ -1,27 +1,10 @@
 .create
   @include container($col-11, $col-11, $col-10, $max-width: 900px)
   margin-top: 100px
-.create__link-to-projects
-  display: block
-  margin: 20px auto 100px auto
-  text-align: center
-  text-decoration: underline
-  font-size: $font-size-h5
-  color: $color-dark
-  &:hover
-    color: lighten($color-dark, 10%)
 .create__id
   &--exist
     color: #ff5252
-.create__upload-btn
-  display: flex
-  margin: 0 auto 10px
-  background-color: $color-main
-  color: #fff
-  padding: 5px 10px
-  border-radius: 5px
-  &:hover
-    background-color: lighten($color-main, 5%)
+
 .create__outlay-resource,
 .create__outlay-resource--final,
 .create__outlay-resource--base
@@ -49,6 +32,7 @@
 .create__pickers
   display: flex
   justify-content: space-around
+  margin-bottom: 40px
   @include mobile-tab
     flex-wrap: wrap
 .create__outlay-item
@@ -62,8 +46,9 @@
     width: $col-12
   &--quantity
     width: $col-3
+    margin-right: 10px
   &--price
-    width: $col-5
+    width: $col-4
   &--sum
     display: flex
     flex-direction: column
@@ -79,6 +64,7 @@
 .outlay__message
   padding: 0 10px
 .create__currency
+  display: block
   margin-top: 40px
 input#projectId::placeholder
   font-size: 0.9*$font-size-h6
