@@ -44,29 +44,14 @@ import VTextField from 'vuetify/es5/components/VTextField/VTextField'
     data() {
       return {
         project: [],
-        // user: {}
       }
     },
     computed: {
       // Only first project shows
       // Project will be deleted after 3 month
-      // project(){
-      //   return this.$store.getters.projects.find((project) =>{
-      //     return project.creatorId === this.$store.getters.userId
-      //   })
-      // },
       user(){
         return this.$store.getters.user
       },
-      // project_2(){
-      //   return this.$store.getters.projects.find((project) =>{
-      //     const pro = project.creatorId === this.$store.getters.userId
-      //     if(project.projectId !== this.project.projectId){
-      //       return pro
-      //     }
-      //     return
-      //   })
-      // },
       contacts(){
         if(this.project){
           return this.project.contacts
@@ -108,23 +93,10 @@ import VTextField from 'vuetify/es5/components/VTextField/VTextField'
       },
     },
     created(){
-      // return this.$store.getters.projects
       this.project = this.$store.getters.projects.find((project) =>{
         return project.creatorId === this.$store.getters.userId
       })
-      // this.user = this.$store.getters.user
     }
-    // mounted() {
-      // this.$store.dispatch('tryAutoSignin')
-      // setTimeout(()=>{
-      //   this.$store.dispatch('loadProjects')
-      // },500)
-      // setTimeout(()=>{
-      // if(!this.project){
-      //   this.$store.dispatch('logout')
-      // }
-      // },4500)
-    // }
   };
 </script>
 

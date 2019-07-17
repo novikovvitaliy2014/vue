@@ -254,9 +254,6 @@ import VIcon from 'vuetify/es5/components/VIcon/VIcon'
         const contacts = target.parentNode.nextSibling
         contacts.classList.toggle('outlay-proof--show')
       }
-    },
-    // created(){
-      // this.$store.dispatch('loadProjects')
-    // }
+    }
   };
 </script>

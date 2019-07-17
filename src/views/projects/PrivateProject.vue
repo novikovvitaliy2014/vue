@@ -254,12 +254,6 @@ export default {
     }
   },
   created() {
-    // this.$store.dispatch('tryAutoSignin')
-    // this.$store.dispatch('resizeImages')
-    // setTimeout(()=>{
-    // this.$store.dispatch('loadProjects')
-    // }, 2000)
-
     if(!this.project){
       this.$store.dispatch('logout')
     }

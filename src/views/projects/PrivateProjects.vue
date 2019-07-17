@@ -59,13 +59,7 @@ import VTextField from 'vuetify/es5/components/VTextField/VTextField'
       }
     },
     created() {
-      // this.$store.dispatch('tryAutoSignin')
       this.$store.dispatch('resizeImages')
-      // setTimeout(()=>{
-      //   if(!this.$store.getters.userId){
-      //     this.$store.dispatch('logout')
-      //   }
-      // }, 1000)
     }
   };
 </script>

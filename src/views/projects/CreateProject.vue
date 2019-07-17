@@ -526,8 +526,6 @@ export default {
         if(!this.projects || this.projects.length === 0){
           this.$store.dispatch('logout')
         }
-        // console.log(this.$store.getters.projects)
-        // console.log(this.$store.getters.userId)
       }
 };
 </script>
