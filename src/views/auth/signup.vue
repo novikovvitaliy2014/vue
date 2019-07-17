@@ -155,5 +155,5 @@ export default {
 </script>
 
 <style lang="sass">
-  @import "./../../sass/_auth.sass"
+  @import "@/sass/_auth.sass"
 </style>

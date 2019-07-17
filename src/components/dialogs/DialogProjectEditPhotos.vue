@@ -143,7 +143,7 @@ import VIcon from 'vuetify/es5/components/VIcon/VIcon'
             this.messagesShow()
           }, 1000)
         } catch (e) {
-            // console.log(e)
+            console.log(e)
         }
       },
       onFilesChange(image){
@@ -208,8 +208,9 @@ import VIcon from 'vuetify/es5/components/VIcon/VIcon'
     },
     created(){
       const storeImage = this.project.dataPhotos
+      const finalPhotosQuantity = 4
       if(storeImage){
-        for(let i = 0; i < 4; i++) {
+        for(let i = 0; i < finalPhotosQuantity; i++) {
           if (storeImage[i] != undefined && storeImage[i] != "") {
               this.urls[i] = storeImage[i].imageUrl
           } else {

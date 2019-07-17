@@ -1,12 +1,13 @@
 <template>
   <div class="user-page">
     <h1 >{{ $t('user-page') }}</h1>
-    <section>
+    <p  v-if="!project">{{ $t('user-page-empty') }}</p>
+    <section v-if="project">
       <div class="user-page__user-data">
         <h4>{{ $t('user-data') }}</h4>
-        <p><span>Nickname: </span> {{user.pseudo}}</p>
-        <p><span>Project: </span>{{project.title}}</p>
-        <p><span>Project ID: </span>{{project.projectId}}</p>
+        <span>Nickname: </span><p> {{user.pseudo}}</p>
+        <span>Project: </span><p>{{project.title}}</p>
+        <span>Project ID: </span><p>{{project.projectId}}</p>
         <p>{{ $t('edit-explain') }}</p>
       </div>
       <h4>{{ $t('contacts-data') }}</h4>
@@ -40,14 +41,20 @@ import VTextField from 'vuetify/es5/components/VTextField/VTextField'
     components: {
       VTextField
     },
+    data() {
+      return {
+        project: [],
+        // user: {}
+      }
+    },
     computed: {
       // Only first project shows
       // Project will be deleted after 3 month
-      project(){
-        return this.$store.getters.projects.find((project) =>{
-          return project.creatorId === this.$store.getters.userId
-        })
-      },
+      // project(){
+      //   return this.$store.getters.projects.find((project) =>{
+      //     return project.creatorId === this.$store.getters.userId
+      //   })
+      // },
       user(){
         return this.$store.getters.user
       },
@@ -100,20 +107,27 @@ import VTextField from 'vuetify/es5/components/VTextField/VTextField'
         }, 3000)
       },
     },
-    created() {
-      this.$store.dispatch('tryAutoSignin')
-      setTimeout(()=>{
-        this.$store.dispatch('loadProjects')
-      },500)
-      setTimeout(()=>{
-        if(!this.project || Object.keys(this.user).length === 0){
-          this.$store.dispatch('logout')
-        }
-      },4500)
+    created(){
+      // return this.$store.getters.projects
+      this.project = this.$store.getters.projects.find((project) =>{
+        return project.creatorId === this.$store.getters.userId
+      })
+      // this.user = this.$store.getters.user
     }
+    // mounted() {
+      // this.$store.dispatch('tryAutoSignin')
+      // setTimeout(()=>{
+      //   this.$store.dispatch('loadProjects')
+      // },500)
+      // setTimeout(()=>{
+      // if(!this.project){
+      //   this.$store.dispatch('logout')
+      // }
+      // },4500)
+    // }
   };
 </script>
 
 <style lang="sass">
-  @import "./../../sass/_user-page.sass"
+  @import "@/sass/_user-page.sass"
 </style>

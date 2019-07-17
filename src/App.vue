@@ -31,8 +31,8 @@ export default {
 </script>
 
 <style lang="sass">
-  @import "./src/sass/_dialogs.sass"
-  @import "./src/sass/_project.sass"
-  @import "./src/sass/_create.sass"
+  @import "@/sass/_dialogs.sass"
+  @import "@/sass/_project.sass"
+  @import "@/sass/_create.sass"
 </style>
 

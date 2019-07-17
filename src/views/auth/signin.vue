@@ -1,7 +1,7 @@
 <template>
   <section class="signin">
     <h1>{{$t('nav-signin')}}</h1>
-    <h4>{{$t('signin-explain')}}</h4>
+    <h4 v-if="!auth">{{$t('signin-explain')}}</h4>
     <v-form @submit.prevent = "onSubmitSignin"
       v-model="valid"
       method="post"
@@ -109,7 +109,10 @@
          >
       {{$t('nav-projects')}}
       </router-link>
+      <!-- <p>users{{users}}</p> -->
+      <p>user{{user}}</p>
     </div>
+
   </section>
 </template>
 
@@ -126,19 +129,20 @@ export default {
   },
   data() {
     return {
+      // user: {},
       forgot: false,
       password: '',
       hidePassword: true,
       valid: true,
       donation: null,
       passwordRules: [
-        v => !!v || this.$i18n.t('enter-data'),
-        v => (v && v.length >= 6) || this.$i18n.t('min-6')
+        value => !!value || this.$i18n.t('enter-data'),
+        value => (value && value.length >= 6) || this.$i18n.t('min-6')
       ],
       emailRules: [
-        v => !!v || this.$i18n.t('enter-data'),
-        v => /.+@.+/.test(v) || this.$i18n.t('valid-email'),
-        v => (v && v.length >= 8) || this.$i18n.t('valid-email')
+        value => !!value || this.$i18n.t('enter-data'),
+        value => /.+@.+/.test(value) || this.$i18n.t('valid-email'),
+        value => (value && value.length >= 8) || this.$i18n.t('valid-email')
       ],
       errors: [],
       email: ''
@@ -155,39 +159,48 @@ export default {
     onDismissed() {
       this.$store.dispatch('clearError')
     },
-    authUser() {
+    // authUser() {
+    //   const signinData = {
+    //     email: this.email,
+    //     password: this.password
+    //   }
+    //   this.$store.dispatch('signin', signinData)
+    // },
+
+    // loadProjects(){
+    //   setTimeout(() => {
+    //     this.$store.dispatch('loadProjects')
+    //   }, 1000)
+    // },
+    // fetchUsers(){
+    //   setTimeout(() => {
+    //     this.$store.dispatch('fetchUsers')
+    //   }, 2000)
+    // },
+    // getUserData(){
+    //   setTimeout(() => {
+    //     localStorage.setItem('pseudo', this.$store.getters.user.pseudo)
+    //     this.$store.dispatch('getUser', {email: this.email})
+    //   }, 3000)
+    // },
+    onSubmitSignin() {
       const signinData = {
         email: this.email,
-        password: this.password
+        password: this.password,
+        pseudo: this.user.pseudo
       }
       this.$store.dispatch('signin', signinData)
-    },
-    fetchUsers(){
-      setTimeout(() => {
-        this.$store.dispatch('fetchUsers')
-      }, 2000)
-    },
-    loadProjects(){
-      setTimeout(() => {
-        this.$store.dispatch('loadProjects')
-      }, 1000)
-    },
-    getUserData(){
-      setTimeout(() => {
-        localStorage.setItem('pseudo', this.$store.getters.user.pseudo)
-        this.$store.dispatch('getUser', {email: this.email})
-      }, 3000)
-    },
-    async onSubmitSignin() {
-      try {
-        await this.authUser()
-        await this.fetchUsers()
-        await this.loadProjects()
-        await this.getUserData()
-      } catch (e) {
-          // console.log(e)
-      }
     }
+    // async onSubmitSignin() {
+    //   try {
+    //     await this.authUser()
+    //     await this.loadProjects()
+    //     await this.fetchUsers()
+    //     await this.getUserData()
+    //   } catch (e) {
+    //       console.log(e)
+    //   }
+    // }
   },
   // async onSubmitSignin() {
   //     try {
@@ -201,12 +214,18 @@ export default {
   //   await this.$store.dispatch('getUser')
   // }
   computed: {
-    userNick() {
-      if(this.$store.getters.user){
-        return this.$store.getters.user.pseudo
-      } else if (localStorage.getItem('pseudo')){
-        return localStorage.getItem('pseudo')
-      }
+    // userNick() {
+    //   if(this.$store.getters.user){
+    //     return this.$store.getters.user.pseudo
+    //   } else if (localStorage.getItem('pseudo')){
+    //     return localStorage.getItem('pseudo')
+    //   }
+    // },
+    // users(){
+    //   return this.$store.getters.users
+    // },
+    user(){
+      return this.$store.getters.user
     },
     error() {
       return this.$store.getters.error
@@ -228,6 +247,7 @@ export default {
     }
   },
   created () {
+    // this.user = this.$store.getters.user
     this.$store.commit('setError',{status: false})
     this.$store.commit('setSuccess',{status: false})
   }
@@ -235,5 +255,5 @@ export default {
 </script>
 
 <style lang="sass">
-  @import "./../../sass/_auth.sass"
+  @import "@/sass/_auth.sass"
 </style>

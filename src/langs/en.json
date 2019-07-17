@@ -12,7 +12,7 @@
   "email-error": "We are sorry. We were not able to identify you due to given information.",
   "email-exist": "Provided email adress has already been added into the database.",
   "reset-sent": "Recovery link is sent to your email adress.",
-  "signed-in": "You have signed in. Now you can create own project or visit Private Projects page!",
+  "signed-in": "You have signed in. Now you can create own project.",
   "password": "Password",
   "agreed": " Check your fill in page, you might not have agreed Conditions of Use and Privacy Notice",
   "signin-explain": "You have to authorize to create project",
@@ -36,7 +36,9 @@
   "preliminary": "Preliminary Priced outlay",
   "table-head":"<th>Resource</th><th>Quantity</th><th>Price of 1 item</th><th>Sum</th>",
   "sum": "Final sum",
-  "example-contacts": "If user decided to take part in the project he needs to send convinient contact(Email, phone number, number in messenger, social link or other). Contacts will be available only to project author in his user page, author will contact user to agree about his participation and will save his donation and nickname to the public participants list.",
+  "example-contacts": "If user decided to take part in the project he needs send convinient contact (Email, phone number, number in messenger, social link or other). Contacts will be available only to project author in his User Data page, he contacts to user to agree about his participation and will save his donation sum and nickname to public participants list.",
+  "example-contacts-author": "If user decided to take part in the project he needs send convinient contact(Email, phone number, number in messenger, social link or other). Contacts will be available only to you (project author) in your User Data page, you can contact to user to agree about his participation and you need just save his donation sum on your User Data page. Donation sum and nickname will be added to public participants list.",
+  "example-contacts-user": "If you decided to take part in the project you need send convinient contact(Email, phone number, number in messenger, social link or other). Contacts will be available only to project author, author will contact you to agree about your participation and he will save your donation sum and nickname to the public participants list.",
   "min-6": "Data must be at least 6 characters",
   "max-1000": "Maximum 1000 characters",
   "idExist": "Change ID, this ID already exists",
@@ -105,5 +107,6 @@
   "user-final": "Final outlay could be published here by project creator after project realization.",
   "demo": "Your contacts would be sent, but this project is demo-example. You can visit page 'Private Projects' to take part in real project.",
   "user-photo": "Final photos of realized project could be published here by project creator after project realization.",
-  "projects-enter": "You have to enter unique project ID to see project details"
+  "projects-enter": "You have to enter unique project ID to see project details",
+  "user-page-empty": "You have not created any project yet."
 }

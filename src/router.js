@@ -3,6 +3,7 @@ import PageMain from './views/mainPage/PageMain.vue'
 import store from "./store/store.js"
 import VueRouter from 'vue-router'
 import Contacts from './components/header/Contacts.vue'
+import NotFoundComponent from './views/mainPage/NotFoundComponent.vue'
 Vue.use(VueRouter)
 
 // const CreateProject = () => import(/* webpackChunkName: "create" */ './views/projects/CreateProject.vue')
@@ -90,13 +91,19 @@ const routes = [
     path: '/signin',
     name: 'signin',
     component: () => import(/* webpackChunkName: "signin", webpackPreFetch: true */ './views/auth/signin.vue')
+  },
+  {
+    path: '*', component: NotFoundComponent
   }
 ]
 
 const router = new VueRouter({
-    mode: 'hash',
+    mode: 'history',
     // base: process.env.BASE_URL,
     routes
+    // routes: [
+    //   { path: '*', component: NotFoundComponent }
+    // ]
 })
 
 

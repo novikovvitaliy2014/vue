@@ -49,13 +49,13 @@ new Vue({
       projectId: 'vue-city',
       storageBucket: 'gs://vue-city.appspot.com',
     })
-    firebase.auth().onAuthStateChanged((user) =>{
-      if (user) {
-        this.$store.dispatch('tryAutoSignin', user)
-      } else {
-        this.$store.getters.isAuthenticated
-      }
-    })
+    // firebase.auth().onAuthStateChanged((user) =>{
+    //   if (user) {
+    //     this.$store.dispatch('tryAutoSignin', user)
+    //   } else {
+    //     this.$store.getters.userId
+    //   }
+    // })
     firebase.auth().useDeviceLanguage()
   }
 }).$mount('#app')

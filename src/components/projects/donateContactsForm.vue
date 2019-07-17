@@ -1,7 +1,8 @@
 <template>
   <div class="project__participation">
     <h4>{{$t('donate-contacts')}}</h4>
-    <p>{{$t('example-contacts')}}</p>
+    <p v-if="userIsCreator">{{$t('example-contacts-author')}}</p>
+    <p v-if="!userIsCreator">{{$t('example-contacts-user')}}</p>
     <div  >
       <v-form v-model="valid" @submit.prevent = "sendContact">
         <v-text-field
@@ -98,6 +99,15 @@ import VTextField from 'vuetify/es5/components/VTextField/VTextField'
     computed: {
       empty(){
         return this.contact.trim() === ''
+      },
+      project() {
+        return this.$store.getters.project(this.id)
+      },
+      userIsCreator(){
+        if(this.project && this.$store.getters.userId){
+          return this.$store.getters.userId === this.project.creatorId
+        }
+        return false
       },
       // userNick() {
       //   if(this.$store.getters.user){

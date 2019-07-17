@@ -42,9 +42,9 @@
               {{ $t('nav-logout') }}
             </span>
         </li>
+        <!-- v-if="userIsCreator" -->
         <router-link to="/user-page"
            tag="li"
-           v-if="userIsCreator"
            class="side__link"
            >
            {{ $t('nav-user') }}
@@ -83,5 +83,5 @@ export default {
 };
 </script>
 <style lang="sass">
-  @import "./../../sass/_side-menu.sass"
+  @import "@/sass/_side-menu.sass"
 </style>

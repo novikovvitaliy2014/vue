@@ -260,23 +260,19 @@ export default {
     // this.$store.dispatch('loadProjects')
     // }, 2000)
 
-    setTimeout(()=>{
-      if(!this.project) {
-        this.$router.push('/')
-        // if(Object.keys(this.project).length === 0){
-         // this.$store.dispatch('logout')
-        // }
+    if(!this.project){
+      this.$store.dispatch('logout')
+    }
+    const images = this.project.projectImages
+    if(this.project && images){
+      if (images[0]) {
+      this.currentImage = images[0].imageUrl
       }
-      const images = this.project.projectImages
-      if(this.project && images){
-        if (images[0]) {
-        this.currentImage = images[0].imageUrl
-        }
-        if (images[1]) {
-          this.projectImage = images[1].imageUrl
-        }
+      if (images[1]) {
+        this.projectImage = images[1].imageUrl
       }
-    }, 3000)
+    }
+
     this.$store.commit('setError',{status: false})
     this.$store.commit('setSuccess',{status: false})
   }

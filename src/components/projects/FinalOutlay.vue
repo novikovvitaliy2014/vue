@@ -202,7 +202,8 @@ import VIcon from 'vuetify/es5/components/VIcon/VIcon'
         const array = []
         const img = this.project.dataFinalImages
         const base = this.imagesBase
-        for(let i = 0; i < 5; i++) {
+        const checksPhotosQuantity = 5
+        for(let i = 0; i < checksPhotosQuantity; i++) {
           if(base.length > 0 && base[i] != undefined && base[i] != ""){
             array[i] =  base[i]
           } else if (img && img[i] != undefined && img[i] != "") {
@@ -254,8 +255,8 @@ import VIcon from 'vuetify/es5/components/VIcon/VIcon'
         contacts.classList.toggle('outlay-proof--show')
       }
     },
-    created(){
+    // created(){
       // this.$store.dispatch('loadProjects')
-    }
+    // }
   };
 </script>

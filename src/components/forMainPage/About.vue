@@ -25,5 +25,5 @@
 </template>
 
 <style lang="sass">
-  @import "./../../sass/_about.sass"
+  @import "@/sass/_about.sass"
 </style>
