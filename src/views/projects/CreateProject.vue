@@ -523,6 +523,8 @@ export default {
         this.$store.dispatch('loadProjects')
         this.$store.commit('setError',{status: false})
         this.$store.commit('setSuccess',{status: false})
+      },
+      mounted(){
         if(!this.projects || this.projects.length === 0){
           this.$store.dispatch('logout')
         }

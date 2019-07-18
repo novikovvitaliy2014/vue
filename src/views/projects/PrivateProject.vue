@@ -166,6 +166,7 @@ export default {
       photosBase: [],
       currentImage: null,
       projectImage: null
+      // project: []
     }
   },
   components: {
@@ -257,6 +258,8 @@ export default {
     if(!this.project){
       this.$store.dispatch('logout')
     }
+    this.$store.commit('setError',{status: false})
+    this.$store.commit('setSuccess',{status: false})
     const images = this.project.projectImages
     if(this.project && images){
       if (images[0]) {
@@ -266,9 +269,6 @@ export default {
         this.projectImage = images[1].imageUrl
       }
     }
-
-    this.$store.commit('setError',{status: false})
-    this.$store.commit('setSuccess',{status: false})
   }
 };
 </script>
