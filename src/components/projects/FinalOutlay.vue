@@ -255,7 +255,7 @@ import VIcon from 'vuetify/es5/components/VIcon/VIcon'
       }
     },
     created(){
-      // this.$store.dispatch('loadProjects')
+      this.$store.dispatch('loadProjects')
     }
   };
 </script>

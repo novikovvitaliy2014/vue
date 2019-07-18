@@ -31,8 +31,10 @@ export default {
 </script>
 
 <style lang="sass">
-  @import "./src/sass/_dialogs.sass"
-  @import "./src/sass/_project.sass"
-  @import "./src/sass/_create.sass"
+  @import "./sass/_dialogs.sass"
+  @import "./sass/_footer.sass"
+  @import "./sass/_header.sass"
+  @import "./sass/_project.sass"
+  @import "./sass/_logo.sass"
+  @import "./sass/_side-menu.sass"
 </style>
-

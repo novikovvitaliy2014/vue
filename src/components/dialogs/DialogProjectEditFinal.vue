@@ -48,7 +48,7 @@
                   </v-text-field>
                 </div>
                 <section>
-                  <button type="button" raised class="btn" @click="onPickFile1">{{$t('upload-photo')}}</button>
+                  <button type="button" raised class="create__upload-btn" @click="onPickFile1">{{$t('upload-photo')}}</button>
                   <input type="file" style="display: none" ref="fileInput1" accept="image/*" @change="onFiles(0)">
                   <p class="msg-error">{{ msgFileMax_1 }}</p>
                   <div class="create__img">
@@ -95,7 +95,7 @@
                   </v-text-field>
                 </div>
                 <section>
-                  <button type="button" raised class="btn" @click="onPickFile2">{{$t('upload-photo')}}</button>
+                  <button type="button" raised class="create__upload-btn" @click="onPickFile2">{{$t('upload-photo')}}</button>
                   <input type="file" style="display: none" ref="fileInput2" accept="image/*" @change="onFiles(1)">
                   <p class="msg-error">{{ msgFileMax_2 }}</p>
                   <div class="create__img">
@@ -142,7 +142,7 @@
                   </v-text-field>
                 </div>
                 <section>
-                  <button type="button" raised class="btn" @click="onPickFile3">{{$t('upload-photo')}}</button>
+                  <button type="button" raised class="create__upload-btn" @click="onPickFile3">{{$t('upload-photo')}}</button>
                   <input type="file"
                     style="display: none"
                     ref="fileInput3"
@@ -194,7 +194,7 @@
                   </v-text-field>
                 </div>
                 <section>
-                  <button type="button" raised class="btn" @click="onPickFile4">{{$t('upload-photo')}}</button>
+                  <button type="button" raised class="create__upload-btn" @click="onPickFile4">{{$t('upload-photo')}}</button>
                   <input type="file" style="display: none" ref="fileInput4" accept="image/*" @change="onFiles(3)">
                   <p class="msg-error">{{ msgFileMax_4 }}</p>
                   <div class="create__img">
@@ -242,7 +242,7 @@
                   </v-text-field>
                 </div>
                 <section>
-                  <button type="button" raised class="btn" @click="onPickFile5">{{$t('upload-photo')}}</button>
+                  <button type="button" raised class="create__upload-btn" @click="onPickFile5">{{$t('upload-photo')}}</button>
                   <input type="file" style="display: none" ref="fileInput5" accept="image/*" @change="onFiles(4)">
                   <p class="msg-error">{{ msgFileMax_5 }}</p>
                   <div class="create__img">
@@ -266,14 +266,18 @@
 import VCard from 'vuetify/es5/components/VCard/VCard'
 import VBtn from 'vuetify/es5/components/VBtn/VBtn'
 import VDialog from 'vuetify/es5/components/VDialog/VDialog'
+import VImg from 'vuetify/es5/components/VImg/VImg'
 import VIcon from 'vuetify/es5/components/VIcon/VIcon'
+import VSelect from 'vuetify/es5/components/VSelect/VSelect'
 import VTextField from 'vuetify/es5/components/VTextField/VTextField'
 export default {
   components: {
     VCard,
     VBtn,
     VDialog,
+    VImg,
     VIcon,
+    VSelect,
     VTextField
   },
   props: {

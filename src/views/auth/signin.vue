@@ -98,14 +98,14 @@
       <router-link to="/project/new"
          tag="a"
          v-if="auth"
-         class="signin__link-to-projects"
+         class="create__link-to-projects"
          >
       {{$t('nav-create')}}
       </router-link>
       <router-link to="/private-projects"
          tag="a"
          v-if="auth"
-         class="signin__link-to-projects"
+         class="create__link-to-projects"
          >
       {{$t('nav-projects')}}
       </router-link>
@@ -174,8 +174,8 @@ export default {
     },
     getUserData(){
       setTimeout(() => {
-        localStorage.setItem('pseudo', this.$store.getters.user.pseudo)
         this.$store.dispatch('getUser', {email: this.email})
+        localStorage.setItem('pseudo', this.$store.getters.user.pseudo)
       }, 3000)
     },
     async onSubmitSignin() {
@@ -189,17 +189,6 @@ export default {
       }
     }
   },
-  // async onSubmitSignin() {
-  //     try {
-  //       await this.authUser()
-  //       await this.getUserData()
-  //     } catch (e) {}
-  // async authUser() {
-  //   await this.$store.dispatch('signin')
-  // },
-  // async getUserData(){
-  //   await this.$store.dispatch('getUser')
-  // }
   computed: {
     userNick() {
       if(this.$store.getters.user){

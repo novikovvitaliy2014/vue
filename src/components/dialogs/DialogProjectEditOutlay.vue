@@ -171,7 +171,9 @@
 import VCard from 'vuetify/es5/components/VCard/VCard'
 import VBtn from 'vuetify/es5/components/VBtn/VBtn'
 import VDialog from 'vuetify/es5/components/VDialog/VDialog'
+import VImg from 'vuetify/es5/components/VImg/VImg'
 import VIcon from 'vuetify/es5/components/VIcon/VIcon'
+import VSelect from 'vuetify/es5/components/VSelect/VSelect'
 import VTextField from 'vuetify/es5/components/VTextField/VTextField'
 
   export default {
@@ -179,7 +181,9 @@ import VTextField from 'vuetify/es5/components/VTextField/VTextField'
       VCard,
       VBtn,
       VDialog,
+      VImg,
       VIcon,
+      VSelect,
       VTextField
     },
     props: {

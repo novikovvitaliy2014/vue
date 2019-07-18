@@ -1,7 +1,6 @@
 .project
   padding-bottom: 40px
   margin-top: 40px
-  display: flex
 // .v-list__tile__title
 //   font-size: $font-size-h5
 // .project .project__select
@@ -17,7 +16,6 @@
 //   height: 45px
 //   max-height: 45px
 .project__images
-  @include container ($col-12, $col-12, $col-12, $max-width: 1500px)
   display: flex
   justify-content: space-between
   margin-bottom: 30px
@@ -35,10 +33,10 @@
   height: 250px
   width: 100%
   &--before-bench
-    background: url("./img/before-bench.jpg") no-repeat center center
+    background: url("img/before-bench.jpg") no-repeat center center
     background-size: cover
   &--bench
-    background: url("./img/bench3.jpg") no-repeat center 80%
+    background: url("img/bench3.jpg") no-repeat center 80%
     background-size: cover
   @include mobile-tab
     height: 200px
@@ -113,12 +111,12 @@
     background-color: $color-light
     button
       width: 100%
-      // background: url('./img/arrow_down.svg') right center no-repeat
-      // background-size: 30px
-      // @include mobile
-      //   padding-bottom: 15px
-      //   background: url('./img/arrow_down.svg') center 10px no-repeat
-      //   background-size: 30px
+      background: url('./img/arrow_down.svg') right center no-repeat
+      background-size: 30px
+      @include mobile
+        padding-bottom: 15px
+        background: url('./img/arrow_down.svg') center 10px no-repeat
+        background-size: 30px
     &:hover
       background-color: $color-main
       color: #fff
@@ -156,11 +154,12 @@
   display: flex
   justify-content: space-between
   flex-wrap: wrap
+  margin-bottom: 30px
   @include container($col-12, $col-12, $col-12, $max-width: 1700px)
-  margin: 30px auto 50px auto
+  margin: 30px 0 50px 0
   &--container
     @include container($col-11, $col-11, $col-9, $max-width: 700px)
-    margin: 0 auto
+    margin: 0px auto 0
 .outlay__photo--img
   width: 100%
   max-width: 100%
@@ -179,11 +178,6 @@
 //   opacity: 0
 // .slide-fade-leave-to
 //   opacity: 0
-.v-responsive,
-.v-image,
-.v-responsive__sizer,
-.v-responsive__content
-  display: block
 .project__container
   align-self: center
 .project__container p

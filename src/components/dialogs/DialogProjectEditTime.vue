@@ -12,7 +12,7 @@
         <v-time-picker v-model="editableTime"
           class="dialog__picker mt-2"
           format="24hr">
-          <template actions>
+          <template scope="{save, cancel}" actions>
             <v-btn color="green darken-1" flat @click.native="dialog = false">{{ $t('close') }}</v-btn>
             <v-btn color="green darken-1" flat @click.native="onSaveEdit">{{ $t('save') }}</v-btn>
           </template>

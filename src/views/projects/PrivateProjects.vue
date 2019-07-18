@@ -18,7 +18,7 @@
       <router-link :to="'/private-projects/' + project.id"
         :project="project"
         tag="button"
-        class="btn private-projects__project-btn"
+        class="private-projects__project-btn btn"
         >{{ $t('view-project') }}
       </router-link>
     </section>
@@ -56,21 +56,22 @@ import VTextField from 'vuetify/es5/components/VTextField/VTextField'
     methods: {
       loadProjects(){
         this.$store.dispatch('loadProjects')
+
         setTimeout(()=>{
-          if(!this.projects) {
-            this.$router.push('/')
+          if(!this.projects  || this.projects.length === 0) {
+            this.$store.dispatch('logout')
           }
         },3000)
       }
     },
     created() {
-      // this.$store.dispatch('tryAutoSignin')
+      this.$store.dispatch('tryAutoSignin')
       this.$store.dispatch('resizeImages')
-      // setTimeout(()=>{
-      //   if(!this.$store.getters.userId){
-      //     this.$store.dispatch('logout')
-      //   }
-      // }, 1000)
+      setTimeout(()=>{
+        if(!this.$store.getters.userId){
+          this.$store.dispatch('logout')
+        }
+      }, 1000)
     }
   };
 </script>

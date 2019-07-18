@@ -14,14 +14,13 @@
     width: 100%
     text-align: center
 .about__row
-  max-width: 1440px
-  display: inline-block
+  max-width: 1700px
   display: flex
   flex-wrap: wrap
   justify-content: space-between
   margin: 10px auto
 .about__row-img
-  display: inline-block
+  display: flex
   height: 200px
   overflow: hidden
   width: $col-6
@@ -49,10 +48,11 @@
     &--4
       display: none
 .about__row-desc
-  @include container( $col-12, $col-11, $col-11, $max-width: 900px )
+  @include container( $col-11, $col-9, $col-9, $max-width: 900px )
   background-color: #fff
   border: 1px solid lighten($color-main, 20%)
   border-top: 5px solid $color-main
+  margin: 0 auto
   padding: 10px 10px 30px 10px
   transform: translateY(20px)
   h5

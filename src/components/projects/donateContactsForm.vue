@@ -6,16 +6,6 @@
       <v-form v-model="valid" @submit.prevent = "sendContact">
         <v-text-field
           type="text"
-          :label="$t('nickname')"
-          :rules="pseudoRules"
-          placeholder="Erik 38"
-          id="pseudo"
-          v-model='pseudo'
-          :title="$t('title-nick')"
-          required>
-        </v-text-field>
-        <v-text-field
-          type="text"
           :label="$t('contacts-label')"
           :rules="contactRules"
           placeholder="WhatsApp: +447 356 78 90"
@@ -27,7 +17,7 @@
           color="green"
           required>
         </v-text-field>
-        <!-- <p class="donor__usernick">{{ userNick }}</p> -->
+        <p class="donor__usernick">{{ userNick }}</p>
         <button class="btn"
                 type="submit"
                 :disabled="!valid && !empty"
@@ -84,28 +74,24 @@ import VTextField from 'vuetify/es5/components/VTextField/VTextField'
         filling: false,
         valid: true,
         contact: '',
-        pseudo: '',
         contactActive: '',
         contactRules: [
           v => !!v || this.$i18n.t("enter-data"),
           v => (v && v.length >= 6) || this.$i18n.t("min-6")
         ],
-        pseudoRules: [
-          v => !!v || this.$i18n.t('enter-data')
-        ]
       }
     },
     computed: {
       empty(){
         return this.contact.trim() === ''
       },
-      // userNick() {
-      //   if(this.$store.getters.user){
-      //     return this.$store.getters.user.pseudo
-      //   } else {
-      //     return localStorage.getItem('pseudo')
-      //   }
-      // },
+      userNick() {
+        if(this.$store.getters.user){
+          return this.$store.getters.user.pseudo
+        } else {
+          return localStorage.getItem('pseudo')
+        }
+      },
       error(){
         return this.$store.getters.error
       }
@@ -118,13 +104,12 @@ import VTextField from 'vuetify/es5/components/VTextField/VTextField'
       sendContact(){
         const contactsData = {
           contact: this.contact,
-          nickname: this.pseudo,
+          nickname: this.userNick,
           id: this.id
         }
-        // if(!this.userNick) {
-        //   this.$store.dispatch('logout')
-        // } else
-        if(!this.valid){
+        if(!this.userNick) {
+          this.$store.dispatch('logout')
+        } else if(!this.valid){
           this.filling = true
           return
         } else {
@@ -135,11 +120,11 @@ import VTextField from 'vuetify/es5/components/VTextField/VTextField'
       }
     },
     created(){
-      // setTimeout(()=>{
-      //   if(!this.userNick) {
-      //     this.$store.dispatch('logout')
-      //   }
-      // },2500)
+      setTimeout(()=>{
+        if(!this.userNick) {
+          this.$store.dispatch('logout')
+        }
+      },2500)
       this.$store.commit('setError',{status: false})
       this.$store.commit('setSuccess',{status: false})
     }

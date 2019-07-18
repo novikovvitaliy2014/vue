@@ -7,7 +7,6 @@
         <p><span>Nickname: </span> {{user.pseudo}}</p>
         <p><span>Project: </span>{{project.title}}</p>
         <p><span>Project ID: </span>{{project.projectId}}</p>
-        <p>{{ $t('edit-explain') }}</p>
       </div>
       <h4>{{ $t('contacts-data') }}</h4>
       <div v-for="(contact, index) in contacts"

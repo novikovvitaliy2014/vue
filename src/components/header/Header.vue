@@ -1,15 +1,14 @@
 <template>
   <header class="header"  >
-    <div
+    <v-progress-linear
       class="header__progress"
       color="green"
+      height="5"
+      value="15"
       v-if="loading"
-    ></div>
+      :indeterminate="true"
+    ></v-progress-linear>
     <div class="header__top">
-      <side :class="{side__show: isOpen}"
-        @emitShowMenu="showMenu"
-        >
-      </side>
       <div class="side-logo">
         <button class="side-icon"
           @click="showMenu"
@@ -19,35 +18,31 @@
           <logo></logo>
         </router-link>
       </div>
-      <nav class="header__top-nav">
+      <nav>
         <ul>
           <router-link to="/project/new"
              tag="li"
-             class="header__top-link"
              >
           {{ $t('nav-create') }}
           </router-link>
           <router-link to="/private-projects"
              tag="li"
-             class="header__top-link"
              >
           {{ $t('nav-projects') }}
           </router-link>
           <router-link to="/signup"
                        tag="li"
-                       class="header__top-link"
                        v-if="!auth"
                        >
           {{ $t('nav-signup') }}
           </router-link>
           <router-link to="/signin"
                        tag="li"
-                       class="header__top-link"
                        v-if="!auth"
                        >
           {{ $t('nav-signin') }}
           </router-link>
-          <li class="header__nav-logout header__top-link" v-if="auth"
+          <li class="header__nav-logout" v-if="auth"
             @click="onLogout"
             >
             <span>
@@ -66,16 +61,19 @@
       <div class="header__lang">
         <span>Language</span>
         <select v-model="selected"  @change="setLocale" label="Language">
-          <option selected style="height: 30px">English </option>
-          <option style="height: 30px">Russian </option>
+          <option selected>English</option>
+          <option>Russian</option>
         </select>
       </div>
+
     </div>
     <div :class="{overlay__show: isActive}"
           class="overlay"
           @click="showMenu"></div>
-
-
+    <side :class="{side__show: isOpen}"
+      @emitShowMenu="showMenu"
+      >
+    </side>
   </header>
 </template>
 
@@ -83,8 +81,11 @@
 import Logo from './Logo.vue'
 import SideMenu from './SideMenu.vue'
 
+import VProgressLinear from 'vuetify/es5/components/VProgressLinear/VProgressLinear'
+
 export default {
   components: {
+    VProgressLinear,
     Logo,
     "side": SideMenu
   },
@@ -142,6 +143,3 @@ export default {
 };
 </script>
 
-<style lang="sass">
-  @import "./../../sass/_header.sass"
-</style>
