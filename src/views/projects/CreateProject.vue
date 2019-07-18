@@ -41,7 +41,7 @@
       <section class="create__uploads">
         <section class="create__upload">
           <p>{{$t("photos-explain-1")}}</p>
-          <button type="button" raised class="create__upload-btn" @click="onPickFile1">{{$t("upload-photo")}}</button>
+          <button type="button" raised class="btn" @click="onPickFile1">{{$t("upload-photo")}}</button>
           <input
             type="file"
             style="display: none"
@@ -56,7 +56,7 @@
         </section>
         <section class="create__upload">
           <p>{{$t("photos-explain-2")}}</p>
-          <button type="button" raised class="create__upload-btn" @click="onPickFile2">{{$t("upload-photo")}}</button>
+          <button type="button" raised class="btn" @click="onPickFile2">{{$t("upload-photo")}}</button>
           <input
             type="file"
             style="display: none"
@@ -528,10 +528,9 @@ export default {
             this.$store.dispatch('logout')
           }
         }, 1500)
+        // console.log(this.$store.getters.projects)
+        // console.log(this.$store.getters.userId)
       }
 };
 </script>
 
-<style lang="sass">
-  @import "./../../sass/_create.sass"
-</style>

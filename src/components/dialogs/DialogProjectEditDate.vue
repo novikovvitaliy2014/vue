@@ -11,7 +11,7 @@
         </v-card-title>
         <v-date-picker v-model="editableDate"
           class="dialog__picker mt-2">
-          <template scope="{save, cancel}" actions>
+          <template actions>
             <v-btn color="green darken-1" flat @click.native="dialog = false">{{ $t('close') }}</v-btn>
             <v-btn color="green darken-1" flat @click.native="onSaveEdit">{{ $t('save') }}</v-btn>
           </template>

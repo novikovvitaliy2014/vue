@@ -251,9 +251,11 @@ const store = new Vuex.Store({
         })
     },
     resizeImages({state}){
-      globalAxios.get('/projects.json' + '?auth=' + state.idToken)
-        .then(res => {
-          const obj = res.data
+      // globalAxios.get('/projects.json' + '?auth=' + state.idToken)
+      //   .then(res => {
+      //     const obj = res.data
+      firebase.database().ref('projects').on('value', snap => {
+          const obj = snap.val()
           for (let key in obj) {
             for(let i = 0; i < 2; i++){
               const image = firebase.storage().ref("projects/" + key + i + "/" + "resized-" + key + i)

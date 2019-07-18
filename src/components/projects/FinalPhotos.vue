@@ -1,7 +1,7 @@
 <template>
   <section class="outlay__photos">
     <div class="outlay__photo" v-if="Url_F1">
-      <v-img class="outlay-photo outlay-photo--1"
+      <v-img class="outlay-photo"
          :src="Url_F1"
          aspect-ratio="1.618"
          alt="final-photo-1"
@@ -9,7 +9,7 @@
       </v-img>
     </div>
     <div class="outlay__photo" v-if="Url_F2">
-      <v-img class="outlay-photo outlay-photo--2"
+      <v-img class="outlay-photo"
          :src="Url_F2"
          aspect-ratio="1.618"
          alt="final-photo-2"
@@ -17,7 +17,7 @@
       </v-img>
     </div>
     <div class="outlay__photo" v-if="Url_F3">
-      <v-img class="outlay-photo outlay-photo--3"
+      <v-img class="outlay-photo"
          :src="Url_F3"
          aspect-ratio="1.618"
          alt="final-photo-3"
@@ -25,7 +25,7 @@
       </v-img>
     </div>
     <div class="outlay__photo" v-if="Url_F4">
-      <v-img class="outlay-photo outlay-photo--4"
+      <v-img class="outlay-photo"
          :src="Url_F4"
          aspect-ratio="1.618"
          alt="final-photo-4"

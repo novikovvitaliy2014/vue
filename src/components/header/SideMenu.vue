@@ -3,34 +3,40 @@
     <nav>
       <ul @click="emitShowMenu">
         <router-link to="/signin"
-                       tag="li"
-                       v-if="!auth"
-                       >
+                     tag="li"
+                     v-if="!auth"
+                     class="side__link"
+                     >
         {{ $t('nav-signin') }}
         </router-link>
         <router-link to="/signup"
                      tag="li"
                      v-if="!auth"
+                     class="side__link"
                      >
         {{ $t('nav-signup') }}
         </router-link>
         <router-link to="/project/new"
-           tag="li"
-           >
+                     tag="li"
+                     class="side__link"
+                     >
         {{ $t('nav-create') }}
         </router-link>
         <router-link to="/private-projects"
-           tag="li"
-           >
+                     tag="li"
+                     class="side__link"
+                     >
         {{ $t('nav-projects') }}
         </router-link>
         <router-link to="/contacts"
-           tag="li"
-           >
+                     tag="li"
+                     class="side__link"
+                     >
         {{ $t('nav-contacts') }}
         </router-link>
-        <li class="side__logout" v-if="auth"
+        <li v-if="auth"
             @click="onLogout"
+            class="side__link side__logout"
             >
             <span>
               {{ $t('nav-logout') }}
@@ -39,6 +45,7 @@
         <router-link to="/user-page"
            tag="li"
            v-if="userIsCreator"
+           class="side__link"
            >
            {{ $t('nav-user') }}
         </router-link>
@@ -75,3 +82,6 @@ export default {
   }
 };
 </script>
+<style lang="sass">
+  @import "./../../sass/_side-menu.sass"
+</style>
