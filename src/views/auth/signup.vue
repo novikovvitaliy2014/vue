@@ -42,13 +42,13 @@
         id="terms"
         v-model="terms"
         :rules="switchRules"
-        required>
+      required>
         <div slot="label">
-          {{$t('agreement')}}
-          <v-tooltip bottom>
-            <a slot="activator" target="_blank" href="http://vuetifyjs.com" @click.stop>Conditions of Use and Privacy Notice</a>
-            will be opened in a new window
-          </v-tooltip>
+          <router-link to="/terms"
+             class="header__top-link"
+             >
+          {{ $t('agreement') }}
+          </router-link>
         </div>
       </v-checkbox>
       <button

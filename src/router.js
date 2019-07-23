@@ -63,6 +63,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "signin", webpackPreFetch: true */ './views/auth/signin.vue')
   },
   {
+    path: '/terms',
+    name: 'Terms',
+    component: () => import(/* webpackChunkName: "signin", webpackPreFetch: true */ './views/auth/terms.vue')
+  },
+  {
     path: '*', component: NotFoundComponent
   }
 ]
