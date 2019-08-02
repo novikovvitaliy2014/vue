@@ -137,7 +137,7 @@ import VTextField from 'vuetify/es5/components/VTextField/VTextField'
           await this.checkField()
           await this.editProject()
         } catch (e) {
-            // console.log("Error" + e)
+            console.log(e)
         }
       },
       onPickFile1(){
@@ -173,7 +173,7 @@ import VTextField from 'vuetify/es5/components/VTextField/VTextField'
             this.messagesShow()
           }, 2000)
         } catch (e) {
-          // console.log(e)
+          console.log(e)
         }
       },
       urlsShow() {

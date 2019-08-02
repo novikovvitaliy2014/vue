@@ -9,5 +9,5 @@
 </template>
 
 <style lang="sass">
-  @import "./../../sass/_contacts.sass"
+  @import "@/sass/_contacts.sass"
 </style>

@@ -56,13 +56,6 @@
           </li>
         </ul>
       </nav>
-      <!-- <v-select
-        class="header__lang"
-        v-model="selected"
-        :items="languages"
-        @change="setLocale"
-        label="Language">
-      </v-select> -->
       <div class="header__lang">
         <span>Language</span>
         <select v-model="selected"  @change="setLocale" label="Language">
@@ -95,7 +88,6 @@ export default {
       selected: 'English',
       languages: ['English','Russian'],
       locale: 'en',
-      userIsCreator: false
     }
   },
   computed: {
@@ -104,6 +96,9 @@ export default {
     },
     loading(){
       return this.$store.getters.loading
+    },
+    projects(){
+      return this.$store.getters.projects
     }
   },
   methods: {
@@ -124,9 +119,6 @@ export default {
       this.$store.dispatch('initOutlay', this.locale)
     },
     showMenu() {
-      this.userIsCreator = this.$store.getters.projects.find((project) =>{
-        return project.creatorId == this.$store.getters.userId
-      })
       this.isOpen = !this.isOpen
       this.isActive = !this.isActive
     },
@@ -143,5 +135,5 @@ export default {
 </script>
 
 <style lang="sass">
-  @import "./../../sass/_header.sass"
+  @import "@/sass/_header.sass"
 </style>

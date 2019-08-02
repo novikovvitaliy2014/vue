@@ -58,8 +58,8 @@ import VTextField from 'vuetify/es5/components/VTextField/VTextField'
         contact: '',
         contactActive: '',
         contactRules: [
-          v => !!v || this.$i18n.t("enter-data"),
-          v => (v && v.length >= 6) || this.$i18n.t("min-6")
+          value => !!value || this.$i18n.t("enter-data"),
+          value => (value && value.length >= 6) || this.$i18n.t("min-6")
         ],
       }
     },

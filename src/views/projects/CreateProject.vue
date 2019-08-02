@@ -357,9 +357,9 @@ export default {
           }
         ],
         descRules: [
-          v => !!v || this.$i18n.t("enter-data"),
-          v => (v && v.length <= 1000 ) || this.$i18n.t("max-1000"),
-          v => (v && v.length >= 6 ) || this.$i18n.t("min-6"),
+          value => !!value || this.$i18n.t("enter-data"),
+          value => (value && value.length <= 1000 ) || this.$i18n.t("max-1000"),
+          value => (value && value.length >= 6 ) || this.$i18n.t("min-6"),
           ],
         valid: false,
         title: '',
@@ -368,12 +368,12 @@ export default {
         url_2: '',
         images: [],
         titleRules: [
-        v => !!v || this.$i18n.t("enter-data"),
-        v => (v && v.length >= 6) || this.$i18n.t("min-6")
+        value => !!value || this.$i18n.t("enter-data"),
+        value => (value && value.length >= 6) || this.$i18n.t("min-6")
         ],
         projectIdRules: [
-        v => !!v || this.$i18n.t("enter-data"),
-        v => (v && v.length >= 6) || this.$i18n.t("min-6")
+        value => !!value || this.$i18n.t("enter-data"),
+        value => (value && value.length >= 6) || this.$i18n.t("min-6")
         ],
         picker: new Date().toISOString().substr(0, 10),
         date: new Date().toISOString().substr(0, 10),
@@ -470,7 +470,7 @@ export default {
           await this.checkForm()
           await this.dispatch()
         } catch(e){
-          // console.log(e)
+          console.log(e)
         }
       },
       onPickFile1(){
@@ -523,13 +523,11 @@ export default {
         this.$store.dispatch('loadProjects')
         this.$store.commit('setError',{status: false})
         this.$store.commit('setSuccess',{status: false})
-        setTimeout(()=>{
-          if(!this.projects || this.projects.length === 0){
-            this.$store.dispatch('logout')
-          }
-        }, 1500)
-        // console.log(this.$store.getters.projects)
-        // console.log(this.$store.getters.userId)
+      },
+      mounted(){
+        if(!this.projects || this.projects.length === 0){
+          this.$store.dispatch('logout')
+        }
       }
 };
 </script>

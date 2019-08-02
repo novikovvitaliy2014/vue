@@ -74,5 +74,5 @@ export default {
 </script>
 
 <style lang="sass">
-  @import "./../../sass/_donors.sass"
+  @import "@/sass/_donors.sass"
 </style>

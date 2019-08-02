@@ -1,7 +1,8 @@
 <template>
   <div class="project__participation">
     <h4>{{$t('donate-contacts')}}</h4>
-    <p>{{$t('example-contacts')}}</p>
+    <p v-if="userIsCreator">{{$t('example-contacts-author')}}</p>
+    <p v-if="!userIsCreator">{{$t('example-contacts-user')}}</p>
     <div  >
       <v-form v-model="valid" @submit.prevent = "sendContact">
         <v-text-field
@@ -99,13 +100,15 @@ import VTextField from 'vuetify/es5/components/VTextField/VTextField'
       empty(){
         return this.contact.trim() === ''
       },
-      // userNick() {
-      //   if(this.$store.getters.user){
-      //     return this.$store.getters.user.pseudo
-      //   } else {
-      //     return localStorage.getItem('pseudo')
-      //   }
-      // },
+      project() {
+        return this.$store.getters.project(this.id)
+      },
+      userIsCreator(){
+        if(this.project && this.$store.getters.userId){
+          return this.$store.getters.userId === this.project.creatorId
+        }
+        return false
+      },
       error(){
         return this.$store.getters.error
       }
@@ -121,9 +124,6 @@ import VTextField from 'vuetify/es5/components/VTextField/VTextField'
           nickname: this.pseudo,
           id: this.id
         }
-        // if(!this.userNick) {
-        //   this.$store.dispatch('logout')
-        // } else
         if(!this.valid){
           this.filling = true
           return
@@ -135,11 +135,6 @@ import VTextField from 'vuetify/es5/components/VTextField/VTextField'
       }
     },
     created(){
-      // setTimeout(()=>{
-      //   if(!this.userNick) {
-      //     this.$store.dispatch('logout')
-      //   }
-      // },2500)
       this.$store.commit('setError',{status: false})
       this.$store.commit('setSuccess',{status: false})
     }

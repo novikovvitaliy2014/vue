@@ -403,7 +403,7 @@ export default {
           this.messagesShow()
         }, 1000)
       } catch (e) {
-        // console.log(e)
+        console.log(e)
       }
     },
 
@@ -424,16 +424,17 @@ export default {
   },
   created() {
     const storeImage = this.project.dataFinalImages
-    setTimeout(() => {
-      for (let i = 0; i < 5; i++) {
-        if (storeImage && storeImage[i] != undefined && storeImage[i] != "") {
-          this.urls[i] = storeImage[i].imageUrl
-        } else {
-          this.urls[i] = ""
-        }
+    const checksPhotoQuantity = 5
+    // setTimeout(() => {
+    for (let i = 0; i < checksPhotoQuantity; i++) {
+      if (storeImage && storeImage[i] != undefined && storeImage[i] != "") {
+        this.urls[i] = storeImage[i].imageUrl
+      } else {
+        this.urls[i] = ""
       }
-      this.urlsShow()
-    }, 1500)
+    }
+    this.urlsShow()
+    // }, 1500)
 
     const data = this.project.dataFinal
     if (data) {

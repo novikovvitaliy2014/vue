@@ -50,7 +50,8 @@ import VImg from 'vuetify/es5/components/VImg/VImg'
         const array = []
         const img = this.dataPhotos
         const base = this.photosBase
-        for(let i = 0; i < 4; i++) {
+        const finalPhotosQuantity = 4
+        for(let i = 0; i < finalPhotosQuantity; i++) {
           if(base.length > 0 && base[i] != undefined && base[i] != ""){
             array[i] =  base[i]
           } else if (img.length > 0 && img[i] != undefined && img[i] != "") {

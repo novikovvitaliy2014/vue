@@ -34,8 +34,8 @@ import VTextField from 'vuetify/es5/components/VTextField/VTextField'
     data() {
       return {
         numberRules: [
-        v => !!v || 'Enter the project ID',
-        v => (v && v.length >= 6) || 'ID must be at least 6 symbols'
+        value => !!value || 'Enter the project ID',
+        value => (value && value.length >= 6) || 'ID must be at least 6 symbols'
       ],
         projectId: ''
       }
@@ -56,25 +56,14 @@ import VTextField from 'vuetify/es5/components/VTextField/VTextField'
     methods: {
       loadProjects(){
         this.$store.dispatch('loadProjects')
-        setTimeout(()=>{
-          if(!this.projects) {
-            this.$router.push('/')
-          }
-        },3000)
       }
     },
     created() {
-      // this.$store.dispatch('tryAutoSignin')
       this.$store.dispatch('resizeImages')
-      // setTimeout(()=>{
-      //   if(!this.$store.getters.userId){
-      //     this.$store.dispatch('logout')
-      //   }
-      // }, 1000)
     }
   };
 </script>
 
 <style lang="sass">
-  @import "./../../sass/_private-projects.sass"
+  @import "@/sass/_private-projects.sass"
 </style>

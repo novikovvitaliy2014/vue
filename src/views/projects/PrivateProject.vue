@@ -166,6 +166,7 @@ export default {
       photosBase: [],
       currentImage: null,
       projectImage: null
+      // project: []
     }
   },
   components: {
@@ -254,31 +255,20 @@ export default {
     }
   },
   created() {
-    // this.$store.dispatch('tryAutoSignin')
-    // this.$store.dispatch('resizeImages')
-    // setTimeout(()=>{
-    // this.$store.dispatch('loadProjects')
-    // }, 2000)
-
-    setTimeout(()=>{
-      if(!this.project) {
-        this.$router.push('/')
-        // if(Object.keys(this.project).length === 0){
-         // this.$store.dispatch('logout')
-        // }
-      }
-      const images = this.project.projectImages
-      if(this.project && images){
-        if (images[0]) {
-        this.currentImage = images[0].imageUrl
-        }
-        if (images[1]) {
-          this.projectImage = images[1].imageUrl
-        }
-      }
-    }, 3000)
+    if(!this.project){
+      this.$store.dispatch('logout')
+    }
     this.$store.commit('setError',{status: false})
     this.$store.commit('setSuccess',{status: false})
+    const images = this.project.projectImages
+    if(this.project && images){
+      if (images[0]) {
+      this.currentImage = images[0].imageUrl
+      }
+      if (images[1]) {
+        this.projectImage = images[1].imageUrl
+      }
+    }
   }
 };
 </script>
