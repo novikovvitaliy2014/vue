@@ -68,12 +68,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "signin", webpackPreFetch: true */ './views/auth/terms.vue')
   },
   {
-    path: '*', component: NotFoundComponent
+    path: '/*', component: NotFoundComponent
   }
 ]
 
 const router = new VueRouter({
-    mode: 'history',
+    mode: 'hash',
     // base: process.env.BASE_URL,
     routes
 })
