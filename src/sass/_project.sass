@@ -64,7 +64,7 @@
   flex-wrap: no-wrap
   align-items: center
   height: auto
-  border-bottom: 1px dashed $color-main
+  // border-bottom: 1px dashed $color-main
   @include mobile
     font-size: $font-size-h6
   span
@@ -96,12 +96,17 @@
         border-left: 2px solid #fff
         color: #fff
   &--btn
-    background-color: $color-light
     button
-      width: 100%
-    &:hover
+      // width: 100%
+      padding: 0 10px
+      display: flex
+      margin: auto
       background-color: $color-main
       color: #fff
+      &:hover
+        box-sizing: border-box
+        background-color: $color-light
+        color: $color-dark
     flex-grow: 1
     &:first-child
       flex-basis: $col-7
