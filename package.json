@@ -44,6 +44,7 @@
   },
   "devDependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "lodash": ">=4.17.21",
     "@fortawesome/fontawesome-free": "^5.5.0",
     "@vue/cli-plugin-babel": "^3.2.0",
     "@vue/cli-plugin-eslint": "^3.2.0",
